@@ -1,8 +1,8 @@
-import React from "react";
+import SubmitButton from "./SubmitButton";
 
-export default function CharacterGuess() {
+const SearchBar: React.FC = () => {
     return (
-        <div>
+        <div className="searchbar">
             <form>
                 <input
                     type="text"
@@ -10,8 +10,10 @@ export default function CharacterGuess() {
                     className="searchbar"
                     placeholder="Type champion name ..."
                 />
-                <button>submit</button>
             </form>
+            <SubmitButton/>
         </div>
-    ) 
+    )
 }
+
+export default SearchBar;

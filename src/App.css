@@ -14,8 +14,20 @@
   background-color: beige;
 }
 
-.title {
+.header {
   font-size: 5rem;
+}
+
+.footer {
+  margin: 0 auto;
+  text-align: center;
+}
+
+.footer-container {
+  background-color: blue;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
 }
 
 .searchbar {

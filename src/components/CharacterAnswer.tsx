@@ -1,48 +1,27 @@
-import React, { Fragment } from "react";
 
-export default function CharacterAnswer() {
-  return (
-    <>
-        <div className="attribute-container">
-            <div className="attribute-square">
-                <div className="square-content">Champion</div>
+import { Url } from "url";
+import AttributeSquare from "./AttributeSquare"
+
+const CharacterAnswer: React.FC = () => {
+
+    const attributeContents: string[] = ['Champion', 'Gender', 'Cost', 'Type', 'item', 'item'];
+    const answerContents: string[] = ['item', 'item', 'item', 'item', 'item', 'item'];
+
+    return (
+        <>
+            <div className="attribute-container">
+                {attributeContents.map((content, index) => (
+                    <AttributeSquare key={index} content={content}/>
+                ))}
             </div>
-            <div className="attribute-square">
-                <div className="square-content">item</div>
+            <div className="answer-container">
+            {answerContents.map((content, index) => (
+                    <AttributeSquare key={index} content={content}/>
+                ))}
             </div>
-            <div className="attribute-square">
-                <div className="square-content">item</div>
-            </div>
-            <div className="attribute-square">
-                <div className="square-content">item</div>
-            </div>
-            <div className="attribute-square">
-                <div className="square-content">item</div>
-            </div>
-            <div className="attribute-square">
-                <div className="square-content">item</div>
-            </div>
-        </div>
-        <div className="answer-container">
-            <div className="attribute-square">
-                <div className="square-content">item</div>
-            </div>
-            <div className="attribute-square">
-                <div className="square-content">item</div>
-            </div>
-            <div className="attribute-square">
-                <div className="square-content">item</div>
-            </div>
-            <div className="attribute-square">
-                <div className="square-content">item</div>
-            </div>
-            <div className="attribute-square">
-                <div className="square-content">item</div>
-            </div>
-            <div className="attribute-square">
-                <div className="square-content">item</div>
-            </div>
-        </div>
-    </>
-  )
+        </>
+    )
 }
+
+
+export default CharacterAnswer;
