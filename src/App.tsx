@@ -5,6 +5,9 @@ import CharacterAnswer from './components/CharacterAnswer';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
+import supabase from './utils/supabaseClient';
+
+
 
 function App() {
   return (

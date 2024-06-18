@@ -4,8 +4,8 @@ import AttributeSquare from "./AttributeSquare"
 
 const CharacterAnswer: React.FC = () => {
 
-    const attributeContents: string[] = ['Champion', 'Gender', 'Cost', 'Type', 'item', 'item'];
-    const answerContents: string[] = ['item', 'item', 'item', 'item', 'item', 'item'];
+    const attributeContents: string[] = ['Img','Champion', 'Gender', 'Cost', 'Type', 'Chibi',];
+    const answerContents: string[] = ['item', 'item', 'item', 'item', 'item',];
 
     return (
         <>
