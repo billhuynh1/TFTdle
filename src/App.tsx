@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import SubmitButton from './components/SubmitButton';
 import CharacterAnswer from './components/CharacterAnswer';
@@ -8,8 +8,18 @@ import SearchBar from './components/SearchBar';
 import supabase from './utils/supabaseClient';
 
 
-
 function App() {
+  const [champion, setChampion] = useState<any[] | null>(null);
+
+  useEffect(() => {
+    getChampion();
+  }, []);
+
+  async function getChampion() {
+    const { data } = await supabase.from("Champions").select();
+    setChampion(data);
+  }
+
   return (
     <>    
       <div className="App">
