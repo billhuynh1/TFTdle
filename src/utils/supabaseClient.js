@@ -6,5 +6,3 @@ const supebaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYm
 const supabase = createClient(supabaseUrl, supebaseAnonKey,);
 
 export default supabase;
-
-//{ auth: { persistSession: false },} <-- in case I need it 

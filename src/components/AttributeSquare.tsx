@@ -2,6 +2,8 @@ interface AttributeSquareProps {
     content: string;
 }
 
+// AttributeSquares are going to take in the attributes as props, replace content with queried attributes from database.
+
 const AttributeSquare: React.FC<AttributeSquareProps> = ({ content }) => {
     return (
         <div className="attribute-square">
