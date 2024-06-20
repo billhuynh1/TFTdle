@@ -1,11 +1,11 @@
 
 import AttributeSquare from "./AttributeSquare"
-import App from "../App";
+import { Champion } from "../type";
 
-const CharacterAnswer: React.FC = () => {
+const ChampionAnswer: React.FC<Champion> = ({ name, gender, cost, type, chibi, attRange }) => {
 
     const attributeContents: string[] = ['Img','Champion', 'Gender', 'Cost', 'Type', 'Chibi',];
-    const answerContents: string[] = ['item', 'item', 'item', 'item', 'item',];
+    const answerContents: (number | string | null)[] = [name, gender, cost, type, chibi, attRange,];
     
     return (
         <>
@@ -24,4 +24,4 @@ const CharacterAnswer: React.FC = () => {
 }
 
 
-export default CharacterAnswer;
+export default ChampionAnswer;

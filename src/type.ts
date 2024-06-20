@@ -13,11 +13,19 @@ export interface ChampionAttributes extends AttributeSquareInterface {
 }
 
 export interface Champion {
-    id: number;
-    name: string;
-    gender: string;
-    cost: number;
-    type: string;
-    chibi: string;
-    attRange: number;
+    name: string | null;
+    gender: string | null;
+    cost: number | null;
+    type: string | null;
+    chibi: string | null;
+    attRange: number | null;
 }
+
+export interface ChampionAnswerProps {
+    id: number
+    champion: Champion;
+}
+
+// export interface GuessableChampion extends Champion {
+    
+// }
