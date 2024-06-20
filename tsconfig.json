@@ -23,5 +23,5 @@
   },
   "include": [
     "src"
-  ]
+, "../idk/setupTests.ts", "../idk/react-app-env.d.ts"  ]
 }

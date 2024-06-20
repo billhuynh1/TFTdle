@@ -5,30 +5,38 @@ import CharacterAnswer from './components/CharacterAnswer';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
-// import supabase from './utils/supabaseClient';
-import { createClient } from "@supabase/supabase-js";
-
+import supabase from './utils/supabaseClient';
+import { Champion } from './type';
 
 
 function App() {
-  const supabaseUrl = "https://fwimlkxoggqhamjejeuz.supabase.co";
-  const supebaseAnonKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3aW1sa3hvZ2dxaGFtamVqZXV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgxNTQ2NTQsImV4cCI6MjAzMzczMDY1NH0.nWOGoM3-rFH5CXoSnT2YCyPyUhxnAN-X78Y-YHCMHGE";
-  const supabase = createClient(supabaseUrl, supebaseAnonKey);
+
+  const [championsList, setChampionsList] = useState<Champion[]>([]);
+
+  const fetchChampions = async (): Promise<Champion[]> => {
+    const { data, error } = await supabase.from("champions").select("*");
+
+    if (error) {
+      throw error;
+    }
+
+    return data || [];
+  }
 
   useEffect(() => {
     async function getChampions() {
-      const { data } = await supabase.from("champions").select();
-      const championName = await supabase.from("champions").select("name");
-
-      console.log(data);
+      const championsData = await fetchChampions();
+      setChampionsList(championsData);
+      console.log(championsData);
     }
-        
+    
     getChampions();
   }, []);
 
-  async function getChampName() {
-    const champName = await supabase.from("champions").select("name");
-  }
+  championsList.map(champ => (
+    console.log(champ.name)
+  ));
+
 
   return (
     <>    

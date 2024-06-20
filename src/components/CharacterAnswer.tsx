@@ -1,12 +1,12 @@
 
-import { Url } from "url";
 import AttributeSquare from "./AttributeSquare"
+import App from "../App";
 
 const CharacterAnswer: React.FC = () => {
 
     const attributeContents: string[] = ['Img','Champion', 'Gender', 'Cost', 'Type', 'Chibi',];
     const answerContents: string[] = ['item', 'item', 'item', 'item', 'item',];
-
+    
     return (
         <>
             <div className="attribute-container">

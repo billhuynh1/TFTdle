@@ -7,9 +7,17 @@ export interface AttributeSquareInterface {
     color?: string;
 }
 
-export interface ChampionAttributes extends AttributeSquareInterface{
+export interface ChampionAttributes extends AttributeSquareInterface {
     icon: string;
     gender: string;
-     
 }
 
+export interface Champion {
+    id: number;
+    name: string;
+    gender: string;
+    cost: number;
+    type: string;
+    chibi: string;
+    attRange: number;
+}
