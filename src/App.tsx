@@ -19,6 +19,7 @@ function App() {
   const [champType, setChampType] = useState<string | null>(null);
   const [champChibi, setChampChibi] = useState<string | null>(null);
   const [attRange, setAttRange] = useState<number | null>(null);
+  const [guessedChampion, setGuessedChampion] = useState<Champion>();
 
   useEffect(() => {
     async function getChampions() {
@@ -36,13 +37,6 @@ function App() {
     getChampions();
   }, []);
   
-  
-  // championsList.map(champ => (
-  //   console.log(champ.name)
-  // ));
-
-  
-
   return (
     <>    
       <div className="App">

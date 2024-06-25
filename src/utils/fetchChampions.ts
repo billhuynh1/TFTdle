@@ -10,5 +10,5 @@ export const fetchChampions = async (): Promise<Champion[]> => {
     }
     
     return data || [];
-  }
+}
 

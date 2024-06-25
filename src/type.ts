@@ -26,6 +26,4 @@ export interface ChampionAnswerProps {
     champion: Champion;
 }
 
-// export interface GuessableChampion extends Champion {
-    
-// }
+
