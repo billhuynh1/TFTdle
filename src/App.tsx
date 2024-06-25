@@ -11,27 +11,30 @@ import { fetchChampions } from './utils/fetchChampions';
 
 function App() {
 
-  const [championsList, setChampionsList] = useState<Champion>();
-  const [champId, setChampId] = useState<number | null>(null);
-  const [champName, setChampName] = useState<string | null>(null);
-  const [champGender, setChampGender] = useState<string | null>(null);
-  const [champCost, setChampCost] = useState<number | null>(null);
-  const [champType, setChampType] = useState<string | null>(null);
-  const [champChibi, setChampChibi] = useState<string | null>(null);
-  const [attRange, setAttRange] = useState<number | null>(null);
-  const [guessedChampion, setGuessedChampion] = useState<Champion>();
+  const [search, setSearchResults] = useState<Champion[]>([]);
+  const [championList, setChampionList] = useState<Champion[]>([]);
+  const [champion, setChampion] = useState<Champion>({
+    name: "",
+    gender: "",
+    cost: 0,
+    type: "",
+    chibi: "",
+    attRange: 0,
+  });
 
   useEffect(() => {
     async function getChampions() {
       const championsData = await fetchChampions();
+      setChampionList(championsData);
       const champ = championsData[0];
-      setChampionsList(champ);
-      setChampName(champ.name);
-      setChampGender(champ.gender);
-      setChampCost(champ.cost);
-      setChampType(champ.type);
-      setChampChibi(champ.chibi);
-      setAttRange(champ.attRange);
+      setChampion({
+        name: champ.name,
+        gender: champ.gender,
+        cost: champ.cost,
+        type: champ.type,
+        chibi: champ.chibi,
+        attRange: champ.attRange,
+      })
     }
     
     getChampions();
@@ -44,12 +47,12 @@ function App() {
           <Header/>
           <SearchBar/>
           <ChampionAnswer 
-            name={champName}
-            gender={champGender}
-            cost={champCost}
-            type={champType}
-            chibi={champChibi}
-            attRange={attRange}
+            name={champion.name}
+            gender={champion.gender}
+            cost={champion.cost}
+            type={champion.type}
+            chibi={champion.chibi}
+            attRange={champion.attRange}
           />
           <Footer/>
         </div>
