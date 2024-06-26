@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import SubmitButton from './components/SubmitButton';
 import ChampionAnswer from './components/ChampionAnswer';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -11,7 +10,6 @@ import { fetchChampions } from './utils/fetchChampions';
 
 function App() {
 
-  const [search, setSearchResults] = useState<Champion[]>([]);
   const [championList, setChampionList] = useState<Champion[]>([]);
   const [champion, setChampion] = useState<Champion>({
     name: "",
@@ -45,7 +43,7 @@ function App() {
       <div className="App">
         <div className="container">
           <Header/>
-          <SearchBar/>
+          <SearchBar championList={championList}/>
           <ChampionAnswer 
             name={champion.name}
             gender={champion.gender}

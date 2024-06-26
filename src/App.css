@@ -31,6 +31,7 @@
 }
 
 .searchbar {
+  display: flex;
   width: 300px;
   height: 50px;
   margin: 1rem;
@@ -67,4 +68,9 @@
 
 .square-content {
   align-items: center;
+}
+
+.champion-list {
+  background-color: black;
+  width: 500px;
 }

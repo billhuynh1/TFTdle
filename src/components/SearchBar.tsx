@@ -1,25 +1,28 @@
 import { useState } from "react";
 import { Champion } from "../type";
-import { fetchChampions } from "../utils/fetchChampions";
-import SubmitButton from "./SubmitButton";
 import supabase from "../utils/supabaseClient";
 
 interface searchBarProps {
-    searchResults: Champion[],
-    searchValue: string,
+    championList: Champion[] | any;
 }
 
-const SearchBar: React.FC<searchBarProps> = () => {
+const SearchBar: React.FC<searchBarProps> = ({ championList }) => {
 
     const [input, setInput] = useState<string>("");
 
-    const handleSearch = async (value: string) => {
+    const handleChange = async (e:any) => {
+        setInput(e.target.value.toLowerCase());
+        handleSearch(input);
+    }
 
+    console.log(input);
+
+
+    const handleSearch = async (value: string) => {
         const { data, error } = await supabase
             .from("champions")
-            .select()
-            .textSearch("name", `${value}`)
-        
+            .select("*")
+            .ilike("name", `${value}`)
     }
 
 
@@ -31,8 +34,17 @@ const SearchBar: React.FC<searchBarProps> = () => {
                     id="guess"
                     className="searchbar"
                     placeholder="Type champion name ..."
-                    onChange={}
+                    onChange={handleChange}
                 />
+                <div className="champion-list">
+                    <ul>
+                        {championList.map((champ:any) => {
+                            <li key={champ.id}>
+                                {champ.name}
+                            </li>
+                        })}
+                    </ul>
+                </div>
                 <button>Submit</button>
             </form>
         </div>
