@@ -6,52 +6,61 @@ import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
 import { Champion, ChampionAnswerProps } from './type';
 import { fetchChampions } from './utils/fetchChampions';
+import AttributeSquare from './components/AttributeSquare';
 
+
+const attributeContents: string[] = ['Img','Champion', 'Gender', 'Cost', 'Type', 'Chibi',];
 
 function App() {
 
   const [championList, setChampionList] = useState<Champion[]>([]);
-  const [champion, setChampion] = useState<Champion>({
-    name: "",
-    gender: "",
-    cost: 0,
-    type: "",
-    chibi: "",
-    attRange: 0,
-  });
+  const [guessedChampions, setGuessedChampions] = useState<Champion[]>([]);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     async function getChampions() {
       const championsData = await fetchChampions();
       setChampionList(championsData);
-      const champ = championsData[0];
-      setChampion({
-        name: champ.name,
-        gender: champ.gender,
-        cost: champ.cost,
-        type: champ.type,
-        chibi: champ.chibi,
-        attRange: champ.attRange,
-      })
     }
     
     getChampions();
   }, []);
   
+  useEffect(() => {
+    console.log(guessedChampions);
+  }, [guessedChampions]);
+
   return (
     <>    
       <div className="App">
-        <div className="container">
+        <div className="container fade-in">
           <Header/>
-          <SearchBar championList={championList}/>
-          <ChampionAnswer 
-            name={champion.name}
-            gender={champion.gender}
-            cost={champion.cost}
-            type={champion.type}
-            chibi={champion.chibi}
-            attRange={champion.attRange}
-          />
+          <SearchBar 
+            championList={championList}
+            guessedChampions={guessedChampions}
+            setGuessedChampions={setGuessedChampions}
+            />
+          
+          <div className="guessed-container">
+              { guessedChampions.length > 0 ?       
+              <div className="attribute-container">
+                  {attributeContents.map((content, index) => (
+                  <AttributeSquare key={index} content={content}/>
+                  ))}
+              </div>
+              : null}
+            {
+              guessedChampions.map((champ, index) => (<ChampionAnswer
+                isAnimating={index === 0} 
+                name={champ.name}
+                gender={champ.gender}
+                cost={champ.cost}
+                type={champ.type}
+                chibi={champ.chibi}
+                attRange={champ.attRange}
+              />))
+            }
+          </div>
           <Footer/>
         </div>
       </div>

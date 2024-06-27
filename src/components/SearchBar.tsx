@@ -1,52 +1,70 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Champion } from "../type";
 import supabase from "../utils/supabaseClient";
 
-interface searchBarProps {
-    championList: Champion[] | any;
+interface SearchBarProps {
+    championList: Champion[];
+    guessedChampions: Champion[];
+    setGuessedChampions: React.Dispatch<React.SetStateAction<Champion[]>>;
 }
 
-const SearchBar: React.FC<searchBarProps> = ({ championList }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, setGuessedChampions }) => {
 
     const [input, setInput] = useState<string>("");
+    const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
+    const [isListOpen, setIsListOpen] = useState(false);
 
-    const handleChange = async (e:any) => {
-        setInput(e.target.value.toLowerCase());
-        handleSearch(input);
+    const handleSearch = async (searchQuery: string) => {   
+        if(searchQuery.length) {
+            const regex = new RegExp(`^${searchQuery.toLowerCase()}`);        
+            const newFilteredChampions = championList.filter((champ: Champion) => {          
+                return regex.test(champ.name.toLowerCase()) && !guessedChampions.includes(champ);
+            })
+    
+            setFilteredChampions([...newFilteredChampions]);
+            setIsListOpen(true);
+        }
+        else {
+            setFilteredChampions([]);
+        }
+    }
+    
+    const handleChange = (e:any) => {
+        const newInput = e.target.value
+        const regex = /[a-zA-Z]+$/i;
+
+        if (newInput === "" || regex.test(newInput)) {
+            setInput(newInput);
+            handleSearch(newInput);
+        }
     }
 
-    console.log(input);
-
-
-    const handleSearch = async (value: string) => {
-        const { data, error } = await supabase
-            .from("champions")
-            .select("*")
-            .ilike("name", `${value}`)
+    const handleSelectChampion = (champ: Champion) => {
+        setGuessedChampions(prev => [champ, ...prev]);
+        setIsListOpen(false);
+        setInput("");
     }
 
+    const renderedChampions = filteredChampions.length > 0 && isListOpen ? (
+            <ul className="champion-list">
+                {filteredChampions.map((champ: Champion) => (
+                    <li className="champion-list-item" key={champ.name} onClick={() => handleSelectChampion(champ)}>
+                        {champ.name}
+                    </li>
+                ))}
+            </ul>
+    ) : null;
 
     return (
         <div className="searchbar">
-            <form>
                 <input
                     type="text"
                     id="guess"
-                    className="searchbar"
                     placeholder="Type champion name ..."
                     onChange={handleChange}
+                    value={input}
                 />
-                <div className="champion-list">
-                    <ul>
-                        {championList.map((champ:any) => {
-                            <li key={champ.id}>
-                                {champ.name}
-                            </li>
-                        })}
-                    </ul>
-                </div>
-                <button>Submit</button>
-            </form>
+                {renderedChampions}
         </div>
     )
 }

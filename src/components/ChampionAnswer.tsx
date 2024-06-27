@@ -2,19 +2,16 @@
 import AttributeSquare from "./AttributeSquare"
 import { Champion } from "../type";
 
-const ChampionAnswer: React.FC<Champion> = ({ name, gender, cost, type, chibi, attRange }) => {
+interface ChampionAnswerProps extends Champion {
+    isAnimating: boolean;
+}
 
-    const attributeContents: string[] = ['Img','Champion', 'Gender', 'Cost', 'Type', 'Chibi',];
+const ChampionAnswer: React.FC<ChampionAnswerProps> = ({isAnimating, name, gender, cost, type, chibi, attRange}: ChampionAnswerProps) => {
     const answerContents: (number | string | null)[] = [name, gender, cost, type, chibi, attRange,];
     
     return (
         <>
-            <div className="attribute-container">
-                {attributeContents.map((content, index) => (
-                    <AttributeSquare key={index} content={content}/>
-                ))}
-            </div>
-            <div className="answer-container">
+            <div className={`answer-container ${isAnimating && "fade-in"} `}>
             {answerContents.map((content, index) => (
                     <AttributeSquare key={index} content={content}/>
                 ))}
