@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Champion } from "../type";
 import supabase from "../utils/supabaseClient";
+import compareChampions from "../utils/compareChampions";
 
 interface SearchBarProps {
     championList: Champion[];

@@ -21,16 +21,6 @@ export interface Champion {
     attRange: number;
 }
 
-
-export type Champion2 = {
-    name: string;
-    gender: string;
-    cost: number;
-    type: string;
-    chibi: string;
-    attRange: number;
-}
-
 export interface ChampionAnswerProps {
     id: number
     champion: Champion;

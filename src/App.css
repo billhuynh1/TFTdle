@@ -59,12 +59,12 @@
   height: 100px;
 }
 
-.attribute-square {
+.attribute-square, .attribute-square-correct, .attribute-square-partial, .attribute-square-incorrect {
   display: flex;
   flex-wrap: nowrap;
+  background-color: white;
   flex: 1;
   border: solid red;
-  background-color: aqua;
   box-sizing: border-box;
   padding: 2rem;
   align-items: center;
@@ -73,11 +73,21 @@
   width: 15%;
 }
 
+.attribute-square-correct {
+  background-color: green;
+}
+
+.attribute-square-partial {
+  background-color: orange;
+}
+
+.attribute-square-incorrect {
+  background-color: red;
+}
+
 .square-content {
   align-items: center;
 }
-
-
 
 .champion-list {
   list-style-type: none;

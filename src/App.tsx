@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, createContext, useContext } from 'react';
 import './App.css';
 import ChampionAnswer from './components/ChampionAnswer';
 import Header from './components/Header';
@@ -7,50 +7,48 @@ import SearchBar from './components/SearchBar';
 import { Champion, ChampionAnswerProps } from './type';
 import { fetchChampions } from './utils/fetchChampions';
 import AttributeSquare from './components/AttributeSquare';
+import AttributeHeader from './components/AttributeHeader';
 
-
-const attributeContents: string[] = ['Img','Champion', 'Gender', 'Cost', 'Type', 'Chibi',];
+const attributeContents: string[] = ['Img','Champion', 'Gender', 'Cost', 'Type', 'Chibi', 'Attack Range'];
+const ChampionContext = createContext<Champion | null>(null);
+export const useChampionContext = () => useContext(ChampionContext);
 
 function App() {
 
   const [championList, setChampionList] = useState<Champion[]>([]);
   const [guessedChampions, setGuessedChampions] = useState<Champion[]>([]);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [testChampion, setTestChampion] = useState<Champion | null>(null);
 
   useEffect(() => {
     async function getChampions() {
       const championsData = await fetchChampions();
       setChampionList(championsData);
+      setTestChampion(championsData[12]);
     }
     
     getChampions();
   }, []);
   
-  useEffect(() => {
-    console.log(guessedChampions);
-  }, [guessedChampions]);
-
+  console.log(testChampion);
+  
   return (
     <>    
       <div className="App">
         <div className="container fade-in">
-          <Header/>
+          <Header />
           <SearchBar 
             championList={championList}
             guessedChampions={guessedChampions}
             setGuessedChampions={setGuessedChampions}
-            />
-          
-          <div className="guessed-container">
-              { guessedChampions.length > 0 ?       
-              <div className="attribute-container">
-                  {attributeContents.map((content, index) => (
-                  <AttributeSquare key={index} content={content}/>
-                  ))}
-              </div>
-              : null}
-            {
-              guessedChampions.map((champ, index) => (<ChampionAnswer
+          />
+          <ChampionContext.Provider value={testChampion}>
+            <div className="guessed-container">
+              {guessedChampions.length > 0 ? <AttributeHeader /> : null}
+            </div>
+            {guessedChampions.map((champ, index) => (
+              <ChampionAnswer
+                key={index}
                 isAnimating={index === 0} 
                 name={champ.name}
                 gender={champ.gender}
@@ -58,10 +56,10 @@ function App() {
                 type={champ.type}
                 chibi={champ.chibi}
                 attRange={champ.attRange}
-              />))
-            }
-          </div>
-          <Footer/>
+              />
+            ))}
+          </ChampionContext.Provider>
+          <Footer />
         </div>
       </div>
     </>

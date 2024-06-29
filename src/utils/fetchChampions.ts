@@ -8,7 +8,6 @@ export const fetchChampions = async (): Promise<Champion[]> => {
     if (error) {
       throw error;
     }
-    
     return data || [];
 }
 
