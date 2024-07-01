@@ -4,24 +4,22 @@ import { useChampionContext } from "../App";
 import { log } from "console";
 
 interface AttributeSquareProps {
-    boxColor?: string; 
     pos: keyof Champion;
     champion: Champion
 }
 
 const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
 
-    const boxColorCorrect = "attribute-square-correct";
-    const boxColorPartial = "attribute-square-partial";
-    const boxColorIncorrect = "attribute-square-incorrect"
+    const squareCorrect = "attribute-square-correct";
+    const squarePartial = "attribute-square-partial";
+    const squareIncorrect = "attribute-square-incorrect"
     const testChampion = useChampionContext();
-    const typeOfTestChamp = testChampion?.type
 
     const getSquareColor = () => {
         if (testChampion && champion[pos] === testChampion[pos]) {            
-            return boxColorCorrect;
+            return squareCorrect;
         } else {
-            return boxColorIncorrect;
+            return squareIncorrect;
         }
     }
     

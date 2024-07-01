@@ -2,17 +2,15 @@ import guessedChampions from "../App";
 import { Champion } from "../type";
 
 const AttributeHeader = () => {
-    const attributeContents: string[] = ['Img', 'Champion', 'Gender', 'Cost', 'Type', 'Chibi', 'Attack Range'];
+    const attributeContents: string[] = ['Champion', 'Name', 'Gender', 'Cost', 'Type', 'Chibi', 'Attack Range'];
 
     return (
         <div className="attribute-container">
-            <div className="attribute-square">
             {attributeContents.map((content, index) => (
-                <div key={index} className="square-content">
+                <div key={index} className="attribute-square">
                     {content}
                 </div>
             ))}
-            </div>
         </div>
     );
 };

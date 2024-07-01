@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: beige;
+  background-color: gray;
 }
 
 .header {
@@ -35,11 +35,24 @@
   margin-bottom: 3rem;
 }
 
+.guessed-container {
+  display: flex;
+  width: 750px;
+  height: 100px;
+}
+
 .answer-container {
   display: flex;
-  background-color: black;
-  width: 700px;
+  max-width: 160%;
   height: 100px;
+}
+
+.attribute-container {
+  display: flex;
+  flex-wrap: nowrap;
+  max-width: 750px;
+  height: 100px;
+  margin-bottom: 2px;
 }
 
 .fade-in {
@@ -52,25 +65,17 @@
   }
 }
 
-.attribute-container {
-  display: flex;
-  background-color: blue;
-  width: 700px;
-  height: 100px;
-}
-
 .attribute-square, .attribute-square-correct, .attribute-square-partial, .attribute-square-incorrect {
   display: flex;
-  flex-wrap: nowrap;
-  background-color: white;
+  flex-wrap: wrap;
   flex: 1;
-  border: solid red;
+  border: solid black;
   box-sizing: border-box;
   padding: 2rem;
   align-items: center;
   justify-content: center;
-  height: auto;
-  width: 15%;
+  height: 100px;
+  width: 100px;
 }
 
 .attribute-square-correct {
@@ -87,6 +92,7 @@
 
 .square-content {
   align-items: center;
+  justify-content: center;
 }
 
 .champion-list {

@@ -43,13 +43,12 @@ function App() {
             setGuessedChampions={setGuessedChampions}
           />
           <ChampionContext.Provider value={testChampion}>
-            <div className="guessed-container">
-              {guessedChampions.length > 0 ? <AttributeHeader /> : null}
-            </div>
+            {guessedChampions.length > 0 ? <AttributeHeader /> : null}
             {guessedChampions.map((champ, index) => (
               <ChampionAnswer
                 key={index}
                 isAnimating={index === 0} 
+                imageUrl='placeholder'
                 name={champ.name}
                 gender={champ.gender}
                 cost={champ.cost}

@@ -13,6 +13,7 @@ export interface ChampionAttributes extends AttributeSquareInterface {
 }
 
 export interface Champion {
+    imageUrl: string;
     name: string;
     gender: string;
     cost: number;
