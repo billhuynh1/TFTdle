@@ -103,9 +103,12 @@
 
 .champion-list {
   list-style-type: none;
-  width: 100%;
-  margin: 0;
+  background-color: white;
+  width: 500px;
+  position: absolute;
+  margin-top: 19px;
   padding: 0;
+  border: solid black;
 }
 
 .champion-list-item {
