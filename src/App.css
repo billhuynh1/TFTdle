@@ -95,10 +95,6 @@
   justify-content: center;
 }
 
-.icon-container {
-  fill: aqua;
-}
-
 .image {
   position: absolute;
   height: 100px;
