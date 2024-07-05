@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Champion } from "../type";
 import { useChampionContext } from "../App";
-import { log } from "console";
 
 interface AttributeSquareProps {
     pos: keyof Champion;
@@ -10,8 +9,10 @@ interface AttributeSquareProps {
 
 const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
 
+    const [isGameOver, setIsGameOver] = useState<boolean>(false);
+    const [squareColor, setSquareColor] = useState<string>("");
+
     const squareCorrect = "attribute-square-correct";
-    const squarePartial = "attribute-square-partial";
     const squareIncorrect = "attribute-square-incorrect"
     const testChampion = useChampionContext();
 
@@ -23,10 +24,27 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
         }
     }
     
-    return (
-        <div className={getSquareColor()}>
-            <div className="square-content">{champion[pos]}</div>
+    const isImage = (url: string | number) => {
+        if (typeof url != 'string') {
+            return false;
+        }
+        const regex = /\.(jpg|jpeg|png|gif|bmp|svg)$/;
+        return regex.test(url);
+    };
+
+    const renderImage = isImage(champion[pos]) ? (
+        <div className="icon-container">
+            <img className="image" src={`images/${champion.imageurl}`} alt="Champion image"/>
         </div>
+        ) : null;
+    
+    return (
+        <>
+            {renderImage}
+            <div className={getSquareColor()}>
+                <div className="square-content">{champion[pos]}</div>
+            </div>
+        </>
     );
 }
 

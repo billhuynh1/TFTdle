@@ -95,6 +95,16 @@
   justify-content: center;
 }
 
+.icon-container {
+  fill: aqua;
+}
+
+.image {
+  position: absolute;
+  height: 100px;
+  width: 100px;
+}
+
 .champion-list {
   list-style-type: none;
   width: 100%;
