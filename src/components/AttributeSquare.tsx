@@ -11,6 +11,7 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
 
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     const [squareColor, setSquareColor] = useState<string>("");
+    
 
     const squareCorrect = "attribute-square-correct";
     const squareIncorrect = "attribute-square-incorrect"

@@ -2,22 +2,26 @@
 import AttributeSquare from "./AttributeSquare"
 import { Champion } from "../type";
 import testChampion from "../App"
-import { log } from "console";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
-interface ChampionAnswerProps extends Champion {
-    isAnimating: boolean;
-}
 
-const ChampionAnswer: React.FC<ChampionAnswerProps> = ({ isAnimating, ...champion }: ChampionAnswerProps) => {
+const ChampionAnswer: React.FC<Champion> = ({ ...champion }) => {
 
-    const answerContents: (number | string | null )[] = Object.keys(champion).map(key => champion[key as keyof Champion])
-
+    const [isAnimate, setIsAnimate] = useState(false);
+    
+    useEffect(() => {
+        setIsAnimate(true);
+      }, []);
+      
     return (
         <>
-            <div className={`answer-container ${isAnimating && "fade-in"}`}>
-                {Object.keys(champion).map((key ) => (
-                    <AttributeSquare key={key} champion={champion} pos={key as keyof Champion}/>
+            <div className={`answer-container ${isAnimate && "fade-in"}`}>
+                {Object.keys(champion).map((key) => (
+                    <AttributeSquare 
+                        key={key} 
+                        champion={champion} 
+                        pos={key as keyof Champion}
+                    />
                 ))}
             </div>
         </>

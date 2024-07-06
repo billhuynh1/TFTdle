@@ -15,7 +15,6 @@ function App() {
 
   const [championList, setChampionList] = useState<Champion[]>([]);
   const [guessedChampions, setGuessedChampions] = useState<Champion[]>([]);
-  const [isAnimating, setIsAnimating] = useState(false);
   const [testChampion, setTestChampion] = useState<Champion | null>(null);
   const [imageurl, setimageurl] = useState<string | null>("");
 
@@ -45,7 +44,6 @@ function App() {
               {guessedChampions.map((champ, index) => (
                 <ChampionAnswer
                   key={index}
-                  isAnimating={index === 0} 
                   imageurl={champ.imageurl}
                   name={champ.name}
                   gender={champ.gender}
