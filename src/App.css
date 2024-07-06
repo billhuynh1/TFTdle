@@ -7,7 +7,14 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background-color: gray;
+}
+
+.background-container {
+  background-image: url("../public/images/tftdle_background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;  
 }
 
 .header {
@@ -21,8 +28,9 @@
 
 .footer-container {
   background-color: blue;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  position: absolute;
   bottom: 0;
 }
 
@@ -76,6 +84,7 @@
   justify-content: center;
   height: 100px;
   width: 100px;
+  color: white;
 }
 
 .attribute-square-correct {
@@ -93,6 +102,7 @@
 .square-content {
   align-items: center;
   justify-content: center;
+  color: white;
 }
 
 .image {

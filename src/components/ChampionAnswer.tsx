@@ -16,9 +16,9 @@ const ChampionAnswer: React.FC<ChampionAnswerProps> = ({ isAnimating, ...champio
     return (
         <>
             <div className={`answer-container ${isAnimating && "fade-in"}`}>
-            {Object.keys(champion).map((key ) => (
-                <AttributeSquare key={key} champion={champion} pos={key as keyof Champion}/>
-            ))}
+                {Object.keys(champion).map((key ) => (
+                    <AttributeSquare key={key} champion={champion} pos={key as keyof Champion}/>
+                ))}
             </div>
         </>
     )

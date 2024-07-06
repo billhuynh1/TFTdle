@@ -29,37 +29,36 @@ function App() {
     getChampions();
   }, []);
   
-  console.log(testChampion?.imageurl);
-  
-
   return (
     <>    
       <div className="App">
-        <div className="container fade-in">
-          <Header/>
-          <SearchBar 
-            championList={championList}
-            guessedChampions={guessedChampions}
-            setGuessedChampions={setGuessedChampions}
-          />
-          <ChampionContext.Provider value={testChampion}>
-            {guessedChampions.length > 0 ? <AttributeHeader /> : null}
-            {guessedChampions.map((champ, index) => (
-              <ChampionAnswer
-                key={index}
-                isAnimating={index === 0} 
-                imageurl={champ.imageurl}
-                name={champ.name}
-                gender={champ.gender}
-                cost={champ.cost}
-                type={champ.type}
-                chibi={champ.chibi}
-                attRange={champ.attRange}
-              />
-            ))}
-          </ChampionContext.Provider>
-          <Footer />
+        <div className="background-container">
+        <Header/>
+          <div className="container fade-in">
+            <SearchBar 
+              championList={championList}
+              guessedChampions={guessedChampions}
+              setGuessedChampions={setGuessedChampions}
+            />
+            <ChampionContext.Provider value={testChampion}>
+              {guessedChampions.length > 0 ? <AttributeHeader /> : null}
+              {guessedChampions.map((champ, index) => (
+                <ChampionAnswer
+                  key={index}
+                  isAnimating={index === 0} 
+                  imageurl={champ.imageurl}
+                  name={champ.name}
+                  gender={champ.gender}
+                  cost={champ.cost}
+                  type={champ.type}
+                  chibi={champ.chibi}
+                  attRange={champ.attRange}
+                />
+              ))}
+            </ChampionContext.Provider>
+          </div>
         </div>
+        <Footer />
       </div>
     </>
   );
