@@ -33,7 +33,7 @@ function App() {
       <div className="App">
         <div className="background-container">
         <Header/>
-          <div className="container fade-in">
+          <div className="container">
             <SearchBar 
               championList={championList}
               guessedChampions={guessedChampions}
@@ -41,9 +41,9 @@ function App() {
             />
             <ChampionContext.Provider value={testChampion}>
               {guessedChampions.length > 0 ? <AttributeHeader /> : null}
-              {guessedChampions.map((champ, index) => (
+              {guessedChampions.map((champ) => (
                 <ChampionAnswer
-                  key={index}
+                  key={champ.name}
                   imageurl={champ.imageurl}
                   name={champ.name}
                   gender={champ.gender}

@@ -7,15 +7,13 @@ import { useContext, useEffect, useState } from "react";
 
 const ChampionAnswer: React.FC<Champion> = ({ ...champion }) => {
 
-    const [isAnimate, setIsAnimate] = useState(false);
-    
-    useEffect(() => {
-        setIsAnimate(true);
-      }, []);
+    const [isAnimating, setIsAnimating] = useState<boolean>(true);
+
+    console.log("Rendering",  champion.name);
       
     return (
         <>
-            <div className={`answer-container ${isAnimate && "fade-in"}`}>
+            <div className={`answer-container ${isAnimating ? "fade-in" : ""}`}>
                 {Object.keys(champion).map((key) => (
                     <AttributeSquare 
                         key={key} 
