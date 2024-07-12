@@ -8,8 +8,6 @@ import { useContext, useEffect, useState } from "react";
 const ChampionAnswer: React.FC<Champion> = ({ ...champion }) => {
 
     const [isAnimating, setIsAnimating] = useState<boolean>(true);
-
-    console.log("Rendering",  champion.name);
       
     return (
         <>

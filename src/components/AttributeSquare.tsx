@@ -33,20 +33,23 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
         return regex.test(url);
     };
 
-    const renderImage = isImage(champion[pos]) ? (
-        <div className="icon-container">
-            <img className="image" src={`images/${champion.imageurl}`} alt="Champion image"/>
-        </div>
-        ) : null;
-    
     return (
         <>
-            {renderImage}
-            <div className={getSquareColor()}>
-                <div className="square-content">{champion[pos]}</div>
+          {isImage(champion[pos]) ? (
+            <div className="icon-container">
+              <img
+                className="image"
+                src={`images/${champion.imageurl}`}
+                alt="Champion image"
+              />
             </div>
+          ) : (
+            <div className={getSquareColor()}>
+              <div className="square-content">{champion[pos]}</div>
+            </div>
+          )}
         </>
-    );
-}
+      );
+    };
 
 export default AttributeSquare; 
