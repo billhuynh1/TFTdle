@@ -7,6 +7,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  position: relative;
 }
 
 .background-container {
@@ -14,10 +15,21 @@
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
+  position: relative;
   min-height: 100vh;  
 }
 
+.background-container::before {
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  top: 0; bottom: 0;
+  background: rgba(0,0,0,0.2);
+}
+
 .header {
+  position: relative;
+  color: white;
   font-size: 5rem;
 }
 
@@ -34,13 +46,29 @@
   bottom: 0;
 }
 
-.searchbar {
+.game-header {
+  background-color: white;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  width: 500px;
+  border-radius: 5px;
+}
+
+.searchbar-container {
   display: flex;
   flex-direction: column;
   width: 500px;
-  height: 50px;
+  height: 75px;
   margin: 1rem;
   margin-bottom: 3rem;
+}
+
+.search-bar {
+  font-size: x-large;
+  height: 150px;
+  padding: 10px;
 }
 
 .guessed-container {
@@ -53,6 +81,7 @@
   display: flex;
   max-width: 160%;
   height: 100px;
+  margin-bottom: 10px;
 }
 
 .attribute-container {
@@ -63,14 +92,19 @@
   margin-bottom: 2px;
 }
 
+.attribute-square:nth-child(-n+7) {
+  border: none;
+  border-bottom: 5px solid white;
+
+}
+
 @keyframes fadeIn {
   0% { opacity: 0; }
-  50% { opacity: 0.5; }
   100% { opacity: 1; }
 }
 
 .fade-in {
-  animation: fadeIn 1s;
+  animation: fadeIn 1s ease-in-out;
 }
 
 
@@ -86,10 +120,12 @@
   height: 100px;
   width: 100px;
   color: white;
+  margin: 2px;
 }
 
+
 .attribute-square-correct {
-  background-color: green;
+  background-color: #00b42d;
 }
 
 .attribute-square-partial {
@@ -97,12 +133,13 @@
 }
 
 .attribute-square-incorrect {
-  background-color: red;
+  background-color: #ff3131;
 }
 
 .square-content {
   align-items: center;
   justify-content: center;
+  text-shadow: black 1px 0 5px;
   color: white;
 }
 
@@ -117,7 +154,7 @@
   background-color: white;
   width: 500px;
   position: absolute;
-  margin-top: 19px;
+  margin-top: 75px;
   padding: 0;
   border: solid black;
 }

@@ -56,10 +56,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, s
     ) : null;
 
     return (
-        <div className="searchbar">
+        <div className="searchbar-container">
                 <input
                     type="text"
                     id="guess"
+                    className="search-bar"
                     placeholder="Type champion name ..."
                     onChange={handleChange}
                     value={input}
