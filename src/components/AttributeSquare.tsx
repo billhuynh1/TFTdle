@@ -38,7 +38,7 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
           {isImage(champion[pos]) ? (
             <div className="icon-container">
               <img
-                className="image"
+                className="champion-image"
                 src={`images/${champion.imageurl}`}
                 alt="Champion image"
               />

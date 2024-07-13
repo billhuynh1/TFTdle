@@ -24,7 +24,7 @@
   position: absolute;
   left: 0; right: 0;
   top: 0; bottom: 0;
-  background: rgba(0,0,0,0.2);
+  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0, 0, 0, 0.8));
 }
 
 .header {
@@ -34,7 +34,7 @@
 }
 
 .footer {
-  margin: 0 auto;
+  margin: 0;
   text-align: center;
 }
 
@@ -51,9 +51,12 @@
   position: relative;
   justify-content: center;
   align-items: center;
-  height: 100px;
-  width: 500px;
+  height: 50px;
+  width: 400px;
   border-radius: 5px;
+  padding: 50px;
+  border: 2px solid black;
+  font-size: large;
 }
 
 .searchbar-container {
@@ -71,31 +74,32 @@
   padding: 10px;
 }
 
-.guessed-container {
-  display: flex;
-  width: 750px;
-  height: 100px;
-}
-
 .answer-container {
   display: flex;
-  max-width: 160%;
+  max-width: 800px;
   height: 100px;
   margin-bottom: 10px;
+  padding: 10px;
 }
 
 .attribute-container {
   display: flex;
   flex-wrap: nowrap;
-  max-width: 750px;
+  max-width: 800px;
+  padding: 10px;
   height: 100px;
-  margin-bottom: 2px;
 }
 
 .attribute-square:nth-child(-n+7) {
   border: none;
-  border-bottom: 5px solid white;
+  font-size: large;
+}
 
+.attribute-square hr {
+  width: 85%;
+  height: 4px;
+  background-color: white;
+  bottom: 0;
 }
 
 @keyframes fadeIn {
@@ -107,20 +111,21 @@
   animation: fadeIn 1s ease-in-out;
 }
 
-
 .attribute-square, .attribute-square-correct, .attribute-square-partial, .attribute-square-incorrect {
   display: flex;
   flex-wrap: wrap;
   flex: 1;
-  border: solid black;
+  border: 3px solid black;
   box-sizing: border-box;
-  padding: 2rem;
   align-items: center;
   justify-content: center;
   height: 100px;
   width: 100px;
   color: white;
-  margin: 2px;
+  margin: 5px;
+  text-align: center;
+  flex-direction: column;
+  font-family: Verdana, sans-serif;
 }
 
 
@@ -137,32 +142,51 @@
 }
 
 .square-content {
+  display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   text-shadow: black 1px 0 5px;
   color: white;
+  font-size: large;
 }
 
-.image {
+.champion-image {
   position: relative;
+  padding: 5px;
   height: 100px;
   width: 100px;
 }
 
 .champion-list {
+  display: flex;
+  flex-direction: column;
   list-style-type: none;
   background-color: white;
-  width: 500px;
+  width: 495px;
   position: absolute;
   margin-top: 75px;
-  padding: 0;
   border: solid black;
+  padding-left: 0;
+  overflow-y: auto;
+  height: 250px;
+}
+
+.champion-image-list {
+  height: 50px;
+  width: 50px;
+  padding-right: 10px;
+  padding-left: 10px;
+  left: 0;
 }
 
 .champion-list-item {
-  margin: 8px 0;
+  display: flex;
+  padding: 5px;
+  left: 0;
+  font-size: x-large;
 }
 
 li:hover {
-  background-color: aqua;
+  background-color: yellow;
 }

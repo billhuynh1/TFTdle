@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Champion } from "../type";
 import supabase from "../utils/supabaseClient";
 
@@ -45,15 +45,34 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, s
         setInput("");
     }
 
-    const renderedChampions = filteredChampions.length > 0 && isListOpen ? (
+    const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === "Enter") {
+            if (filteredChampions.length > 0) {
+                handleSelectChampion(filteredChampions[0]);
+            }
+        }
+    }
+
+    // Returns list of champions from query
+    const renderedChampions =
+        filteredChampions.length > 0 && isListOpen ? (
             <ul className="champion-list">
                 {filteredChampions.map((champ: Champion) => (
-                    <li className="champion-list-item" key={champ.name} onClick={() => handleSelectChampion(champ)}>
+                    <li
+                        className="champion-list-item"
+                        key={champ.name}
+                        onClick={() => handleSelectChampion(champ)}
+                    >
+                        <img
+                            src={`images/${champ.imageurl}`} 
+                            alt="Champion list image" 
+                            className="champion-image-list"
+                        />
                         {champ.name}
                     </li>
                 ))}
             </ul>
-    ) : null;
+        ) : null;
 
     return (
         <div className="searchbar-container">
@@ -63,6 +82,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, s
                     className="search-bar"
                     placeholder="Type champion name ..."
                     onChange={handleChange}
+                    onKeyDown={handleKeyInput}
                     value={input}
                 />
                 {renderedChampions}
