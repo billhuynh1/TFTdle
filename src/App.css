@@ -33,6 +33,10 @@
   font-size: 5rem;
 }
 
+.header-image {
+  height: 100px;
+}
+
 .footer {
   margin: 0;
   text-align: center;
@@ -47,14 +51,15 @@
 }
 
 .game-header {
+  display: flex;
+  flex-direction: column;
   background-color: white;
-  position: relative;
   justify-content: center;
   align-items: center;
   height: 50px;
-  width: 400px;
+  width: 440px;
   border-radius: 5px;
-  padding: 50px;
+  padding: 30px;
   border: 2px solid black;
   font-size: large;
 }
@@ -69,8 +74,9 @@
 }
 
 .search-bar {
-  font-size: x-large;
-  height: 150px;
+  font-size: larger;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  height: 30px;
   padding: 10px;
 }
 
@@ -141,6 +147,10 @@
   background-color: #ff3131;
 }
 
+.attribute-square-correct:hover, .attribute-square-partial:hover, .attribute-square-incorrect:hover {
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+}
+
 .square-content {
   display: flex;
   flex: 1;
@@ -165,7 +175,7 @@
   background-color: white;
   width: 495px;
   position: absolute;
-  margin-top: 75px;
+  margin-top: 54px;
   border: solid black;
   padding-left: 0;
   overflow-y: auto;
