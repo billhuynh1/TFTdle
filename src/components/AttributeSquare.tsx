@@ -12,14 +12,16 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     const [squareColor, setSquareColor] = useState<string>("");
     
-
     const squareCorrect = "attribute-square-correct";
     const squareIncorrect = "attribute-square-incorrect"
+    const squarePartial = "attribute-square-partial"
     const testChampion = useChampionContext();
 
     const getSquareColor = () => {
         if (testChampion && champion[pos] === testChampion[pos]) {            
             return squareCorrect;
+        } else if (testChampion?.[pos]?.toString().includes(champion?.[pos]?.toString() ?? '')) {
+            return squarePartial;
         } else {
             return squareIncorrect;
         }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Champion } from "../type";
-import supabase from "../utils/supabaseClient";
+import Button from "./Button";
 
 interface SearchBarProps {
     championList: Champion[];
@@ -52,6 +52,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, s
             }
         }
     }
+    
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+        if (guessedChampions.includes(filteredChampions[0])) {
+            return;
+        }
+        handleSelectChampion(filteredChampions[0]);
+      };
 
     // Returns list of champions from query
     const renderedChampions =
@@ -73,9 +80,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, s
                 ))}
             </ul>
         ) : null;
-
+    
     return (
-        <div className="searchbar-container">
+        <div className="searchbar-main-container">
+            <div className="searchbar-sub-container">
                 <input
                     type="text"
                     id="guess"
@@ -85,6 +93,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, s
                     onKeyDown={handleKeyInput}
                     value={input}
                 />
+                <Button 
+                    icon="images/tft_spat.png" 
+                    onClick={handleClick}
+                />
+            </div>
                 {renderedChampions}
         </div>
     )

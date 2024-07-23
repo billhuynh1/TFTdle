@@ -8,7 +8,7 @@ import { useContext, useEffect, useState } from "react";
 const ChampionAnswer: React.FC<Champion> = ({ ...champion }) => {
 
     const [isAnimating, setIsAnimating] = useState<boolean>(true);
-      
+
     return (
         <>
             <div className={`answer-container ${isAnimating ? "fade-in" : ""}`}>

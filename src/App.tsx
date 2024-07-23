@@ -4,12 +4,14 @@ import ChampionAnswer from './components/ChampionAnswer';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import SearchBar from './components/SearchBar';
-import { Champion, ChampionAnswerProps } from './type';
+import { Champion } from './type';
 import { fetchChampions } from './utils/fetchChampions';
 import AttributeHeader from './components/AttributeHeader';
 import GameHeader from './components/GameHeader';
 
 const ChampionContext = createContext<Champion | null>(null);
+const AttemptsContext = createContext<number>(0);
+export const useAttmptsContext = () => useContext(AttemptsContext);
 export const useChampionContext = () => useContext(ChampionContext);
 
 function App() {
@@ -17,18 +19,18 @@ function App() {
   const [championList, setChampionList] = useState<Champion[]>([]);
   const [guessedChampions, setGuessedChampions] = useState<Champion[]>([]);
   const [testChampion, setTestChampion] = useState<Champion | null>(null);
+  const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
   useEffect(() => {
     async function getChampions() {
       const championsData = await fetchChampions();
       setChampionList(championsData);
-      setTestChampion(championsData[12]);
+      setTestChampion(championsData[15]);
     }
     
     getChampions();
   }, []);
-  
-  
+
   return (
     <>    
       <div className="App">
