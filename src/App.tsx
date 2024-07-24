@@ -8,6 +8,7 @@ import { Champion } from './type';
 import { fetchChampions } from './utils/fetchChampions';
 import AttributeHeader from './components/AttributeHeader';
 import GameHeader from './components/GameHeader';
+import GameEnd from './components/GameEnd';
 
 const ChampionContext = createContext<Champion | null>(null);
 const AttemptsContext = createContext<number>(0);
@@ -40,6 +41,7 @@ function App() {
           <div className="container">
           <AttemptsContext.Provider value={attempts}>
           <GameHeader/>
+            <GameEnd attempts={attempts}/>
             <SearchBar 
               championList={championList}
               guessedChampions={guessedChampions}
