@@ -6,9 +6,10 @@ interface SearchBarProps {
     championList: Champion[];
     guessedChampions: Champion[];
     setGuessedChampions: React.Dispatch<React.SetStateAction<Champion[]>>;
+    setAttempts: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, setGuessedChampions }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, setGuessedChampions, setAttempts }) => {
 
     const [input, setInput] = useState<string>("");
     const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
@@ -43,6 +44,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, s
         setGuessedChampions(prev => [champ, ...prev]);
         setIsListOpen(false);
         setInput("");
+        setAttempts(attempts => attempts + 1);
     }
 
     const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {

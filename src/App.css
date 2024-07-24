@@ -129,11 +129,6 @@
   height: 100px;
 }
 
-.attribute-square:nth-child(-n+7) {
-  border: none;
-  font-size: large;
-}
-
 .attribute-square hr {
   width: 85%;
   height: 4px;
@@ -156,11 +151,10 @@
   animation: fadeIn 1s ease-in-out
 }
 
-.attribute-square, .attribute-square-correct, .attribute-square-partial, .attribute-square-incorrect {
+.attribute-square {
   display: flex;
   flex-wrap: wrap;
   flex: 1;
-  border: 3px solid black;
   box-sizing: border-box;
   align-items: center;
   justify-content: center;
@@ -168,25 +162,26 @@
   width: 100px;
   color: white;
   margin: 5px;
-  text-align: center;
   flex-direction: column;
   font-family: Verdana, sans-serif;
 }
 
-
-.attribute-square-correct {
+.attribute-square.correct {
   background-color: #00b42d;
+  border: 3px solid black;
 }
 
-.attribute-square-partial {
+.attribute-square.partial {
   background-color: orange;
+  border: 3px solid black;
 }
 
-.attribute-square-incorrect {
+.attribute-square.incorrect {
   background-color: #ff3131;
+  border: 3px solid black;
 }
 
-.attribute-square-correct:hover, .attribute-square-partial:hover, .attribute-square-incorrect:hover {
+.correct:hover, .partial:hover, .incorrect:hover {
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }
 

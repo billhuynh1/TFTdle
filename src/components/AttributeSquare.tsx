@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Champion } from "../type";
 import { useChampionContext } from "../App";
 
@@ -11,21 +11,17 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
 
     const [isGameOver, setIsGameOver] = useState<boolean>(false);
     const [squareColor, setSquareColor] = useState<string>("");
-    
-    const squareCorrect = "attribute-square-correct";
-    const squareIncorrect = "attribute-square-incorrect"
-    const squarePartial = "attribute-square-partial"
     const testChampion = useChampionContext();
 
-    const getSquareColor = () => {
-        if (testChampion && champion[pos] === testChampion[pos]) {            
-            return squareCorrect;
-        } else if (testChampion?.[pos]?.toString().includes(champion?.[pos]?.toString() ?? '')) {
-            return squarePartial;
-        } else {
-            return squareIncorrect;
-        }
-    }
+    useEffect(() => {
+      if (testChampion && champion[pos] === testChampion[pos]) {            
+          setSquareColor("correct")
+      } else if (testChampion?.[pos]?.toString().includes(champion?.[pos]?.toString() ?? '')) {
+          setSquareColor("partial")
+      } else {
+          setSquareColor("incorrect")
+      }
+    }, [champion[pos]])
     
     const isImage = (url: string | number) => {
         if (typeof url != 'string') {
@@ -35,6 +31,8 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
         return regex.test(url);
     };
 
+    console.log(squareColor);
+    
     return (
         <>
           {isImage(champion[pos]) ? (
@@ -46,7 +44,7 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
               />
             </div>
           ) : (
-            <div className={getSquareColor()}>
+            <div className={`attribute-square ${squareColor}`}>
               <div className="square-content">{champion[pos]}</div>
             </div>
           )}

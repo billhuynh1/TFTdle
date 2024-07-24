@@ -11,7 +11,7 @@ import GameHeader from './components/GameHeader';
 
 const ChampionContext = createContext<Champion | null>(null);
 const AttemptsContext = createContext<number>(0);
-export const useAttmptsContext = () => useContext(AttemptsContext);
+export const useAttemptsContext = () => useContext(AttemptsContext);
 export const useChampionContext = () => useContext(ChampionContext);
 
 function App() {
@@ -19,6 +19,7 @@ function App() {
   const [championList, setChampionList] = useState<Champion[]>([]);
   const [guessedChampions, setGuessedChampions] = useState<Champion[]>([]);
   const [testChampion, setTestChampion] = useState<Champion | null>(null);
+  const [attempts, setAttempts] = useState<number>(0);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
 
   useEffect(() => {
@@ -30,19 +31,22 @@ function App() {
     
     getChampions();
   }, []);
-
+  
   return (
     <>    
       <div className="App">
         <div className="background-container">
         <Header/>
           <div className="container">
+          <AttemptsContext.Provider value={attempts}>
           <GameHeader/>
             <SearchBar 
               championList={championList}
               guessedChampions={guessedChampions}
               setGuessedChampions={setGuessedChampions}
+              setAttempts={setAttempts}
             />
+            </AttemptsContext.Provider>
             <ChampionContext.Provider value={testChampion}>
               {guessedChampions.length > 0 ? <AttributeHeader /> : null}
               {guessedChampions.map((champ) => (
