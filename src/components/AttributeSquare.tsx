@@ -30,8 +30,6 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
         const regex = /\.(jpg|jpeg|png|gif|bmp|svg)$/;
         return regex.test(url);
     };
-
-    console.log(squareColor);
     
     return (
         <>

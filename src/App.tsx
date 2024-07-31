@@ -27,7 +27,7 @@ function App() {
     async function getChampions() {
       const championsData = await fetchChampions();
       setChampionList(championsData);
-      setTestChampion(championsData[15]);
+      setTestChampion(championsData[3]);
     }
     
     getChampions();
@@ -39,18 +39,29 @@ function App() {
         <div className="background-container">
         <Header/>
           <div className="container">
+          <ChampionContext.Provider value={testChampion}>
           <AttemptsContext.Provider value={attempts}>
-          <GameHeader/>
-            <GameEnd attempts={attempts}/>
-            <SearchBar 
-              championList={championList}
-              guessedChampions={guessedChampions}
-              setGuessedChampions={setGuessedChampions}
-              setAttempts={setAttempts}
-            />
+          {!isGameOver ? <GameHeader /> : null}
+          {isGameOver 
+            ? <GameEnd 
+              attempts={attempts} 
+              champIcon={testChampion?.imageurl}
+              champName={testChampion?.name}
+              /> 
+            : <SearchBar 
+                championList={championList}
+                guessedChampions={guessedChampions}
+                correctChampion={testChampion}
+                setGuessedChampions={setGuessedChampions}
+                setAttempts={setAttempts}
+                setIsGameOver={setIsGameOver}
+              />
+          }
             </AttemptsContext.Provider>
-            <ChampionContext.Provider value={testChampion}>
-              {guessedChampions.length > 0 ? <AttributeHeader /> : null}
+              {guessedChampions.length > 0 
+                ? <AttributeHeader /> 
+                : null
+              }
               {guessedChampions.map((champ) => (
                 <ChampionAnswer
                   key={champ.name}

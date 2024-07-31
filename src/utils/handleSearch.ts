@@ -1,11 +1,9 @@
 import { useState } from "react";
-import supabase from "./supabaseClient";
+import supabase from "./supabaseClient.js";
 import { Champion } from "../type";
 
 
 export const handleSearch = async(searchTerm: string) => {
-    const [searchedChampion, setSearchedChampion] = useState<Champion>();
-
     try {
         const { data, error } = await supabase
             .from("champions")

@@ -7,9 +7,11 @@ interface SearchBarProps {
     guessedChampions: Champion[];
     setGuessedChampions: React.Dispatch<React.SetStateAction<Champion[]>>;
     setAttempts: React.Dispatch<React.SetStateAction<number>>;
+    setIsGameOver: React.Dispatch<React.SetStateAction<boolean>>;
+    correctChampion?: Champion | null;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, setGuessedChampions, setAttempts }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, correctChampion, setGuessedChampions, setAttempts, setIsGameOver }) => {
 
     const [input, setInput] = useState<string>("");
     const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
@@ -34,7 +36,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, s
         const newInput = e.target.value
         const regex = /[a-zA-Z]+$/i;
 
-        if (newInput === "" || regex.test(newInput)) {
+        if ( newInput === "" || regex.test(newInput )) {
             setInput(newInput);
             handleSearch(newInput);
         }
@@ -45,22 +47,27 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, s
         setIsListOpen(false);
         setInput("");
         setAttempts(attempts => attempts + 1);
+        if (correctChampion && correctChampion.name === champ.name) {
+            setIsGameOver(true);
+        }
     }
 
     const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if (event.key === "Enter") {
+        if ( event.key === "Enter" ) {
             if (filteredChampions.length > 0) {
                 handleSelectChampion(filteredChampions[0]);
             }
         }
     }
     
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
+    // FIX THIS!!!!
+    const handleClick = () => {
         if (guessedChampions.includes(filteredChampions[0])) {
             return;
+        } else if (input == filteredChampions[0].name) {
+            handleSelectChampion(filteredChampions[0]);
         }
-        handleSelectChampion(filteredChampions[0]);
-      };
+    };
 
     // Returns list of champions from query
     const renderedChampions =
@@ -91,12 +98,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, s
                     id="guess"
                     className="search-bar"
                     placeholder="Type champion name ..."
+                    autoComplete="off"
                     onChange={handleChange}
                     onKeyDown={handleKeyInput}
                     value={input}
                 />
                 <Button 
-                    icon="images/tft_spat.png" 
+                    icon="images/golden_spat.png" 
                     onClick={handleClick}
                 />
             </div>

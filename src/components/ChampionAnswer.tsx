@@ -4,7 +4,6 @@ import { Champion } from "../type";
 import testChampion from "../App"
 import { useContext, useEffect, useState } from "react";
 
-
 const ChampionAnswer: React.FC<Champion> = ({ ...champion }) => {
 
     const [isAnimating, setIsAnimating] = useState<boolean>(true);

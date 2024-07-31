@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: Friz Quadrata Std,Mobilo,Helvetica,Arial
 }
 
 .container {
@@ -11,7 +12,7 @@
 }
 
 .background-container {
-  background-image: url("../public/images/tftdle_background.jpg");
+  background-image: url("../public/images/teamfighttactics_background.jpeg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -51,11 +52,23 @@
 }
 
 .game-end-container {
-  width: 300px;
-  height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 400px;
+  height: 400px;
+  padding: 10px;
   margin-top: 10px;
+  align-content: center;
   background-color: #1e2328;
   border: 2px solid #af9767;
+}
+
+.champion-image-game-end {
+  padding: 20px;
+  height: 100px;
+  width: 100px;
 }
 
 .button {
@@ -65,19 +78,18 @@
   justify-content: center;
   align-items: center;
   margin-left: 2px;
+  background: none;
+  border: none;
 }
 
 .button-img:hover {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 90px;
   transition: ease-out 0.5s;
-  box-shadow: 0 0 50px rgba(255, 255, 255, 0.5);
 }
 
 .button-img{
-  margin-top: 1px;
-  border: 2px solid #f6b635;
-  height: 50px;
+  height: 60px;
   width: 50px;
 }
 
@@ -112,7 +124,6 @@
 
 .search-bar {
   font-size: large;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: white;
   height: 30px;
   padding: 10px;
@@ -147,11 +158,11 @@
 @keyframes fadeIn {
   0% {
     opacity: 0;
-    transform: translateX(20px);
+    /* transform: translateY(20px); */
  }
  100% {
     opacity: 1;
-    transform: translateX(0);
+    /* transform: translateY(0); */
  }
 }
 
@@ -171,7 +182,6 @@
   color: white;
   margin: 5px;
   flex-direction: column;
-  font-family: Verdana, sans-serif;
 }
 
 .attribute-square.correct {
