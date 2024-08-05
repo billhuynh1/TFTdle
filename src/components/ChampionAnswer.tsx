@@ -1,8 +1,9 @@
+/* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 
 import AttributeSquare from "./AttributeSquare"
 import { Champion } from "../type";
-import testChampion from "../App"
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 
 const ChampionAnswer: React.FC<Champion> = ({ ...champion }) => {
 
@@ -12,9 +13,9 @@ const ChampionAnswer: React.FC<Champion> = ({ ...champion }) => {
         <>
             <div className={`answer-container ${isAnimating ? "fade-in" : ""}`}>
                 {Object.keys(champion).map((key) => (
-                    <AttributeSquare 
-                        key={key} 
-                        champion={champion} 
+                    <AttributeSquare
+                        key={key}
+                        champion={champion}
                         pos={key as keyof Champion}
                     />
                 ))}

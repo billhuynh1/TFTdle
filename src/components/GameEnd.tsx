@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 
 interface GameEndProps {
-  attempts: number;
-  champIcon?: string;
-  champName?: string;
+    attempts: number;
+    champIcon?: string;
+    champName?: string;
 }
 
 const GameEnd: React.FC<GameEndProps> = ({ attempts, champIcon, champName }) => {
@@ -14,13 +14,15 @@ const GameEnd: React.FC<GameEndProps> = ({ attempts, champIcon, champName }) => 
     const [showContent, setShowContent] = useState<boolean>(false);
     const [difference, setDifference] = useState<number>(resetTime.getTime() - currentTime.getTime());
 
+    const imagePath = "https://tftdle.s3.us-east-2.amazonaws.com/images/";
+
     useEffect(() => {
         const interval = setInterval(() => {
             const now = currentTime;
-    
+
             setDifference(resetTime.getTime() - now.getTime());
         }, 1000)
-        
+
         return () => clearInterval(interval);
     }, [currentTime]);
 
@@ -30,7 +32,7 @@ const GameEnd: React.FC<GameEndProps> = ({ attempts, champIcon, champName }) => 
         const minutes = Math.floor((totalSeconds % 3600) / 60);
         const seconds = totalSeconds % 60;
         return `${hours}h : ${minutes}m : ${seconds}s`;
-      };
+    };
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -40,21 +42,21 @@ const GameEnd: React.FC<GameEndProps> = ({ attempts, champIcon, champName }) => 
         return () => clearTimeout(timer);
     }, []);
 
-    if ( !showContent ) {
+    if (!showContent) {
         return null;
     }
-  
+
     return (
         <div className="game-end-container fade-in">
-            <span style={{color: "white", padding: "10px"}}>The correct champion is:</span>
-            <span style={{color: "white", fontWeight: "bold", fontSize:"25px"}}>{champName}</span>
+            <span style={{ color: "white", padding: "10px" }}>The correct champion is:</span>
+            <span style={{ color: "white", fontWeight: "bold", fontSize: "25px" }}>{champName}</span>
             <img
-                src={`images/${champIcon}`} 
+                src={`${imagePath}${champIcon}`}
                 className="champion-image-game-end"
-                alt="Image of correct champion"
+                alt="Correct champion"
             />
-            <span style={{ color: "white"}}>Number of attempts: {attempts}</span>
-            <span style={{color: "white", padding: "20px"}}>Next champion in: {formatTime(difference)}</span>
+            <span style={{ color: "white" }}>Number of attempts: {attempts}</span>
+            <span style={{ color: "white", padding: "20px" }}>Next champion in: {formatTime(difference)}</span>
         </div>
     );
 };

@@ -9,18 +9,18 @@ const Button: React.FC<ButtonProps> = ({ icon, onClick }) => {
 
     return (
         <>
-            <button 
+            <button
                 className="button"
                 onClick={onClick}
             >
-                <img 
-                    src={icon} 
+                <img
+                    src={icon}
                     className="button-img"
-                    alt="" 
+                    alt=""
                 />
             </button>
         </>
-    ) 
+    )
 }
 
 export default Button;

@@ -37,47 +37,47 @@ function App() {
     <>    
       <div className="App">
         <div className="background-container">
-        <Header/>
-          <div className="container">
-          <ChampionContext.Provider value={testChampion}>
-          <AttemptsContext.Provider value={attempts}>
-          {!isGameOver ? <GameHeader /> : null}
-          {isGameOver 
-            ? <GameEnd 
-              attempts={attempts} 
-              champIcon={testChampion?.imageurl}
-              champName={testChampion?.name}
-              /> 
-            : <SearchBar 
-                championList={championList}
-                guessedChampions={guessedChampions}
-                correctChampion={testChampion}
-                setGuessedChampions={setGuessedChampions}
-                setAttempts={setAttempts}
-                setIsGameOver={setIsGameOver}
-              />
-          }
-            </AttemptsContext.Provider>
-              {guessedChampions.length > 0 
-                ? <AttributeHeader /> 
-                : null
-              }
-              {guessedChampions.map((champ) => (
-                <ChampionAnswer
-                  key={champ.name}
-                  imageurl={champ.imageurl}
-                  name={champ.name}
-                  gender={champ.gender}
-                  cost={champ.cost}
-                  type={champ.type}
-                  chibi={champ.chibi}
-                  attRange={champ.attRange}
+          <Header/>
+            <div className="container">
+            <ChampionContext.Provider value={testChampion}>
+            <AttemptsContext.Provider value={attempts}>
+            {!isGameOver ? <GameHeader /> : null}
+            {isGameOver 
+              ? <GameEnd 
+                attempts={attempts} 
+                champIcon={testChampion?.imageurl}
+                champName={testChampion?.name}
+                /> 
+              : <SearchBar 
+                  championList={championList}
+                  guessedChampions={guessedChampions}
+                  correctChampion={testChampion}
+                  setGuessedChampions={setGuessedChampions}
+                  setAttempts={setAttempts}
+                  setIsGameOver={setIsGameOver}
                 />
-              ))}
-            </ChampionContext.Provider>
-          </div>
+            }
+              </AttemptsContext.Provider>
+                {guessedChampions.length > 0 
+                  ? <AttributeHeader /> 
+                  : null
+                }
+                {guessedChampions.map((champ) => (
+                  <ChampionAnswer
+                    key={champ.name}
+                    imageurl={champ.imageurl}
+                    name={champ.name}
+                    gender={champ.gender}
+                    cost={champ.cost}
+                    type={champ.type}
+                    chibi={champ.chibi}
+                    attRange={champ.attRange}
+                  />
+                ))}
+              </ChampionContext.Provider>
+              <Footer />
+            </div>
         </div>
-        <Footer />
       </div>
     </>
   );

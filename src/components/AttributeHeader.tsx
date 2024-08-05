@@ -1,6 +1,4 @@
-import guessedChampions from "../App";
-import { Champion } from "../type";
-
+/* eslint-disable react/react-in-jsx-scope */
 const AttributeHeader = () => {
     const attributeContents: string[] = ['Champion', 'Name', 'Gender', 'Cost', 'Type', 'Chibi', 'Attack Range'];
 
@@ -9,7 +7,7 @@ const AttributeHeader = () => {
             {attributeContents.map((content, index) => (
                 <div key={index} className="attribute-square">
                     <div className="square-content">{content}</div>
-                    <hr /> 
+                    <hr />
                 </div>
             ))}
         </div>

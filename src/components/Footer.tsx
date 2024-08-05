@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 const Footer: React.FC = () => {
     return (
         <div className="footer-container">

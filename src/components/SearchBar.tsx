@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Champion } from "../type";
 import Button from "./Button";
 
@@ -17,13 +17,15 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, c
     const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
     const [isListOpen, setIsListOpen] = useState(false);
 
-    const handleSearch = async (searchQuery: string) => {   
-        if(searchQuery.length) {
-            const regex = new RegExp(`^${searchQuery.toLowerCase()}`);        
-            const newFilteredChampions = championList.filter((champ: Champion) => {          
+    const imagePath = "https://tftdle.s3.us-east-2.amazonaws.com/images/";
+
+    const handleSearch = async (searchQuery: string) => {
+        if (searchQuery.length) {
+            const regex = new RegExp(`^${searchQuery.toLowerCase()}`);
+            const newFilteredChampions = championList.filter((champ: Champion) => {
                 return regex.test(champ.name.toLowerCase()) && !guessedChampions.includes(champ);
             })
-    
+
             setFilteredChampions([...newFilteredChampions]);
             setIsListOpen(true);
         }
@@ -31,12 +33,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, c
             setFilteredChampions([]);
         }
     }
-    
-    const handleChange = (e:any) => {
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleChange = (e: any) => {
         const newInput = e.target.value
         const regex = /[a-zA-Z]+$/i;
 
-        if ( newInput === "" || regex.test(newInput )) {
+        if (newInput === "" || regex.test(newInput)) {
             setInput(newInput);
             handleSearch(newInput);
         }
@@ -53,18 +56,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, c
     }
 
     const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
-        if ( event.key === "Enter" ) {
+        if (event.key === "Enter") {
             if (filteredChampions.length > 0) {
                 handleSelectChampion(filteredChampions[0]);
             }
         }
     }
-    
+
     // FIX THIS!!!!
     const handleClick = () => {
         if (guessedChampions.includes(filteredChampions[0])) {
             return;
-        } else if (input == filteredChampions[0].name) {
+        } else if (input === filteredChampions[0].name) {
             handleSelectChampion(filteredChampions[0]);
         }
     };
@@ -80,8 +83,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, c
                         onClick={() => handleSelectChampion(champ)}
                     >
                         <img
-                            src={`images/${champ.imageurl}`} 
-                            alt="Champion list image" 
+                            src={`${imagePath}${champ.imageurl}`}
+                            alt="A list of champions"
                             className="champion-image-list"
                         />
                         {champ.name}
@@ -89,7 +92,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, c
                 ))}
             </ul>
         ) : null;
-    
+
     return (
         <div className="searchbar-main-container">
             <div className="searchbar-sub-container">
@@ -103,12 +106,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, c
                     onKeyDown={handleKeyInput}
                     value={input}
                 />
-                <Button 
-                    icon="images/golden_spat.png" 
+                <Button
+                    icon="images/golden_spat.png"
                     onClick={handleClick}
                 />
             </div>
-                {renderedChampions}
+            {renderedChampions}
         </div>
     )
 }
