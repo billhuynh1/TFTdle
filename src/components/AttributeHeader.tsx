@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 const AttributeHeader = () => {
-    const attributeContents: string[] = ['Champion', 'Name', 'Gender', 'Cost', 'Type', 'Chibi', 'Attack Range'];
+    const attributeContents: string[] = ['Champion', 'Name', 'Gender', 'Cost', 'Type', 'Traits', 'Attack Range'];
 
     return (
         <div className="attribute-container">

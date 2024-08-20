@@ -57,7 +57,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ championList, guessedChampions, c
 
     const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.key === "Enter") {
-            if (filteredChampions.length > 0) {
+            if (filteredChampions.length > 0 && !guessedChampions.includes(filteredChampions[0])) {
                 handleSelectChampion(filteredChampions[0]);
             }
         }

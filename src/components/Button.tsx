@@ -1,7 +1,7 @@
 import React from "react";
 
 type ButtonProps = {
-    icon: string;
+    icon?: string;
     onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 

@@ -9,6 +9,7 @@ import { fetchChampions } from './utils/fetchChampions';
 import AttributeHeader from './components/AttributeHeader';
 import GameHeader from './components/GameHeader';
 import GameEnd from './components/GameEnd';
+import About from "./components/About";
 
 const ChampionContext = createContext<Champion | null>(null);
 const AttemptsContext = createContext<number>(0);
@@ -70,11 +71,12 @@ function App() {
                     gender={champ.gender}
                     cost={champ.cost}
                     type={champ.type}
-                    chibi={champ.chibi}
+                    traits={champ.traits}
                     attRange={champ.attRange}
                   />
                 ))}
               </ChampionContext.Provider>
+              <About />
               <Footer />
             </div>
         </div>

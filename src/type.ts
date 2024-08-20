@@ -1,5 +1,3 @@
-import AttributeSquare from "./components/AttributeSquare";
-
 export interface AttributeSquareInterface {
     icon?: string;
     text: string;
@@ -18,7 +16,7 @@ export interface Champion {
     gender: string;
     cost: number;
     type: string;
-    chibi: string;
+    traits: string;
     attRange: number;
 }
 

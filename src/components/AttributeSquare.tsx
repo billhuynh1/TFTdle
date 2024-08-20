@@ -12,8 +12,8 @@ interface AttributeSquareProps {
 const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
 
 	const [squareColor, setSquareColor] = useState<string>("");
+	const [imagePath, setImagePath] = useState<string>("https://tftdle.s3.us-east-2.amazonaws.com/images/");
 	const testChampion = useChampionContext();
-	const imagePath = "https://tftdle.s3.us-east-2.amazonaws.com/images/";
 
 	useEffect(() => {
 		if (testChampion && champion[pos] === testChampion[pos]) {
