@@ -52,8 +52,8 @@ html, body {
   color: white;
   border: solid 2px #af9767;
   border-radius: 20px;
-  width: 500px;
-  height: 500px;
+  width: 1000px;
+  height: 1000px;
   padding: 30px;
 }
 
@@ -260,7 +260,7 @@ html, body {
   justify-content: center;
   text-shadow: black 1px 0 5px;
   color: white;
-  font-size: large;
+  font-size: 15px;
 }
 
 .champion-image {
