@@ -1,12 +1,9 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
+    "allowImportingTsExtensions": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -21,7 +18,5 @@
     "outDir": "./dist",
     "jsx": "react-jsx"
   },
-  "include": [
-    "src"
-, "../idk/setupTests.ts", "../idk/react-app-env.d.ts"  ]
+  "include": ["src"]
 }

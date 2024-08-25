@@ -1,5 +1,9 @@
 node_modules
 .env
 src/utils/supabaseClient.js
-eslint.config.mjs
 src/server.js
+.prettierrc
+package.json
+package-lock.json
+tsconfig.json
+.eslintrc.json
