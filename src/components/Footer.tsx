@@ -3,7 +3,11 @@ import { faDiscord, faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  handleToggleAbout: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ handleToggleAbout }) => {
   return (
     <div className="footer-container">
       <span
@@ -43,7 +47,12 @@ const Footer: React.FC = () => {
             fixedWidth
           />
         </button>
-        <button type="button" aria-label="More Info" className="icon-button">
+        <button
+          type="button"
+          aria-label="More Info"
+          className="icon-button"
+          onClick={handleToggleAbout}
+        >
           <FontAwesomeIcon
             icon={faCircleInfo}
             className="icon"

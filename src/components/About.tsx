@@ -1,8 +1,19 @@
 import React from "react";
 
-const About: React.FC = () => {
+interface AboutProps {
+  handleToggleAbout: () => void;
+}
+
+const About: React.FC<AboutProps> = ({ handleToggleAbout }) => {
   return (
     <div className="about-container">
+      <button
+        type="button"
+        className="button-close"
+        onClick={handleToggleAbout}
+      >
+        &times;
+      </button>
       <h1 style={{ fontSize: "60px" }}>About</h1>
       <hr />
       <span style={{ margin: "20px", fontSize: "30px" }}>

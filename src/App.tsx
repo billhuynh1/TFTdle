@@ -22,7 +22,7 @@ function App() {
   const [testChampion, setTestChampion] = useState<Champion | null>(null);
   const [attempts, setAttempts] = useState<number>(0);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
-  // const [isAbout, setIsAbout] = useState<boolean>(false);
+  const [isAbout, setIsAbout] = useState<boolean>(false);
 
   useEffect(() => {
     async function getChampions() {
@@ -33,6 +33,11 @@ function App() {
 
     getChampions();
   }, []);
+
+  const handleToggleAbout = () => {
+    setIsAbout((isAbout) => !isAbout);
+    console.log(isAbout);
+  };
 
   return (
     <div className="App">
@@ -73,8 +78,8 @@ function App() {
               />
             ))}
           </ChampionContext.Provider>
-          <About />
-          <Footer />
+          {isAbout && <About handleToggleAbout={handleToggleAbout} />}
+          <Footer handleToggleAbout={handleToggleAbout} />
         </div>
       </div>
     </div>
