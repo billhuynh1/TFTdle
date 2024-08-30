@@ -26,13 +26,14 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  position: relative;
-  min-height: 100vh;
+  min-height: 150vh;
+  width: 100vw;
+  height: auto;
 }
 
 .background-container::before {
   content: "";
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
@@ -52,23 +53,28 @@ body {
 }
 
 .about-container {
+  width: 50vw;
+  height: 145vh;
+  z-index: 100;
+}
+
+.about-content {
   display: flex;
+  position: relative;
   flex-direction: column;
   background-color: #1e2328;
   font-family: "Friz Quadrata Std", Mobilo, Helvetica, Arial;
   color: white;
   border: solid 2px #af9767;
   border-radius: 20px;
-  width: 1000px;
-  height: 1000px;
   padding: 30px;
 }
 
-.about-container h1 {
+.about-content h1 {
   margin-bottom: 10px;
 }
 
-.about-container hr {
+.about-content hr {
   width: 85%;
 }
 
@@ -153,6 +159,18 @@ body {
 .button-img {
   height: 60px;
   width: 50px;
+}
+
+.button-close {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  top: 1rem;
+  right: 1rem;
+  border: none;
+  border-radius: 25%;
+  border: 2px solid #af9767;
+  background-color: #ff0000;
 }
 
 .game-header {

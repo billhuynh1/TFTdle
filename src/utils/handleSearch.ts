@@ -1,6 +1,4 @@
-import { useState } from "react";
 import supabase from "./supabaseClient.js";
-import { Champion } from "../type";
 
 export const handleSearch = async (searchTerm: string) => {
   try {

@@ -9,7 +9,7 @@ interface FooterProps {
 
 const Footer: React.FC<FooterProps> = ({ handleToggleAbout }) => {
   return (
-    <div className="footer-container">
+    <footer className="footer-container">
       <span
         style={{
           paddingTop: "30px",
@@ -61,7 +61,7 @@ const Footer: React.FC<FooterProps> = ({ handleToggleAbout }) => {
           />
         </button>
       </div>
-    </div>
+    </footer>
   );
 };
 

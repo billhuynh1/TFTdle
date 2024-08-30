@@ -78,8 +78,8 @@ function App() {
               />
             ))}
           </ChampionContext.Provider>
-          {isAbout && <About handleToggleAbout={handleToggleAbout} />}
           <Footer handleToggleAbout={handleToggleAbout} />
+          {isAbout && <About handleToggleAbout={handleToggleAbout} />}
         </div>
       </div>
     </div>
