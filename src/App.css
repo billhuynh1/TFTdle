@@ -19,6 +19,7 @@ body {
   align-items: center;
   flex-direction: column;
   position: relative;
+  height: auto;
 }
 
 .background-container {
@@ -26,8 +27,8 @@ body {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  min-height: 150vh;
   width: 100vw;
+  min-height: 100vh;
   height: auto;
 }
 
@@ -54,7 +55,7 @@ body {
 
 .about-container {
   width: 50vw;
-  height: 145vh;
+  overflow: visible;
   z-index: 100;
 }
 
