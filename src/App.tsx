@@ -10,6 +10,7 @@ import AttributeHeader from "./components/AttributeHeader.tsx";
 import GameHeader from "./components/GameHeader.tsx";
 import GameEnd from "./components/GameEnd.tsx";
 import About from "./components/About.tsx";
+import DiscordPopup from "./components/DiscordPopup.tsx";
 
 const ChampionContext = createContext<Champion | null>(null);
 const AttemptsContext = createContext<number>(0);
@@ -23,6 +24,7 @@ function App() {
   const [attempts, setAttempts] = useState<number>(0);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [isAbout, setIsAbout] = useState<boolean>(false);
+  const [isDiscordPopup, setIsDiscordPopup] = useState<boolean>(false);
 
   useEffect(() => {
     async function getChampions() {
@@ -36,7 +38,10 @@ function App() {
 
   const handleToggleAbout = () => {
     setIsAbout((isAbout) => !isAbout);
-    console.log(isAbout);
+  };
+
+  const handleToggleDiscordPopup = () => {
+    setIsDiscordPopup((isDiscordPopup) => !isDiscordPopup);
   };
 
   return (
@@ -78,8 +83,12 @@ function App() {
               />
             ))}
           </ChampionContext.Provider>
-          <Footer handleToggleAbout={handleToggleAbout} />
+          <Footer
+            handleToggleAbout={handleToggleAbout}
+            handleToggleDiscordPopup={handleToggleDiscordPopup}
+          />
           {isAbout && <About handleToggleAbout={handleToggleAbout} />}
+          {isDiscordPopup && <DiscordPopup />}
         </div>
       </div>
     </div>

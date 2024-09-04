@@ -9,10 +9,10 @@ const About: React.FC<AboutProps> = ({ handleToggleAbout }) => {
 
   useEffect(() => {
     if (aboutRef.current) {
-      // Scroll to the component when it is rendered
       aboutRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, []);
+
   return (
     <div ref={aboutRef} className="about-container">
       <div className="about-content">
@@ -43,7 +43,7 @@ const About: React.FC<AboutProps> = ({ handleToggleAbout }) => {
           Any errors? Suggestions?
         </span>
         <span style={{ margin: "20px", fontSize: "30px" }}>
-          DM me on discord! <u>gorillagripcoochie</u>
+          DM me on discord! <u>ID: gorillagripcoochie</u>
         </span>
       </div>
     </div>
