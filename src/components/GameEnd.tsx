@@ -11,6 +11,7 @@ const GameEnd: React.FC<GameEndProps> = ({
   champIcon,
   champName,
 }) => {
+  // TODO: Move all time logic to App.tsx, and pass the date as a prop
   const currentTime = new Date();
   const resetTime: Date = new Date();
   resetTime.setHours(24, 0, 0, 0);
