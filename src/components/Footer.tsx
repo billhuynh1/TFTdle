@@ -33,7 +33,7 @@ const Footer: React.FC<FooterProps> = ({
           <FontAwesomeIcon
             icon={faDiscord}
             className="icon"
-            size="3x"
+            size="2x"
             color="white"
             fixedWidth
           />
@@ -47,7 +47,7 @@ const Footer: React.FC<FooterProps> = ({
             <FontAwesomeIcon
               icon={faGoogle}
               className="icon"
-              size="3x"
+              size="2x"
               color="white"
               fixedWidth
             />
@@ -63,7 +63,7 @@ const Footer: React.FC<FooterProps> = ({
           <FontAwesomeIcon
             icon={faCircleInfo}
             className="icon"
-            size="3x"
+            size="2x"
             color="white"
           />
         </button>

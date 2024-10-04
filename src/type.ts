@@ -24,3 +24,5 @@ export interface ChampionAnswerProps {
   id: number;
   champion: Champion;
 }
+
+export default Champion;

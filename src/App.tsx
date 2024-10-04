@@ -4,7 +4,7 @@ import ChampionAnswer from "./components/ChampionAnswer.tsx";
 import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
 import SearchBar from "./components/SearchBar.tsx";
-import { Champion } from "./type.ts";
+import Champion from "./type.ts";
 import { fetchChampions } from "./utils/fetchChampions.ts";
 import AttributeHeader from "./components/AttributeHeader.tsx";
 import GameHeader from "./components/GameHeader.tsx";
@@ -25,15 +25,38 @@ function App() {
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [isAbout, setIsAbout] = useState<boolean>(false);
   const [isDiscordPopup, setIsDiscordPopup] = useState<boolean>(false);
+  const currentTime = new Date();
+  const resetTime: Date = new Date();
+  resetTime.setHours(24, 0, 0, 0);
+  const [difference, setDifference] = useState<number>(
+    resetTime.getTime() - currentTime.getTime(),
+  );
 
   useEffect(() => {
     async function getChampions() {
       const championsData = await fetchChampions();
       setChampionList(championsData);
-      setTestChampion(championsData[3]);
     }
 
     getChampions();
+  }, []);
+
+  useEffect(() => {
+    const fetchDailyChampion = async () => {
+      try {
+        const response = await fetch("http://localhost:8080/api/dailychamp");
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const championData = await response.json();
+        setTestChampion(championData);
+        console.log("This is the daily champ", championData);
+      } catch (error) {
+        console.error("Error fetching daily champion:", error);
+      }
+    };
+
+    fetchDailyChampion();
   }, []);
 
   const handleToggleAbout = () => {

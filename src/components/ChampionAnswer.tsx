@@ -1,6 +1,6 @@
-import { useState } from "react";
-import AttributeSquare from "./AttributeSquare";
-import { Champion } from "../type";
+import React, { useState } from "react";
+import AttributeSquare from "./AttributeSquare.tsx";
+import { Champion } from "../type.ts";
 
 const ChampionAnswer: React.FC<Champion> = ({ ...champion }) => {
   const [isAnimating, setIsAnimating] = useState<boolean>(true);
