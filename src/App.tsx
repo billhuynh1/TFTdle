@@ -25,12 +25,16 @@ function App() {
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [isAbout, setIsAbout] = useState<boolean>(false);
   const [isDiscordPopup, setIsDiscordPopup] = useState<boolean>(false);
-  const currentTime = new Date();
   const resetTime: Date = new Date();
   resetTime.setHours(24, 0, 0, 0);
-  const [difference, setDifference] = useState<number>(
-    resetTime.getTime() - currentTime.getTime(),
-  );
+
+  // Test out if existing session exists, then retrieve the previous guesses.
+  // window.onload = () => {
+  //   fetch("http://localhost:8080/api/sessions/id")
+  //     .then((response) => response.text())
+  //     .then((data) => console.log("session id : ", data))
+  //     .catch((error) => console.log(error));
+  // };
 
   useEffect(() => {
     async function getChampions() {

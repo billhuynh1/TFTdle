@@ -280,19 +280,16 @@ body {
 
 .attribute-square.correct {
   background-color: #00b42d;
-  /* border: 3px solid black; */
   border: solid 2px #af9767;
 }
 
 .attribute-square.partial {
   background-color: orange;
-  /* border: 3px solid black; */
   border: solid 2px #af9767;
 }
 
 .attribute-square.incorrect {
   background-color: #ff3131;
-  /* border: 3px solid black; */
   border: solid 2px #af9767;
 }
 
@@ -351,9 +348,10 @@ body {
   padding: 5px;
   left: 0;
   font-size: x-large;
+  border: none;
 }
 
-li:hover {
+.champion-list-item:hover {
   background-color: rgb(207, 207, 207);
 }
 

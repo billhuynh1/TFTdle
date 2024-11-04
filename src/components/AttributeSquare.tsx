@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Champion } from "../type.ts";
 import { useChampionContext } from "../App.tsx";
+import checkPartialGuess from "../utils/checkPartialGuess.ts";
 
 interface AttributeSquareProps {
   pos: keyof Champion;
@@ -18,13 +19,16 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
     if (testChampion && champion[pos] === testChampion[pos]) {
       setSquareColor("correct");
     } else if (
-      testChampion?.[pos]
-        ?.toString()
-        .includes(champion?.[pos]?.toString() ?? "")
+      checkPartialGuess(
+        String(champion?.[pos] ?? ""),
+        String(testChampion?.[pos] ?? ""),
+      )
     ) {
       setSquareColor("partial");
     } else {
       setSquareColor("incorrect");
+      console.log(testChampion?.[pos]?.toString());
+      console.log(champion?.[pos]?.toString());
     }
   }, [champion[pos]]);
 

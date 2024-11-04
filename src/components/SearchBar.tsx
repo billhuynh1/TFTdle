@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Champion } from "../type";
-import Button from "./Button";
+import React, { useEffect, useState } from "react";
+import { Champion } from "../type.ts";
+import Button from "./Button.tsx";
+import saveGuess from "../utils/saveGuess.ts";
 
 interface SearchBarProps {
   championList: Champion[];
@@ -21,8 +22,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   const [input, setInput] = useState<string>("");
   const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
+  const [guessedChampId, setguessedChampId] = useState<string[]>([]);
   const [isListOpen, setIsListOpen] = useState(false);
-
   const imagePath = "https://tftdle.s3.us-east-2.amazonaws.com/images/";
 
   const handleSearch = async (searchQuery: string) => {
@@ -57,6 +58,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     setIsListOpen(false);
     setInput("");
     setAttempts((attempts) => attempts + 1);
+    saveGuess(champ.name);
     if (correctChampion && correctChampion.name === champ.name) {
       setIsGameOver(true);
     }
@@ -73,9 +75,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
-  // FIX THIS!!!!
   const handleClick = () => {
     if (guessedChampions.includes(filteredChampions[0])) {
+      // Fix
     } else if (input === filteredChampions[0].name) {
       handleSelectChampion(filteredChampions[0]);
     }
@@ -86,8 +88,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
     filteredChampions.length > 0 && isListOpen ? (
       <ul className="champion-list">
         {filteredChampions.map((champ: Champion) => (
-          <li
+          <button
             className="champion-list-item"
+            type="button"
             key={champ.name}
             onClick={() => handleSelectChampion(champ)}
           >
@@ -97,7 +100,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
               className="champion-image-list"
             />
             {champ.name}
-          </li>
+          </button>
         ))}
       </ul>
     ) : null;
