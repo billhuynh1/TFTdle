@@ -4,7 +4,7 @@ const saveGuess = async (champ: string): Promise<void> => {
     headers: {
       "content-type": "application/json",
     },
-    body: JSON.stringify(champ),
+    body: JSON.stringify({ champ }),
     credentials: "include",
   })
     .then((response) => console.log(response.text()))

@@ -11,6 +11,7 @@ import GameHeader from "./components/GameHeader.tsx";
 import GameEnd from "./components/GameEnd.tsx";
 import About from "./components/About.tsx";
 import DiscordPopup from "./components/DiscordPopup.tsx";
+import fetchGuessedChampions from "./utils/fetchGuessedChampions.ts";
 
 const ChampionContext = createContext<Champion | null>(null);
 const AttemptsContext = createContext<number>(0);
@@ -70,6 +71,32 @@ function App() {
   const handleToggleDiscordPopup = () => {
     setIsDiscordPopup((isDiscordPopup) => !isDiscordPopup);
   };
+  const getGuessedChampions = async () => {
+    try {
+      const response: Response = await fetch(
+        "http://localhost:8080/guess/get",
+        {
+          method: "GET",
+          credentials: "include",
+        },
+      );
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      const data = await response.json();
+      console.log("Retrieving guesses from session", data.guesses);
+      const champions = await fetchGuessedChampions(data.guesses);
+      setGuessedChampions(champions);
+      setIsGameOver(data.correct);
+      console.log("Response from getGuess", data);
+    } catch (error) {
+      console.error("Error retrieving champions from session", error);
+    }
+  };
+
+  useEffect(() => {
+    getGuessedChampions();
+  }, []);
 
   return (
     <div className="App">

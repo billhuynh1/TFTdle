@@ -32,7 +32,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
       const newFilteredChampions = championList.filter((champ: Champion) => {
         return (
           regex.test(champ.name.toLowerCase()) &&
-          !guessedChampions.includes(champ)
+          !guessedChampions.some(
+            (guessedChamp) =>
+              guessedChamp.name.toLowerCase() === champ.name.toLowerCase(),
+          )
         );
       });
 

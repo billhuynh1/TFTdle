@@ -9,7 +9,7 @@ const ChampionAnswer: React.FC<Champion> = ({ ...champion }) => {
     <div className={`answer-container ${isAnimating ? "fade-in" : ""}`}>
       {Object.keys(champion).map((key) => (
         <AttributeSquare
-          key={key}
+          key={`${champion.name}-${key}`}
           champion={champion}
           pos={key as keyof Champion}
         />
