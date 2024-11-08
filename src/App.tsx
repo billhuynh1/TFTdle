@@ -29,14 +29,6 @@ function App() {
   const resetTime: Date = new Date();
   resetTime.setHours(24, 0, 0, 0);
 
-  // Test out if existing session exists, then retrieve the previous guesses.
-  // window.onload = () => {
-  //   fetch("http://localhost:8080/api/sessions/id")
-  //     .then((response) => response.text())
-  //     .then((data) => console.log("session id : ", data))
-  //     .catch((error) => console.log(error));
-  // };
-
   useEffect(() => {
     async function getChampions() {
       const championsData = await fetchChampions();
@@ -87,6 +79,7 @@ function App() {
       console.log("Retrieving guesses from session", data.guesses);
       const champions = await fetchGuessedChampions(data.guesses);
       setGuessedChampions(champions);
+      setAttempts(champions.length);
       setIsGameOver(data.correct);
       console.log("Response from getGuess", data);
     } catch (error) {
