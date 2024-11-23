@@ -29,17 +29,26 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const handleSearch = async (searchQuery: string) => {
     if (searchQuery.length) {
       const regex = new RegExp(`^${searchQuery.toLowerCase()}`);
+
+      console.log(guessedChampions);
+      const guessedChampionNames = new Set(
+        guessedChampions.map((champion) => champion.name),
+      );
+
       const newFilteredChampions = championList.filter((champ: Champion) => {
+        const normalizedChampName = champ.name.toLowerCase();
+
         return (
-          regex.test(champ.name.toLowerCase()) &&
-          !guessedChampions.some(
-            (guessedChamp) =>
-              guessedChamp.name.toLowerCase() === champ.name.toLowerCase(),
-          )
+          regex.test(normalizedChampName) &&
+          !guessedChampionNames.has(normalizedChampName)
         );
       });
 
+      console.log(guessedChampionNames);
+
       setFilteredChampions([...newFilteredChampions]);
+      console.log("Filtered champs", newFilteredChampions);
+
       setIsListOpen(true);
     } else {
       setFilteredChampions([]);
@@ -56,15 +65,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
-  const handleSelectChampion = (champ: Champion) => {
+  const handleSelectChampion = async (champ: Champion) => {
     setGuessedChampions((prev) => [champ, ...prev]);
     setIsListOpen(false);
     setInput("");
-    setAttempts((attempts) => attempts + 1);
-    saveGuess(champ.name);
+    await saveGuess(champ.name);
     if (correctChampion && correctChampion.name === champ.name) {
       setIsGameOver(true);
     }
+    setAttempts((attempts) => attempts + 1);
   };
 
   const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {

@@ -1,17 +1,19 @@
+import Champion from "../type.ts";
 import supabase from "./supabaseClient";
 
-const findChampionByName = async (champ: string) => {
+const findChampionByNameInTable = async (
+  champs: string[],
+): Promise<Champion[]> => {
   const { data, error } = await supabase
     .from("champions")
     .select("*")
-    .eq("name", champ);
+    .in("name", champs);
 
   if (error) {
-    console.error("Error fetching champ by name", error);
-    return null;
+    return [];
   }
 
-  return data && data.length > 0 ? data[0] : null;
+  return data && data.length > 0 ? data : [];
 };
 
-export default findChampionByName;
+export default findChampionByNameInTable;

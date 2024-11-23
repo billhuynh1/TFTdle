@@ -4,7 +4,7 @@ import ChampionAnswer from "./components/ChampionAnswer.tsx";
 import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
 import SearchBar from "./components/SearchBar.tsx";
-import Champion from "./type.ts";
+import { Champion, ChampionGuess } from "./type.ts";
 import { fetchChampions } from "./utils/fetchChampions.ts";
 import AttributeHeader from "./components/AttributeHeader.tsx";
 import GameHeader from "./components/GameHeader.tsx";
@@ -12,6 +12,7 @@ import GameEnd from "./components/GameEnd.tsx";
 import About from "./components/About.tsx";
 import DiscordPopup from "./components/DiscordPopup.tsx";
 import fetchGuessedChampions from "./utils/fetchGuessedChampions.ts";
+import findChampionByNameInTable from "./utils/findChampionByName.ts";
 
 const ChampionContext = createContext<Champion | null>(null);
 const AttemptsContext = createContext<number>(0);
@@ -42,6 +43,8 @@ function App() {
     const fetchDailyChampion = async () => {
       try {
         const response = await fetch("http://localhost:8080/api/dailychamp");
+        console.log("This is fetchdailychap response ", response);
+
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -53,7 +56,9 @@ function App() {
       }
     };
 
-    fetchDailyChampion();
+    if (testChampion === null) {
+      fetchDailyChampion();
+    }
   }, []);
 
   const handleToggleAbout = () => {
@@ -63,6 +68,7 @@ function App() {
   const handleToggleDiscordPopup = () => {
     setIsDiscordPopup((isDiscordPopup) => !isDiscordPopup);
   };
+
   const getGuessedChampions = async () => {
     try {
       const response: Response = await fetch(
@@ -76,19 +82,26 @@ function App() {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
       const data = await response.json();
-      console.log("Retrieving guesses from session", data.guesses);
-      const champions = await fetchGuessedChampions(data.guesses);
-      setGuessedChampions(champions);
+      console.log("Get guess response : ", data);
+      const championNamesFromResponse: string[] = data.map(
+        (item: ChampionGuess) => item.champ,
+      );
+      const listOfChampionFromTable = await findChampionByNameInTable(
+        championNamesFromResponse,
+      );
+      const champions = await fetchGuessedChampions(listOfChampionFromTable);
+      console.log("champions", champions);
+      setGuessedChampions([...champions]);
       setAttempts(champions.length);
-      setIsGameOver(data.correct);
-      console.log("Response from getGuess", data);
     } catch (error) {
       console.error("Error retrieving champions from session", error);
     }
   };
 
   useEffect(() => {
-    getGuessedChampions();
+    if (!guessedChampions.length) {
+      getGuessedChampions();
+    }
   }, []);
 
   return (

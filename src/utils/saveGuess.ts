@@ -9,7 +9,7 @@ const saveGuess = async (champ: string): Promise<void> => {
   })
     .then((response) => console.log(response.text()))
     .then((data) => console.log(data))
-    .catch((error) => console.log(error));
+    .catch((error) => console.log("Error saving champ", error));
 };
 
 export default saveGuess;

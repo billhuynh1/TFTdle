@@ -10,6 +10,13 @@ export interface ChampionAttributes extends AttributeSquareInterface {
   gender: string;
 }
 
+export interface ChampionGuess {
+  champ: string;
+  isCorrect: boolean;
+  sessionId: string;
+  createdAt: string;
+}
+
 export interface Champion {
   imageurl: string;
   name: string;
