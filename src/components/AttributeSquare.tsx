@@ -27,8 +27,6 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
       setSquareColor("partial");
     } else {
       setSquareColor("incorrect");
-      console.log(testChampion?.[pos]?.toString());
-      console.log(champion?.[pos]?.toString());
     }
   }, [champion[pos]]);
 

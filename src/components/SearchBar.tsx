@@ -10,51 +10,46 @@ interface SearchBarProps {
   setAttempts: React.Dispatch<React.SetStateAction<number>>;
   setIsGameOver: React.Dispatch<React.SetStateAction<boolean>>;
   correctChampion?: Champion | null;
+  sessionId: string;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
   championList,
   guessedChampions,
   correctChampion,
+  sessionId,
   setGuessedChampions,
   setAttempts,
   setIsGameOver,
 }) => {
   const [input, setInput] = useState<string>("");
   const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
-  const [guessedChampId, setguessedChampId] = useState<string[]>([]);
   const [isListOpen, setIsListOpen] = useState(false);
   const imagePath = "https://tftdle.s3.us-east-2.amazonaws.com/images/";
 
   const handleSearch = async (searchQuery: string) => {
     if (searchQuery.length) {
       const regex = new RegExp(`^${searchQuery.toLowerCase()}`);
-
-      console.log(guessedChampions);
       const guessedChampionNames = new Set(
-        guessedChampions.map((champion) => champion.name),
+        guessedChampions.map((champion) => champion.name.toLowerCase()),
       );
 
       const newFilteredChampions = championList.filter((champ: Champion) => {
         const normalizedChampName = champ.name.toLowerCase();
-
         return (
           regex.test(normalizedChampName) &&
           !guessedChampionNames.has(normalizedChampName)
         );
       });
-
-      console.log(guessedChampionNames);
-
       setFilteredChampions([...newFilteredChampions]);
       console.log("Filtered champs", newFilteredChampions);
-
       setIsListOpen(true);
     } else {
       setFilteredChampions([]);
     }
   };
 
+  // Remove the any type, senior dev might crash out
   const handleChange = (e: any) => {
     const newInput = e.target.value;
     const regex = /[a-zA-Z]+$/i;
@@ -66,14 +61,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const handleSelectChampion = async (champ: Champion) => {
-    setGuessedChampions((prev) => [champ, ...prev]);
     setIsListOpen(false);
     setInput("");
-    await saveGuess(champ.name);
+    setGuessedChampions((prev) => [champ, ...prev]);
+    setAttempts((attempts) => attempts + 1);
+    saveGuess(champ.name, sessionId);
     if (correctChampion && correctChampion.name === champ.name) {
       setIsGameOver(true);
     }
-    setAttempts((attempts) => attempts + 1);
   };
 
   const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {

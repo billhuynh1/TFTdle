@@ -5,6 +5,10 @@ export interface AttributeSquareInterface {
   color?: string;
 }
 
+export interface ChampionAnswerProps extends Champion {
+  sessionId: string;
+}
+
 export interface ChampionAttributes extends AttributeSquareInterface {
   icon: string;
   gender: string;
@@ -30,6 +34,11 @@ export interface Champion {
 export interface ChampionAnswerProps {
   id: number;
   champion: Champion;
+}
+
+export interface SessionModel {
+  sessionId: string;
+  createdAt: string;
 }
 
 export default Champion;

@@ -1,15 +1,14 @@
-const saveGuess = async (champ: string): Promise<void> => {
-  await fetch("http://localhost:8080/guess/save", {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({ champ }),
-    credentials: "include",
-  })
-    .then((response) => console.log(response.text()))
-    .then((data) => console.log(data))
-    .catch((error) => console.log("Error saving champ", error));
+import axios from "axios";
+
+const saveGuess = async (
+  champion: string,
+  sessionId: string,
+): Promise<void> => {
+  await axios.post(`http://localhost:8080/guess/v2/${sessionId}/save`, {
+    champ: champion,
+    isCorrect: false,
+  });
+  console.log("Guessed saved for:", sessionId, champion, "added");
 };
 
 export default saveGuess;

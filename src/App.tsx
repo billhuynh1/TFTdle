@@ -1,10 +1,11 @@
-import { useEffect, useState, createContext, useContext } from "react";
+import axios from "axios";
+import { useState, createContext, useContext, useEffect } from "react";
 import "./App.css";
 import ChampionAnswer from "./components/ChampionAnswer.tsx";
 import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
 import SearchBar from "./components/SearchBar.tsx";
-import { Champion, ChampionGuess } from "./type.ts";
+import { Champion, ChampionGuess, SessionModel } from "./type.ts";
 import { fetchChampions } from "./utils/fetchChampions.ts";
 import AttributeHeader from "./components/AttributeHeader.tsx";
 import GameHeader from "./components/GameHeader.tsx";
@@ -13,6 +14,10 @@ import About from "./components/About.tsx";
 import DiscordPopup from "./components/DiscordPopup.tsx";
 import fetchGuessedChampions from "./utils/fetchGuessedChampions.ts";
 import findChampionByNameInTable from "./utils/findChampionByName.ts";
+import fetchGuesses from "./utils/fetchGuesses.ts";
+import fetchSession from "./utils/fetchSession.ts";
+import fetchDailyChampion from "./utils/fetchDailyChampion.ts";
+import fetchGameState from "./utils/fetchGameState.ts";
 
 const ChampionContext = createContext<Champion | null>(null);
 const AttemptsContext = createContext<number>(0);
@@ -27,39 +32,30 @@ function App() {
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [isAbout, setIsAbout] = useState<boolean>(false);
   const [isDiscordPopup, setIsDiscordPopup] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [sessionId, setSessionId] = useState<string>("");
   const resetTime: Date = new Date();
   resetTime.setHours(24, 0, 0, 0);
 
-  useEffect(() => {
-    async function getChampions() {
-      const championsData = await fetchChampions();
-      setChampionList(championsData);
-    }
+  // The sorting for guessed champions is inconsistent
+  // Broken images : Lee Sin and Tahm kench.
+  // Create tables for previous sets.
+  // Cache images
 
-    getChampions();
-  }, []);
+  window.onload = () => {
+    fetchGameState(
+      setSessionId,
+      setChampionList,
+      setGuessedChampions,
+      setAttempts,
+      setTestChampion,
+      setIsLoading,
+    );
+  };
 
-  useEffect(() => {
-    const fetchDailyChampion = async () => {
-      try {
-        const response = await fetch("http://localhost:8080/api/dailychamp");
-        console.log("This is fetchdailychap response ", response);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        const championData = await response.json();
-        setTestChampion(championData);
-        console.log("This is the daily champ", championData);
-      } catch (error) {
-        console.error("Error fetching daily champion:", error);
-      }
-    };
-
-    if (testChampion === null) {
-      fetchDailyChampion();
-    }
-  }, []);
+  if (isLoading) {
+    return <h1>LOADING!!!!!</h1>;
+  }
 
   const handleToggleAbout = () => {
     setIsAbout((isAbout) => !isAbout);
@@ -68,41 +64,6 @@ function App() {
   const handleToggleDiscordPopup = () => {
     setIsDiscordPopup((isDiscordPopup) => !isDiscordPopup);
   };
-
-  const getGuessedChampions = async () => {
-    try {
-      const response: Response = await fetch(
-        "http://localhost:8080/guess/get",
-        {
-          method: "GET",
-          credentials: "include",
-        },
-      );
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      const data = await response.json();
-      console.log("Get guess response : ", data);
-      const championNamesFromResponse: string[] = data.map(
-        (item: ChampionGuess) => item.champ,
-      );
-      const listOfChampionFromTable = await findChampionByNameInTable(
-        championNamesFromResponse,
-      );
-      const champions = await fetchGuessedChampions(listOfChampionFromTable);
-      console.log("champions", champions);
-      setGuessedChampions([...champions]);
-      setAttempts(champions.length);
-    } catch (error) {
-      console.error("Error retrieving champions from session", error);
-    }
-  };
-
-  useEffect(() => {
-    if (!guessedChampions.length) {
-      getGuessedChampions();
-    }
-  }, []);
 
   return (
     <div className="App">
@@ -123,6 +84,7 @@ function App() {
                   championList={championList}
                   guessedChampions={guessedChampions}
                   correctChampion={testChampion}
+                  sessionId={sessionId}
                   setGuessedChampions={setGuessedChampions}
                   setAttempts={setAttempts}
                   setIsGameOver={setIsGameOver}

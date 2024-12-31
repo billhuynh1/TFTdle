@@ -8,7 +8,6 @@ const findChampionByNameInTable = async (
     .from("champions")
     .select("*")
     .in("name", champs);
-
   if (error) {
     return [];
   }
