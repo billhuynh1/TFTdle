@@ -1,22 +1,15 @@
-import axios from "axios";
-import { useState, createContext, useContext, useEffect } from "react";
+import { useState, createContext, useContext } from "react";
 import "./App.css";
 import ChampionAnswer from "./components/ChampionAnswer.tsx";
 import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
 import SearchBar from "./components/SearchBar.tsx";
-import { Champion, ChampionGuess, SessionModel } from "./type.ts";
-import { fetchChampions } from "./utils/fetchChampions.ts";
+import { Champion } from "./type.ts";
 import AttributeHeader from "./components/AttributeHeader.tsx";
 import GameHeader from "./components/GameHeader.tsx";
 import GameEnd from "./components/GameEnd.tsx";
 import About from "./components/About.tsx";
 import DiscordPopup from "./components/DiscordPopup.tsx";
-import fetchGuessedChampions from "./utils/fetchGuessedChampions.ts";
-import findChampionByNameInTable from "./utils/findChampionByName.ts";
-import fetchGuesses from "./utils/fetchGuesses.ts";
-import fetchSession from "./utils/fetchSession.ts";
-import fetchDailyChampion from "./utils/fetchDailyChampion.ts";
 import fetchGameState from "./utils/fetchGameState.ts";
 
 const ChampionContext = createContext<Champion | null>(null);
@@ -37,7 +30,8 @@ function App() {
   const resetTime: Date = new Date();
   resetTime.setHours(24, 0, 0, 0);
 
-  // The sorting for guessed champions is inconsistent
+  // Need a loading spinner
+  // Some confetti on correct
   // Broken images : Lee Sin and Tahm kench.
   // Create tables for previous sets.
   // Cache images
@@ -50,12 +44,9 @@ function App() {
       setAttempts,
       setTestChampion,
       setIsLoading,
+      setIsGameOver,
     );
   };
-
-  if (isLoading) {
-    return <h1>LOADING!!!!!</h1>;
-  }
 
   const handleToggleAbout = () => {
     setIsAbout((isAbout) => !isAbout);
@@ -91,7 +82,11 @@ function App() {
                 />
               )}
             </AttemptsContext.Provider>
-            {guessedChampions.length > 0 ? <AttributeHeader /> : null}
+            {guessedChampions.length > 0 && !isLoading ? (
+              <AttributeHeader />
+            ) : (
+              <div className="loading-spinner">LOADINGGG!!</div>
+            )}
             {guessedChampions.map((champ) => (
               <ChampionAnswer
                 key={champ.name}

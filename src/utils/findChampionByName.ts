@@ -11,7 +11,6 @@ const findChampionByNameInTable = async (
   if (error) {
     return [];
   }
-
   return data && data.length > 0 ? data : [];
 };
 

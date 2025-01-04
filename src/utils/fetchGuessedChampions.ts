@@ -3,7 +3,7 @@ import Champion from "../type.ts";
 const fetchGuessedChampions = async (
   guessedChamps: Champion[],
   allChampions: Champion[],
-) => {
+): Promise<Champion[]> => {
   if (guessedChamps === undefined) return [];
   const guessedChampions = new Set(guessedChamps.map((champ) => champ.name));
 
