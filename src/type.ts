@@ -28,7 +28,7 @@ export interface Champion {
   cost: number;
   type: string;
   traits: string;
-  attRange: number;
+  attRange: string;
 }
 
 export interface ChampionAnswerProps {

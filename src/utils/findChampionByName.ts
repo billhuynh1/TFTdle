@@ -5,7 +5,7 @@ const findChampionByNameInTable = async (
   champs: string[],
 ): Promise<Champion[]> => {
   const { data, error } = await supabase
-    .from("champions")
+    .from("champions_set_13")
     .select("*")
     .in("name", champs);
   if (error) {

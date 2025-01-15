@@ -25,7 +25,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [input, setInput] = useState<string>("");
   const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
   const [isListOpen, setIsListOpen] = useState(false);
-  const imagePath = "https://tftdle.s3.us-east-2.amazonaws.com/images/";
+  const imagePath =
+    "https://tftdle.s3.us-east-2.amazonaws.com/champions_set_13_assets/";
 
   const handleSearch = async (searchQuery: string) => {
     if (searchQuery.length) {
@@ -84,7 +85,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   const handleClick = () => {
     if (guessedChampions.includes(filteredChampions[0])) {
-      // Fix
+      // Fix this
     } else if (input === filteredChampions[0].name) {
       handleSelectChampion(filteredChampions[0]);
     }
@@ -106,7 +107,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
               alt="A list of champions"
               className="champion-image-list"
             />
-            {champ.name}
+            {champ.name.replaceAll("_", " ")}
           </button>
         ))}
       </ul>

@@ -11,7 +11,6 @@ const GameEnd: React.FC<GameEndProps> = ({
   champIcon,
   champName,
 }) => {
-  // TODO: Move all time logic to App.tsx, and pass the date as a prop
   const currentTime = new Date();
   const resetTime: Date = new Date();
   resetTime.setHours(24, 0, 0, 0);
@@ -21,7 +20,7 @@ const GameEnd: React.FC<GameEndProps> = ({
     resetTime.getTime() - currentTime.getTime(),
   );
 
-  const imagePath = "https://tftdle.s3.us-east-2.amazonaws.com/images/";
+  const imagePath = process.env.REACT_APP_AWS_S3_URL;
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -59,7 +58,7 @@ const GameEnd: React.FC<GameEndProps> = ({
         The correct champion is:
       </span>
       <span style={{ color: "white", fontWeight: "bold", fontSize: "25px" }}>
-        {champName}
+        {champName?.replaceAll("_", " ")}
       </span>
       <img
         src={`${imagePath}${champIcon}`}

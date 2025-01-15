@@ -10,8 +10,8 @@ interface AttributeSquareProps {
 
 const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
   const [squareColor, setSquareColor] = useState<string>("");
-  const [imagePath, setImagePath] = useState<string>(
-    "https://tftdle.s3.us-east-2.amazonaws.com/images/",
+  const [imagePath, setImagePath] = useState<string | undefined>(
+    process.env.REACT_APP_AWS_S3_URL,
   );
   const testChampion = useChampionContext();
 
@@ -48,7 +48,11 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
         />
       ) : (
         <div className={`attribute-square ${squareColor}`}>
-          <div className="square-content">{champion[pos]}</div>
+          <div className="square-content">
+            {typeof champion[pos] === "string"
+              ? champion[pos].replaceAll("_", " ")
+              : champion[pos]}
+          </div>
         </div>
       )}
     </>

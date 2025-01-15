@@ -1,5 +1,7 @@
-import { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 import "./App.css";
+import confetti from "canvas-confetti";
+import { ClipLoader } from "react-spinners";
 import ChampionAnswer from "./components/ChampionAnswer.tsx";
 import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
@@ -30,12 +32,6 @@ function App() {
   const resetTime: Date = new Date();
   resetTime.setHours(24, 0, 0, 0);
 
-  // Need a loading spinner
-  // Some confetti on correct
-  // Broken images : Lee Sin and Tahm kench.
-  // Create tables for previous sets.
-  // Cache images
-
   window.onload = () => {
     fetchGameState(
       setSessionId,
@@ -48,12 +44,37 @@ function App() {
     );
   };
 
+  const showConfetti = () => {
+    confetti({ particleCount: 150, spread: 70, origin: { x: 0.5, y: 0.5 } });
+  };
+
+  if (isGameOver) {
+    showConfetti();
+  }
+
   const handleToggleAbout = () => {
     setIsAbout((isAbout) => !isAbout);
   };
 
   const handleToggleDiscordPopup = () => {
     setIsDiscordPopup((isDiscordPopup) => !isDiscordPopup);
+  };
+
+  const renderLoading = (): React.JSX.Element | null => {
+    if (isLoading) {
+      return (
+        <ClipLoader
+          aria-label="Loading data"
+          size={50}
+          color="white"
+          speedMultiplier={0.5}
+        />
+      );
+    }
+    if (guessedChampions.length > 0) {
+      return <AttributeHeader />;
+    }
+    return null;
   };
 
   return (
@@ -82,11 +103,7 @@ function App() {
                 />
               )}
             </AttemptsContext.Provider>
-            {guessedChampions.length > 0 && !isLoading ? (
-              <AttributeHeader />
-            ) : (
-              <div className="loading-spinner">LOADINGGG!!</div>
-            )}
+            {renderLoading()}
             {guessedChampions.map((champ) => (
               <ChampionAnswer
                 key={champ.name}

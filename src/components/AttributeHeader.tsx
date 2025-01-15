@@ -1,4 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
+/* eslint-disable react/no-array-index-key */
+
 const AttributeHeader = () => {
   const attributeContents: string[] = [
     "Champion",

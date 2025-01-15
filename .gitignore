@@ -4,7 +4,6 @@ node_modules
 src/utils/supabaseClient.js
 src/server.js
 .prettierrc
-package.json
-package-lock.json
-tsconfig.json
-.eslintrc.json
+*.json
+Dockerfile
+README.md
