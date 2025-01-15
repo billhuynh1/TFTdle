@@ -25,8 +25,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [input, setInput] = useState<string>("");
   const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
   const [isListOpen, setIsListOpen] = useState(false);
-  const imagePath =
-    "https://tftdle.s3.us-east-2.amazonaws.com/champions_set_13_assets/";
+  const imagePath = process.env.REACT_APP_AWS_S3_URL;
 
   const handleSearch = async (searchQuery: string) => {
     if (searchQuery.length) {
