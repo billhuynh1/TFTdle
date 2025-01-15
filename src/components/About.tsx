@@ -50,7 +50,7 @@ const About: React.FC<AboutProps> = ({ handleToggleAbout }) => {
           Any errors? Suggestions?
         </span>
         <span style={{ margin: "20px", fontSize: "20px", marginLeft: "50px" }}>
-          DM me on discord! <u>ID: gorillagripcoochie</u>
+          Click the gmail button! There will be more features to come!
         </span>
       </div>
     </div>

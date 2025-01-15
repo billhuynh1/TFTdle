@@ -38,7 +38,7 @@ const Footer: React.FC<FooterProps> = ({
             fixedWidth
           />
         </button>
-        <a href="mailto:billhuynh012@gmail.com">
+        <a href="mailto:tftdle01@gmail.com">
           <button
             type="button"
             aria-label="Contact via Google"

@@ -10,7 +10,7 @@ const DiscordPopup = () => {
   }, []);
   return (
     <div className="discord-popup" ref={discordPopupRef}>
-      <span style={{ color: "white" }}>ID: gorillagripcoochie</span>
+      <span style={{ color: "white" }}>TBD</span>
     </div>
   );
 };
