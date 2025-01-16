@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Champion } from "../type.ts";
 import Button from "./Button.tsx";
 import saveGuess from "../utils/saveGuess.ts";

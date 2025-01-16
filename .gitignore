@@ -1,7 +1,6 @@
 node_modules
 .env.local
 .env
-src/utils/supabaseClient.js
 src/server.js
 .prettierrc
 *.json
