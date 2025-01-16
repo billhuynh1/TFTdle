@@ -4,7 +4,7 @@ import { ChampionGuess } from "../type.ts";
 const fetchGuesses = async (sessionId: string): Promise<ChampionGuess[]> => {
   try {
     const response = await axios.get(
-      `http://18.223.238.67:8080/guess/v2/${sessionId}/get`,
+      `https://0g62r8n5nl.execute-api.us-east-2.amazonaws.com/prod/guess/v2/${sessionId}/get`,
     );
     return response.data;
   } catch (error) {

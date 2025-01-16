@@ -3,9 +3,12 @@ import { SessionModel } from "../type.ts";
 
 const fetchSession = async (): Promise<SessionModel> => {
   try {
-    const response = await axios.get(`http://18.223.238.67:8080/session/get`, {
-      withCredentials: true,
-    });
+    const response = await axios.get(
+      "https://0g62r8n5nl.execute-api.us-east-2.amazonaws.com/prod/session/get",
+      {
+        withCredentials: true,
+      },
+    );
     return response.data;
   } catch (error) {
     console.error("Error fetching session:", error);

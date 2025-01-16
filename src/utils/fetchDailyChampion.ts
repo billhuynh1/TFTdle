@@ -4,7 +4,7 @@ import Champion from "../type.ts";
 const fetchDailyChampion = async (): Promise<Champion> => {
   try {
     const response = await axios.get(
-      `${process.env.REACT_APP_BACKEND_URL}/champs/v1/daily`,
+      `https://0g62r8n5nl.execute-api.us-east-2.amazonaws.com/prod/champs/v1/daily`,
       {
         withCredentials: true,
       },
