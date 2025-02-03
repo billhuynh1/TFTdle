@@ -40,7 +40,7 @@ const fetchGameState = async (
     setIsLoading(false);
   } catch (error) {
     console.error("Error fetching data:", error);
-    alert("Error fetching data, try again later");
+    alert("Error fetching data, refreh the page, or try again later!");
   }
 };
 
