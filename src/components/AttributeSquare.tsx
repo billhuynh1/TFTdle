@@ -16,7 +16,9 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
   const testChampion = useChampionContext();
 
   useEffect(() => {
-    if (testChampion && champion[pos] === testChampion[pos]) {
+    if (!testChampion || !champion) return;
+
+    if (champion[pos] === testChampion[pos]) {
       setSquareColor("correct");
     } else if (
       checkPartialGuess(
@@ -25,6 +27,12 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
       )
     ) {
       setSquareColor("partial");
+    } else if (
+      typeof testChampion[pos] === "number" &&
+      typeof champion[pos] === "number" &&
+      testChampion[pos] > champion[pos]
+    ) {
+      setSquareColor("incorrect up");
     } else {
       setSquareColor("incorrect");
     }
