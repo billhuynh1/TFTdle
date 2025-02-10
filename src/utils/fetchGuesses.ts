@@ -15,9 +15,8 @@
 //   }
 // };
 
-// LOCAL STORAGE DEVELOPMENT
-const fetchGuesses = (): string | null => {
-  const guesses: string | null = localStorage.getItem("guesses");
+const fetchGuesses = (): string => {
+  const guesses: string = localStorage.getItem("guesses") || "";
 
   return guesses;
 };

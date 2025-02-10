@@ -25,6 +25,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [input, setInput] = useState<string>("");
   const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
   const [isListOpen, setIsListOpen] = useState(false);
+  const [guesses, setGuesses] = useState<string[]>([]);
   const imagePath = process.env.REACT_APP_AWS_S3_URL;
 
   const handleSearch = async (searchQuery: string) => {
@@ -42,7 +43,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
         );
       });
       setFilteredChampions([...newFilteredChampions]);
-      console.log("Filtered champs", newFilteredChampions);
       setIsListOpen(true);
     } else {
       setFilteredChampions([]);
@@ -65,7 +65,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
     setInput("");
     setGuessedChampions((prev) => [champ, ...prev]);
     setAttempts((attempts) => attempts + 1);
-    saveGuess(champ.name, sessionId);
+    setGuesses([champ.name, ...guesses]);
+    saveGuess(guesses);
     if (correctChampion && correctChampion.name === champ.name) {
       setIsGameOver(true);
     }

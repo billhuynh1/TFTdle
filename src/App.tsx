@@ -13,6 +13,8 @@ import GameEnd from "./components/GameEnd.tsx";
 import About from "./components/About.tsx";
 import DiscordPopup from "./components/DiscordPopup.tsx";
 import fetchGameState from "./utils/fetchGameState.ts";
+import fetchGuesses from "./utils/fetchGuesses.ts";
+import findChampionByNameInTable from "./utils/findChampionByName.ts";
 
 const ChampionContext = createContext<Champion | null>(null);
 const AttemptsContext = createContext<number>(0);
@@ -34,14 +36,19 @@ function App() {
 
   window.onload = () => {
     fetchGameState(
-      setSessionId,
       setChampionList,
       setGuessedChampions,
       setAttempts,
       setTestChampion,
-      setIsLoading,
-      setIsGameOver,
     );
+    setIsLoading(false);
+    // Refactor the names
+    const guesses: string[] = JSON.parse(fetchGuesses());
+    const gettingGuessesAgain = async (champs: string[]) => {
+      const guessesAgain = await findChampionByNameInTable(champs);
+      await setGuessedChampions(guessesAgain);
+    };
+    gettingGuessesAgain(guesses);
   };
 
   const showConfetti = () => {
