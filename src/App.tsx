@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import "./App.css";
 import confetti from "canvas-confetti";
 import { ClipLoader } from "react-spinners";
@@ -34,22 +34,20 @@ function App() {
   const resetTime: Date = new Date();
   resetTime.setHours(24, 0, 0, 0);
 
-  window.onload = () => {
-    fetchGameState(
-      setChampionList,
-      setGuessedChampions,
-      setAttempts,
-      setTestChampion,
-    );
-    setIsLoading(false);
-    // Refactor the names
-    const guesses: string[] = JSON.parse(fetchGuesses());
-    const gettingGuessesAgain = async (champs: string[]) => {
-      const guessesAgain = await findChampionByNameInTable(champs);
-      await setGuessedChampions(guessesAgain);
+  useEffect(() => {
+    fetchGameState(setChampionList, setTestChampion, setIsLoading);
+  }, []);
+
+  useEffect(() => {
+    if (!testChampion) return;
+
+    const guessesFromStorage: string[] = JSON.parse(fetchGuesses());
+    const updateGuesses = async (champs: string[]) => {
+      const guesses = findChampionByNameInTable(champs, championList);
+      await setGuessedChampions(guesses);
     };
-    gettingGuessesAgain(guesses);
-  };
+    updateGuesses(guessesFromStorage);
+  }, [testChampion]);
 
   const showConfetti = () => {
     confetti({ particleCount: 150, spread: 70, origin: { x: 0.5, y: 0.5 } });

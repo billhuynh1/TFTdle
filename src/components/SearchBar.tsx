@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Champion } from "../type.ts";
 import Button from "./Button.tsx";
-import saveGuess from "../utils/saveGuess.ts";
 
 interface SearchBarProps {
   championList: Champion[];
@@ -25,7 +24,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [input, setInput] = useState<string>("");
   const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
   const [isListOpen, setIsListOpen] = useState(false);
-  const [guesses, setGuesses] = useState<string[]>([]);
+  const [guesses, setGuesses] = useState<string[]>(() => {
+    const storedGuesses = localStorage.getItem("guesses");
+    return storedGuesses ? JSON.parse(storedGuesses) : [];
+  });
   const imagePath = process.env.REACT_APP_AWS_S3_URL;
 
   const handleSearch = async (searchQuery: string) => {
@@ -60,17 +62,25 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
-  const handleSelectChampion = async (champ: Champion) => {
+  // Items are being stored alphabetically
+  const handleSelectedChampion = async (champ: Champion) => {
     setIsListOpen(false);
     setInput("");
-    setGuessedChampions((prev) => [champ, ...prev]);
     setAttempts((attempts) => attempts + 1);
-    setGuesses([champ.name, ...guesses]);
-    saveGuess(guesses);
+    setGuesses((prev) => {
+      const updatedGuesses = [...prev, champ.name];
+      localStorage.setItem("guesses", JSON.stringify(updatedGuesses));
+      return updatedGuesses;
+    });
+    setGuessedChampions((prev) => [champ, ...prev]);
     if (correctChampion && correctChampion.name === champ.name) {
       setIsGameOver(true);
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem("guesses", JSON.stringify(guesses));
+  }, [guesses]);
 
   const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
@@ -78,7 +88,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         filteredChampions.length > 0 &&
         !guessedChampions.includes(filteredChampions[0])
       ) {
-        handleSelectChampion(filteredChampions[0]);
+        handleSelectedChampion(filteredChampions[0]);
       }
     }
   };
@@ -87,7 +97,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     if (guessedChampions.includes(filteredChampions[0])) {
       // Fix this
     } else if (input === filteredChampions[0].name) {
-      handleSelectChampion(filteredChampions[0]);
+      handleSelectedChampion(filteredChampions[0]);
     }
   };
 
@@ -100,7 +110,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             className="champion-list-item"
             type="button"
             key={champ.name}
-            onClick={() => handleSelectChampion(champ)}
+            onClick={() => handleSelectedChampion(champ)}
           >
             <img
               src={`${imagePath}${champ.imageurl}`}

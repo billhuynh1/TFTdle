@@ -15,6 +15,7 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
   );
   const testChampion = useChampionContext();
 
+  // Refactor the logic
   useEffect(() => {
     if (!testChampion || !champion) return;
 
@@ -33,6 +34,12 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
       testChampion[pos] > champion[pos]
     ) {
       setSquareColor("incorrect up");
+    } else if (
+      typeof testChampion[pos] === "number" &&
+      typeof champion[pos] === "number" &&
+      testChampion[pos] < champion[pos]
+    ) {
+      setSquareColor("incorrect down");
     } else {
       setSquareColor("incorrect");
     }
