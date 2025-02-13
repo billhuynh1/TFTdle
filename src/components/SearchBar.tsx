@@ -62,20 +62,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
-  // Items are being stored alphabetically
   const handleSelectedChampion = async (champ: Champion) => {
     setIsListOpen(false);
     setInput("");
     setAttempts((attempts) => attempts + 1);
-    setGuesses((prev) => {
-      const updatedGuesses = [...prev, champ.name];
-      localStorage.setItem("guesses", JSON.stringify(updatedGuesses));
-      return updatedGuesses;
-    });
+    setGuesses((prev) => [...prev, champ.name]);
     setGuessedChampions((prev) => [champ, ...prev]);
-    if (correctChampion && correctChampion.name === champ.name) {
-      setIsGameOver(true);
-    }
+    // if (correctChampion && correctChampion.name === champ.name) {
+    //   setIsGameOver(true);
+    // }
   };
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Champion } from "../type.ts";
-import { useChampionContext } from "../App.tsx";
+import { useChampionContext, useGame } from "../App.tsx";
 import checkPartialGuess from "../utils/checkPartialGuess.ts";
 
 interface AttributeSquareProps {
@@ -13,11 +13,17 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
   const [imagePath, setImagePath] = useState<string | undefined>(
     process.env.REACT_APP_AWS_S3_URL,
   );
+
   const testChampion = useChampionContext();
+  const { isGameOver, setIsGameOver } = useGame();
 
   // Refactor the logic
   useEffect(() => {
     if (!testChampion || !champion) return;
+
+    if (champion.name === testChampion.name) {
+      setIsGameOver(true);
+    }
 
     if (champion[pos] === testChampion[pos]) {
       setSquareColor("correct");

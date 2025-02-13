@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface AttributeSquareInterface {
   icon?: string;
   text: string;
@@ -5,13 +7,14 @@ export interface AttributeSquareInterface {
   color?: string;
 }
 
-export interface ChampionAnswerProps extends Champion {
-  sessionId: string;
-}
-
 export interface ChampionAttributes extends AttributeSquareInterface {
   icon: string;
   gender: string;
+}
+
+export interface GameContextType {
+  isGameOver?: boolean;
+  setIsGameOver: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export interface ChampionGuess {
