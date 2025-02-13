@@ -56,6 +56,8 @@ function App() {
     fetchGameState(setChampionList, setTestChampion, setIsLoading);
   }, []);
 
+  // Poll to compare current time to reset time, clear localStorage at midnight.
+
   useEffect(() => {
     if (!testChampion) return;
 
