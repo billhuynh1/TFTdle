@@ -21,7 +21,7 @@ body {
   position: relative;
   height: auto;
   transform: scale(85%);
-  margin-top: -1.5%;
+  margin-top: -3%;
 }
 
 .background-container {
@@ -48,7 +48,7 @@ body {
   position: relative;
   color: white;
   font-size: 5rem;
-  padding-top: 5vh;
+  padding-top: 2vh;
 }
 
 .header-image {
