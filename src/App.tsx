@@ -45,18 +45,35 @@ function App() {
   const [isDiscordPopup, setIsDiscordPopup] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [sessionId, setSessionId] = useState<string>("");
+  const [today, setToday] = useState<string>(new Date().toDateString());
+  const [lastVisit, setLastVisit] = useState<string | null>(() => {
+    const storedDate = localStorage.getItem("lastVisit");
+    if (storedDate === null) {
+      localStorage.setItem("lastVisit", today);
+      return today;
+    }
+    return storedDate;
+  });
   const contextValue = useMemo(
     () => ({ isGameOver, setIsGameOver }),
     [isGameOver, setIsGameOver],
   );
-  const resetTime: Date = new Date();
-  resetTime.setHours(24, 0, 0, 0);
 
   useEffect(() => {
     fetchGameState(setChampionList, setTestChampion, setIsLoading);
   }, []);
 
-  // Poll to compare current time to reset time, clear localStorage at midnight.
+  // Check if user is visiting the next day
+  const useDailyReset = (): void => {
+    useEffect(() => {
+      if (today !== lastVisit) {
+        localStorage.clear();
+        localStorage.setItem("lastVisit", today);
+      }
+    }, []);
+  };
+
+  useDailyReset();
 
   useEffect(() => {
     if (!testChampion) return;
@@ -72,7 +89,6 @@ function App() {
 
   useEffect(() => {
     setAttempts(guessedChampions.length);
-    console.log(localStorage.getItem("guesses"));
   }, [guessedChampions]);
 
   const showConfetti = () => {
@@ -108,7 +124,23 @@ function App() {
     return null;
   };
 
-  console.log(isGameOver);
+  const usePolling = () => {
+    useEffect(() => {
+      const checkReset = () => {
+        const now = new Date();
+        if (now.getHours() === 0 && now.getMinutes() === 0) {
+          localStorage.clear();
+          alert("New daily! Please refresh the page.");
+        }
+      };
+
+      const interval = setInterval(checkReset, 60 * 1000);
+
+      return () => clearInterval(interval);
+    }, []);
+  };
+
+  usePolling();
 
   return (
     <div className="App">
