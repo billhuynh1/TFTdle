@@ -18,6 +18,7 @@ import GameHeader from "./components/GameHeader.tsx";
 import GameEnd from "./components/GameEnd.tsx";
 import About from "./components/About.tsx";
 import DiscordPopup from "./components/DiscordPopup.tsx";
+import HintsHelper from "./components/HintsHelper.tsx";
 import fetchGameState from "./utils/fetchGameState.ts";
 import fetchGuesses from "./utils/fetchGuesses.ts";
 import findChampionByNameInTable from "./utils/findChampionByName.ts";
@@ -58,6 +59,8 @@ function App() {
     () => ({ isGameOver, setIsGameOver }),
     [isGameOver, setIsGameOver],
   );
+
+  console.log(testChampion);
 
   useEffect(() => {
     fetchGameState(setChampionList, setTestChampion, setIsLoading);
@@ -184,6 +187,7 @@ function App() {
               ))}
             </GameContext.Provider>
           </ChampionContext.Provider>
+          <HintsHelper />
           <Footer
             handleToggleAbout={handleToggleAbout}
             handleToggleDiscordPopup={handleToggleDiscordPopup}
