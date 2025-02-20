@@ -185,8 +185,13 @@ body {
   right: 1rem;
   border: none;
   border-radius: 25%;
-  border: 2px solid #af9767;
-  background-color: #960000;
+  background-color: #1e2328;
+  transform: scale(1.5);
+}
+
+.button-close:hover {
+  transform: scale(1.7);
+  text-shadow: #e4e6ed 0 0 10px;
 }
 
 .game-header {
@@ -409,7 +414,7 @@ body {
 }
 
 .hintshelper__text {
-  color: white;
+  color: #e4e6ed;
   padding: 20px;
   font-weight: bold;
   text-shadow: black 1px 0 10px;
@@ -431,4 +436,8 @@ body {
 
 .hintshelper__content.incorrect {
   background-color: #ff3131;
+}
+
+.website {
+  color: white;
 }

@@ -5,9 +5,9 @@ type HintsItem = { id: string; text: string; color: string };
 
 const HintsHelper = () => {
   const hints: HintsItem[] = [
-    { id: "0", text: "correct", color: "correct" },
-    { id: "1", text: "partial", color: "partial" },
-    { id: "2", text: "incorrect", color: "incorrect" },
+    { id: "0", text: "correct ✅", color: "correct" },
+    { id: "1", text: "partial 🔶", color: "partial" },
+    { id: "2", text: "incorrect ❌", color: "incorrect" },
   ];
 
   return (

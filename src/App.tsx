@@ -192,6 +192,7 @@ function App() {
             handleToggleAbout={handleToggleAbout}
             handleToggleDiscordPopup={handleToggleDiscordPopup}
           />
+          <span className="website">tft-dle.com - 2025</span>
           {isAbout && <About handleToggleAbout={handleToggleAbout} />}
           {isDiscordPopup && <DiscordPopup />}
         </div>

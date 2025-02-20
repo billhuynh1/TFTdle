@@ -22,7 +22,7 @@ const About: React.FC<AboutProps> = ({ handleToggleAbout }) => {
           className="button-close"
           onClick={handleToggleAbout}
         >
-          &#x2717;
+          ❌
         </button>
         <h1 style={{ fontSize: "60px", marginLeft: "50px" }}>About</h1>
         <hr />
