@@ -42,8 +42,9 @@ function App() {
   const [testChampion, setTestChampion] = useState<Champion | null>(null);
   const [attempts, setAttempts] = useState<number>(0);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
-  const [isAbout, setIsAbout] = useState<boolean>(false);
-  const [isDiscordPopup, setIsDiscordPopup] = useState<boolean>(false);
+  const [renderAbout, setrenderAbout] = useState<boolean>(false);
+  const [renderDiscordPopup, setrenderDiscordPopup] = useState<boolean>(false);
+  const [renderHints, setRenderHints] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [sessionId, setSessionId] = useState<string>("");
   const [today, setToday] = useState<string>(new Date().toDateString());
@@ -103,11 +104,11 @@ function App() {
   }
 
   const handleToggleAbout = () => {
-    setIsAbout((isAbout) => !isAbout);
+    setrenderAbout((renderAbout) => !renderAbout);
   };
 
   const handleToggleDiscordPopup = () => {
-    setIsDiscordPopup((isDiscordPopup) => !isDiscordPopup);
+    setrenderDiscordPopup((renderDiscordPopup) => !renderDiscordPopup);
   };
 
   const renderLoading = (): React.JSX.Element | null => {
@@ -126,6 +127,12 @@ function App() {
     }
     return null;
   };
+
+  useEffect(() => {
+    if (guessedChampions.length > 0) {
+      setRenderHints(true);
+    }
+  }, [guessedChampions]);
 
   const usePolling = () => {
     useEffect(() => {
@@ -187,14 +194,14 @@ function App() {
               ))}
             </GameContext.Provider>
           </ChampionContext.Provider>
-          <HintsHelper />
+          {renderHints && <HintsHelper />}
           <Footer
             handleToggleAbout={handleToggleAbout}
             handleToggleDiscordPopup={handleToggleDiscordPopup}
           />
           <span className="website">tft-dle.com - 2025</span>
-          {isAbout && <About handleToggleAbout={handleToggleAbout} />}
-          {isDiscordPopup && <DiscordPopup />}
+          {renderAbout && <About handleToggleAbout={handleToggleAbout} />}
+          {renderDiscordPopup && <DiscordPopup />}
         </div>
       </div>
     </div>
