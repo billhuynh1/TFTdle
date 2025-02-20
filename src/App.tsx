@@ -61,13 +61,11 @@ function App() {
     [isGameOver, setIsGameOver],
   );
 
-  console.log(testChampion);
-
+  // Update Game end component
   useEffect(() => {
     fetchGameState(setChampionList, setTestChampion, setIsLoading);
   }, []);
 
-  // Check if user is visiting the next day
   const useDailyReset = (): void => {
     useEffect(() => {
       if (today !== lastVisit) {
