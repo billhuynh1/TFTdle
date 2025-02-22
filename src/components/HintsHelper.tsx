@@ -12,14 +12,17 @@ const HintsHelper = () => {
 
   return (
     <div className="hintshelper">
-      {hints.map((item) => (
-        <div key={item.id} className="hintshelper__item">
-          <span className="hintshelper__text">
-            {item.text}
-            <div className={`hintshelper__content ${item.color}`} />
-          </span>
-        </div>
-      ))}
+      <span className="hintshelper__header">Color Indicators</span>
+      <div className="hintshelper__container">
+        {hints.map((item) => (
+          <div key={item.id} className="hintshelper__item">
+            <span className="hintshelper__text">
+              {item.text}
+              <div className={`hintshelper__content ${item.color}`} />
+            </span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

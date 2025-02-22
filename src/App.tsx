@@ -56,10 +56,13 @@ function App() {
     }
     return storedDate;
   });
+
   const contextValue = useMemo(
     () => ({ isGameOver, setIsGameOver }),
     [isGameOver, setIsGameOver],
   );
+
+  console.log(testChampion);
 
   // Update Game end component
   useEffect(() => {
@@ -113,6 +116,7 @@ function App() {
     if (isLoading) {
       return (
         <ClipLoader
+          className="loader"
           aria-label="Loading data"
           size={50}
           color="white"
@@ -157,6 +161,11 @@ function App() {
         <div className="container">
           <ChampionContext.Provider value={testChampion}>
             <AttemptsContext.Provider value={attempts}>
+              <GameEnd
+                attempts={attempts}
+                champIcon={testChampion?.imageurl}
+                champName={testChampion?.name}
+              />
               {!isGameOver ? <GameHeader /> : null}
               {isGameOver ? (
                 <GameEnd

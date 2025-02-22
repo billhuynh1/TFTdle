@@ -7,6 +7,13 @@
     Arial;
 }
 
+@font-face {
+  font-family: "CustomFont";
+  src: url("../public/fonts/custom_font.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
 html,
 body {
   height: 100%;
@@ -18,10 +25,8 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  position: relative;
   height: auto;
-  transform: scale(85%);
-  margin-top: -2%;
+  z-index: 2;
 }
 
 .background-container {
@@ -41,25 +46,40 @@ body {
   right: 0;
   top: 0;
   bottom: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9));
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1));
+  z-index: 1;
 }
 
 .header {
+  display: grid;
   position: relative;
-  color: white;
-  font-size: 5rem;
+  place-items: center;
+  color: #c8aa6e;
+  font-size: 2.5rem;
   padding-top: 2vh;
+  font-family: CustomFont;
 }
 
-.header-image {
-  height: 100px;
-  width: 125px;
+h1 {
+  text-shadow:
+    4px 4px 0px #091428,
+    -4px -4px 0px #091428,
+    4px -4px 0px #091428,
+    -4px 4px 0px #091428;
+  z-index: 100;
+}
+
+.header__logo {
+  width: 10%;
+  height: 80%;
+  position: absolute;
+  top: 15%;
 }
 
 .about-container {
   width: 30vw;
   overflow: visible;
-  z-index: 100;
+  z-index: 1;
 }
 
 .about-content {
@@ -99,6 +119,8 @@ body {
   width: 220px;
   height: 120px;
   margin: 20px;
+  z-index: 2;
+  transform: scale(90%);
 }
 
 .discord-popup {
@@ -147,7 +169,8 @@ body {
   align-content: center;
   background-color: #1e2328;
   border: 2px solid #af9767;
-  border-radius: 50px;
+  border-radius: 5px;
+  z-index: 2;
 }
 
 .champion-image-game-end {
@@ -165,6 +188,7 @@ body {
   margin-left: 2px;
   background: none;
   border: none;
+  z-index: 2;
 }
 
 .button-img:hover {
@@ -202,10 +226,11 @@ body {
   align-items: center;
   height: 100px;
   width: 300px;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 30px;
   border: 3px solid #af9767;
   font-size: large;
+  z-index: 2;
 }
 
 .searchbar-main-container {
@@ -229,8 +254,9 @@ body {
   height: 85%;
   padding: 10px;
   width: 100%;
-  border: 3px solid #4fb0ff;
+  border: 3px solid #0397ab;
   background-color: #1e2328;
+  z-index: 2;
 }
 
 .answer-container {
@@ -238,8 +264,9 @@ body {
   justify-content: center;
   align-items: center;
   max-width: 800px;
-  height: 100px;
+  height: 70px;
   padding: 10px;
+  z-index: 2;
 }
 
 .attribute-container {
@@ -247,14 +274,15 @@ body {
   flex-wrap: nowrap;
   max-width: 800px;
   padding: 10px;
-  height: 100px;
+  height: 70px;
 }
 
 .attribute-square hr {
-  width: 85%;
-  height: 4px;
+  width: 90%;
+  height: 1px;
   background-color: white;
   bottom: 0;
+  z-index: 2;
 }
 
 @keyframes fadeIn {
@@ -278,8 +306,8 @@ body {
   padding: 5px;
   align-items: center;
   justify-content: center;
-  height: 100px;
-  width: 100px;
+  height: 75px;
+  width: 75px;
   color: white;
   margin: 5px;
   flex-direction: column;
@@ -288,17 +316,17 @@ body {
 
 .attribute-square.correct {
   background-color: #00b42d;
-  border: solid 2px #af9767;
+  border: solid 2px #c8aa6e;
 }
 
 .attribute-square.partial {
   background-color: orange;
-  border: solid 2px #af9767;
+  border: solid 2px #c8aa6e;
 }
 
 .attribute-square.incorrect {
   background-color: #ff3131;
-  border: solid 2px #af9767;
+  border: solid 2px #c8aa6e;
 }
 
 .attribute-square.incorrect.up::after {
@@ -339,7 +367,7 @@ body {
   justify-content: center;
   text-shadow: black 1px 0 5px;
   color: white;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: bold;
   line-height: 1.3;
   z-index: 1;
@@ -348,8 +376,8 @@ body {
 .champion-image {
   position: relative;
   padding: 5px;
-  height: 100px;
-  width: 100px;
+  height: 75px;
+  width: 75px;
 }
 
 .champion-list {
@@ -357,14 +385,14 @@ body {
   flex-direction: column;
   list-style-type: none;
   background-color: white;
-  width: 18%;
+  min-width: 310px;
+  max-width: 310px;
   position: absolute;
-  margin-top: 54px;
+  margin-top: 60px;
   border: solid 2px black;
   padding-left: 0;
   overflow-y: auto;
   max-height: 250px;
-
   z-index: 2;
 }
 
@@ -396,32 +424,44 @@ body {
 
 .hintshelper {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  height: 150px;
-  width: 500px;
+  flex-direction: column;
   margin-top: 10px;
   background-color: #1e2328;
   border: solid 2px #af9767;
   border-radius: 20px;
+  z-index: 2;
+  width: 500px;
+  height: 200px;
+  transform: scale(80%);
+}
+
+.hintshelper__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .hintshelper__item {
   display: flex;
   flex-direction: column;
-  margin-bottom: -15px;
 }
 
 .hintshelper__text {
   color: #e4e6ed;
-  padding: 20px;
   font-weight: bold;
   text-shadow: black 1px 0 10px;
 }
 
+.hintshelper__header {
+  color: #e4e6ed;
+  font-weight: bold;
+  margin: 10px;
+  padding: 10px;
+}
+
 .hintshelper__content {
-  border: 2px solid black;
+  border: 2px solid #c8aa6e;
   margin: 20px;
   padding: 25px;
 }
@@ -440,4 +480,10 @@ body {
 
 .website {
   color: white;
+  margin-bottom: 20px;
+  z-index: 2;
+}
+
+.loader {
+  z-index: 2;
 }
