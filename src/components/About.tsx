@@ -24,7 +24,7 @@ const About: React.FC<AboutProps> = ({ handleToggleAbout }) => {
         >
           ❌
         </button>
-        <h1 style={{ fontSize: "60px", marginLeft: "50px" }}>About</h1>
+        <h2 style={{ fontSize: "60px", marginLeft: "50px" }}>About</h2>
         <hr />
         <span style={{ margin: "20px", fontSize: "20px", marginLeft: "50px" }}>
           Guess today&apos; character from Teamfight Tactics!
@@ -44,7 +44,7 @@ const About: React.FC<AboutProps> = ({ handleToggleAbout }) => {
         <span style={{ margin: "20px", fontSize: "20px", marginLeft: "50px" }}>
           Heavily inspired by Wordle, LOLdle, Smashdle, and Pokedle.
         </span>
-        <h1 style={{ fontSize: "60px", marginLeft: "50px" }}>Feedback</h1>
+        <h2 style={{ fontSize: "60px", marginLeft: "50px" }}>Feedback</h2>
         <hr />
         <span style={{ margin: "20px", fontSize: "20px", marginLeft: "50px" }}>
           Any errors? Suggestions?

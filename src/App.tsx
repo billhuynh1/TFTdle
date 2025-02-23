@@ -154,6 +154,7 @@ function App() {
 
   usePolling();
 
+  // Updating game header component
   return (
     <div className="App">
       <div className="background-container">
@@ -161,11 +162,6 @@ function App() {
         <div className="container">
           <ChampionContext.Provider value={testChampion}>
             <AttemptsContext.Provider value={attempts}>
-              <GameEnd
-                attempts={attempts}
-                champIcon={testChampion?.imageurl}
-                champName={testChampion?.name}
-              />
               {!isGameOver ? <GameHeader /> : null}
               {isGameOver ? (
                 <GameEnd
