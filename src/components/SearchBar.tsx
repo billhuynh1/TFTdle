@@ -109,8 +109,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
           >
             <img
               src={`${imagePath}${champ.imageurl}`}
+              loading="eager"
               alt="A list of champions"
               className="champion-image-list"
+              width={40}
+              height={40}
             />
             {champ.name.replaceAll("_", " ")}
           </button>
