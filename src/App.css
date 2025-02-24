@@ -179,23 +179,14 @@ h1 {
 .game-end-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 400px;
   height: 400px;
-  padding: 10px;
   margin-top: 10px;
   align-content: center;
   background-color: #1e2328;
   border: 2px solid #af9767;
-  border-radius: 5px;
+  border-radius: 8px;
   z-index: 2;
-}
-
-.champion-image-game-end {
-  padding: 20px;
-  height: 100px;
-  width: 100px;
 }
 
 .button {
@@ -345,17 +336,21 @@ h1 {
 
 .attribute-square.correct {
   background-color: #00b42d;
+
   border: solid 2px #5bf581;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
 }
 
 .attribute-square.partial {
   background-color: orange;
   border: solid 2px #ffd478;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
 }
 
 .attribute-square.incorrect {
   background-color: #ff3131;
   border: solid 2px #f78e8e;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
 }
 
 .attribute-square.incorrect.up::after {

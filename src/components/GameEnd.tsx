@@ -52,21 +52,25 @@ const GameEnd: React.FC<GameEndProps> = ({
     return null;
   }
 
+  // Use grid templates
   return (
     <div className="game-end-container fade-in">
-      <span style={{ color: "white", padding: "10px" }}>
+      <h2 style={{ color: "white", fontSize: "50px" }}>ez claps</h2>
+      <span style={{ color: "white", padding: "" }}>
         The correct champion is:
       </span>
-      <span style={{ color: "white", fontWeight: "bold", fontSize: "25px" }}>
+      <span style={{ color: "white", fontWeight: "bold", fontSize: "" }}>
         {champName?.replaceAll("_", " ")}
       </span>
       <img
         src={`${imagePath}${champIcon}`}
         className="champion-image-game-end"
         alt="Correct champion"
+        width={50}
+        height={50}
       />
       <span style={{ color: "white" }}>Number of attempts: {attempts}</span>
-      <span style={{ color: "white", padding: "20px" }}>
+      <span style={{ color: "white", padding: "" }}>
         Next champion in: {formatTime(difference)}
       </span>
     </div>
