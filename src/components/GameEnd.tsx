@@ -37,7 +37,7 @@ const GameEnd: React.FC<GameEndProps> = ({
     const hours = Math.floor(totalSeconds / 3600);
     const minutes = Math.floor((totalSeconds % 3600) / 60);
     const seconds = totalSeconds % 60;
-    return `${hours}h : ${minutes}m : ${seconds}s`;
+    return `${hours}:${minutes}:${seconds}`;
   };
 
   useEffect(() => {
@@ -54,25 +54,42 @@ const GameEnd: React.FC<GameEndProps> = ({
 
   // Use grid templates
   return (
-    <div className="game-end-container fade-in">
-      <h2 style={{ color: "white", fontSize: "50px" }}>ez claps</h2>
-      <span style={{ color: "white", padding: "" }}>
-        The correct champion is:
+    <div className="game-end fade-in">
+      <h1
+        className="game-end__header"
+        style={{ color: "white", fontSize: "50px" }}
+      >
+        👏ez claps👏
+      </h1>
+      <span
+        className="game-end__content"
+        style={{ color: "white", padding: "", fontSize: "20px" }}
+      >
+        The champion was:
       </span>
-      <span style={{ color: "white", fontWeight: "bold", fontSize: "" }}>
-        {champName?.replaceAll("_", " ")}
+      <div className="game-end__champ">
+        <img
+          src={`${imagePath}${champIcon}`}
+          className="champion-image-game-end"
+          alt="Correct champion"
+          width={60}
+          height={60}
+        />
+        <span
+          className="game-end__champ__text"
+          style={{ color: "white", fontWeight: "bold", fontSize: "20px" }}
+        >
+          {" "}
+          {champName?.replaceAll("_", " ")}
+        </span>
+      </div>
+      <span className="attempts" style={{ color: "white" }}>
+        Number of attempts: <span style={{ color: "gold" }}>{attempts}</span>
       </span>
-      <img
-        src={`${imagePath}${champIcon}`}
-        className="champion-image-game-end"
-        alt="Correct champion"
-        width={50}
-        height={50}
-      />
-      <span style={{ color: "white" }}>Number of attempts: {attempts}</span>
-      <span style={{ color: "white", padding: "" }}>
-        Next champion in: {formatTime(difference)}
-      </span>
+      <div className="timer-container">
+        <span className="timer-header">Next Champion in:</span>
+        <span className="timer-content">{formatTime(difference)}</span>
+      </div>
     </div>
   );
 };

@@ -60,7 +60,7 @@ body {
   font-family: CustomFont;
 }
 
-h1 {
+.header h1 {
   text-shadow:
     -2px -2px 0 white,
     2px -2px 0 white,
@@ -176,17 +176,58 @@ h1 {
   transition: ease-out 0.5s;
 }
 
-.game-end-container {
-  display: flex;
-  flex-direction: column;
+.game-end {
+  display: grid;
+  grid-template-rows: 150px 15px 80px auto;
+  grid-template-areas:
+    "header"
+    "content"
+    "champ"
+    "attempts"
+    "timer";
+  font-family: "Times New Roman", Times, serif;
   width: 400px;
   height: 400px;
   margin-top: 10px;
-  align-content: center;
   background-color: #1e2328;
   border: 2px solid #af9767;
   border-radius: 8px;
   z-index: 2;
+}
+
+.game-end h1 {
+  grid-area: header;
+}
+
+.game-end__header {
+  grid-area: header;
+}
+
+.game-end__content {
+  grid-area: content;
+}
+
+.game-end__champ {
+  grid-area: champ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer-container {
+  grid-area: timer;
+  display: flex;
+  color: white;
+  font-size: 30px;
+  flex-direction: column;
+}
+
+.timer-content {
+  font-weight: 600;
+}
+
+.attempts {
+  grid-area: attempts;
 }
 
 .button {
@@ -292,7 +333,7 @@ h1 {
   flex: 1;
   align-items: center;
   justify-content: center;
-  text-shadow: black 1px 0 5px;
+  text-shadow: black 2px 0 5px;
   color: white;
   max-width: 100%;
   z-index: 1;
@@ -336,7 +377,6 @@ h1 {
 
 .attribute-square.correct {
   background-color: #00b42d;
-
   border: solid 2px #5bf581;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
 }

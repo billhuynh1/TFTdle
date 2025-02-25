@@ -61,13 +61,16 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
     return regex.test(url);
   };
 
+  // Dynamic font size
   useEffect(() => {
     const resizeText = () => {
       if (!containerRef.current) return;
       const containerWidth = containerRef.current.offsetWidth;
-      const wordsArray = String(champion[pos])
-        .split(",")
-        .map((word) => word.trim());
+      const matchedWords = String(champion[pos]).match(/[^,]+(,|$)/g);
+      const wordsArray = matchedWords
+        ? matchedWords.map((word) => word.trim())
+        : [];
+
       const newFontSize = wordsArray.map(() => 16); // Starting font size
       // Check if the text fits inside the container
       wordsArray.forEach((word, index) => {
@@ -82,7 +85,7 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
         document.body.removeChild(tempSpan); // Clean up
 
         // Shrink word size if it overflows
-        while (wordWidth > containerWidth && newFontSize[index] > 12) {
+        while (wordWidth > containerWidth && newFontSize[index] > 8) {
           newFontSize[index] -= 1; // Decrease font size
           tempSpan.style.fontSize = `${newFontSize}px`;
           tempSpan.innerText = word;
