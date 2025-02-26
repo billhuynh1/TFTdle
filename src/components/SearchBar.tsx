@@ -68,9 +68,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
     setAttempts((attempts) => attempts + 1);
     setGuesses((prev) => [...prev, champ.name]);
     setGuessedChampions((prev) => [champ, ...prev]);
-    // if (correctChampion && correctChampion.name === champ.name) {
-    //   setIsGameOver(true);
-    // }
   };
 
   useEffect(() => {

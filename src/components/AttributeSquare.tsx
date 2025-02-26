@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Champion } from "../type.ts";
-import { useChampionContext, useGame } from "../App.tsx";
+import { useChampionContext, useGame, useSearchLock } from "../App.tsx";
 import checkPartialGuess from "../utils/checkPartialGuess.ts";
 
 interface AttributeSquareProps {
@@ -17,6 +17,7 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
   );
   const testChampion = useChampionContext();
   const { isGameOver, setIsGameOver } = useGame();
+  const { isSearchLock, setIsSearchLock } = useSearchLock();
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Refactor the logic
@@ -24,7 +25,11 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
     if (!testChampion || !champion) return;
 
     if (champion.name === testChampion.name) {
-      setIsGameOver(true);
+      setIsSearchLock(true);
+      setTimeout(() => {
+        setIsGameOver(true);
+      }, 5000);
+      setIsSearchLock(true);
     }
 
     if (champion[pos] === testChampion[pos]) {
@@ -85,7 +90,7 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
         document.body.removeChild(tempSpan); // Clean up
 
         // Shrink word size if it overflows
-        while (wordWidth > containerWidth && newFontSize[index] > 8) {
+        while (wordWidth > containerWidth && newFontSize[index] > 10) {
           newFontSize[index] -= 1; // Decrease font size
           tempSpan.style.fontSize = `${newFontSize}px`;
           tempSpan.innerText = word;
@@ -109,7 +114,10 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
           alt="Champion"
         />
       ) : (
-        <div ref={containerRef} className={`attribute-square ${squareColor}`}>
+        <div
+          ref={containerRef}
+          className={`attribute-square ${squareColor} fade-in`}
+        >
           {wordsArray.map((words, index) => (
             <span
               className="square-content"
@@ -120,7 +128,7 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
                 lineHeight: "16px",
               }}
             >
-              {words}
+              {String(words).replaceAll("_", " ")}
             </span>
           ))}
         </div>

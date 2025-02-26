@@ -6,7 +6,7 @@ const ChampionAnswer: React.FC<Champion> = ({ ...champion }) => {
   const [isAnimating, setIsAnimating] = useState<boolean>(true);
 
   return (
-    <div className={`answer-container ${isAnimating ? "fade-in" : ""}`}>
+    <div className="answer-container">
       {Object.keys(champion).map((key) => (
         <AttributeSquare
           key={champion.name}

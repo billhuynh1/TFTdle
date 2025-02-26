@@ -17,6 +17,11 @@ export interface GameContextType {
   setIsGameOver: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
+export interface SearchLockContextType {
+  isSearchLock?: boolean;
+  setIsSearchLock: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 export interface ChampionGuess {
   champ: string;
   isCorrect: boolean;

@@ -12,7 +12,7 @@ import ChampionAnswer from "./components/ChampionAnswer.tsx";
 import Header from "./components/Header.tsx";
 import Footer from "./components/Footer.tsx";
 import SearchBar from "./components/SearchBar.tsx";
-import { Champion, GameContextType } from "./type.ts";
+import { Champion, GameContextType, SearchLockContextType } from "./type.ts";
 import AttributeHeader from "./components/AttributeHeader.tsx";
 import GameHeader from "./components/GameHeader.tsx";
 import GameEnd from "./components/GameEnd.tsx";
@@ -26,12 +26,22 @@ import findChampionByNameInTable from "./utils/findChampionByName.ts";
 const ChampionContext = createContext<Champion | null>(null);
 const GameContext = createContext<GameContextType | null>(null);
 const AttemptsContext = createContext<number>(0);
+const SearchLockContext = createContext<SearchLockContextType | null>(null);
 export const useAttemptsContext = () => useContext(AttemptsContext);
 export const useChampionContext = () => useContext(ChampionContext);
 export const useGame = (): GameContextType => {
   const context = useContext(GameContext);
   if (!context) {
     throw new Error("useGame must be used within a GameProvider");
+  }
+  return context;
+};
+export const useSearchLock = (): SearchLockContextType => {
+  const context = useContext(SearchLockContext);
+  if (!context) {
+    throw new Error(
+      "useSearchLockContext must be used within a SearchLockProvider",
+    );
   }
   return context;
 };
@@ -42,11 +52,13 @@ function App() {
   const [testChampion, setTestChampion] = useState<Champion | null>(null);
   const [attempts, setAttempts] = useState<number>(0);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const [isSearchLock, setIsSearchLock] = useState<boolean>(false);
   const [renderAbout, setrenderAbout] = useState<boolean>(false);
   const [renderDiscordPopup, setrenderDiscordPopup] = useState<boolean>(false);
   const [renderHints, setRenderHints] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [sessionId, setSessionId] = useState<string>("");
+  const [searchLock, setSearchLock] = useState<boolean>(false);
   const [today, setToday] = useState<string>(new Date().toDateString());
   const [lastVisit, setLastVisit] = useState<string | null>(() => {
     const storedDate = localStorage.getItem("lastVisit");
@@ -58,11 +70,9 @@ function App() {
   });
 
   const contextValue = useMemo(
-    () => ({ isGameOver, setIsGameOver }),
-    [isGameOver, setIsGameOver],
+    () => ({ isGameOver, setIsGameOver, isSearchLock, setIsSearchLock }),
+    [searchLock, isGameOver, setSearchLock, setIsGameOver, setIsSearchLock],
   );
-
-  console.log(testChampion);
 
   // Update Game end component
   useEffect(() => {
@@ -72,6 +82,7 @@ function App() {
   const useDailyReset = (): void => {
     useEffect(() => {
       if (today !== lastVisit) {
+        setSearchLock(false);
         localStorage.clear();
         localStorage.setItem("lastVisit", today);
       }
@@ -154,7 +165,6 @@ function App() {
 
   usePolling();
 
-  // Updating game header component
   return (
     <div className="App">
       <div className="background-container">
@@ -162,42 +172,48 @@ function App() {
         <div className="container">
           <ChampionContext.Provider value={testChampion}>
             <AttemptsContext.Provider value={attempts}>
-              {!isGameOver ? <GameHeader /> : null}
-              {isGameOver ? (
-                <GameEnd
-                  attempts={attempts}
-                  champIcon={testChampion?.imageurl}
-                  champName={testChampion?.name}
-                />
-              ) : (
-                <SearchBar
-                  championList={championList}
-                  guessedChampions={guessedChampions}
-                  correctChampion={testChampion}
-                  sessionId={sessionId}
-                  setGuessedChampions={setGuessedChampions}
-                  setAttempts={setAttempts}
-                  setIsGameOver={setIsGameOver}
-                />
-              )}
+              <SearchLockContext.Provider value={contextValue}>
+                <GameContext.Provider value={contextValue}>
+                  {!isGameOver ? <GameHeader /> : null}
+                  {isGameOver ? (
+                    <GameEnd
+                      attempts={attempts}
+                      champIcon={testChampion?.imageurl}
+                      champName={testChampion?.name}
+                    />
+                  ) : (
+                    !isSearchLock && ( // Only render SearchBar if isSearchLock is false
+                      <SearchBar
+                        championList={championList}
+                        guessedChampions={guessedChampions}
+                        correctChampion={testChampion}
+                        sessionId={sessionId}
+                        setGuessedChampions={setGuessedChampions}
+                        setAttempts={setAttempts}
+                        setIsGameOver={setIsGameOver}
+                      />
+                    )
+                  )}
+                  {renderLoading()}
+                  {guessedChampions.map((champ) => (
+                    <ChampionAnswer
+                      key={champ.name}
+                      imageurl={champ.imageurl}
+                      name={champ.name}
+                      gender={champ.gender}
+                      cost={champ.cost}
+                      type={champ.type}
+                      traits={champ.traits}
+                      attRange={champ.attRange}
+                    />
+                  ))}
+                </GameContext.Provider>
+              </SearchLockContext.Provider>
             </AttemptsContext.Provider>
-            <GameContext.Provider value={contextValue}>
-              {renderLoading()}
-              {guessedChampions.map((champ) => (
-                <ChampionAnswer
-                  key={champ.name}
-                  imageurl={champ.imageurl}
-                  name={champ.name}
-                  gender={champ.gender}
-                  cost={champ.cost}
-                  type={champ.type}
-                  traits={champ.traits}
-                  attRange={champ.attRange}
-                />
-              ))}
-            </GameContext.Provider>
           </ChampionContext.Provider>
+
           {renderHints && <HintsHelper />}
+
           <Footer
             handleToggleAbout={handleToggleAbout}
             handleToggleDiscordPopup={handleToggleDiscordPopup}

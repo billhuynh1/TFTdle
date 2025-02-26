@@ -178,7 +178,7 @@ body {
 
 .game-end {
   display: grid;
-  grid-template-rows: 150px 15px 80px auto;
+  grid-template-rows: 150px 20px 80px auto;
   grid-template-areas:
     "header"
     "content"
@@ -189,10 +189,11 @@ body {
   width: 400px;
   height: 400px;
   margin-top: 10px;
-  background-color: #1e2328;
-  border: 2px solid #af9767;
+  background: linear-gradient(to top, #0d1f10, #247c2b);
+  border: 2px solid #4bf190;
   border-radius: 8px;
   z-index: 2;
+  text-shadow: black 2px 0 0px;
 }
 
 .game-end h1 {
@@ -212,6 +213,18 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.game-end-champ-icon {
+  padding: 5px;
+}
+
+.game-end__champ__text {
+  padding: 5px;
+}
+
+.timer-header {
+  font-size: 20px;
 }
 
 .timer-container {
@@ -349,9 +362,11 @@ body {
 
 @keyframes fadeIn {
   0% {
+    transform: rotatey(90deg);
     opacity: 0;
   }
   100% {
+    transform: rotatey(0deg);
     opacity: 1;
   }
 }
@@ -379,18 +394,50 @@ body {
   background-color: #00b42d;
   border: solid 2px #5bf581;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
 }
 
 .attribute-square.partial {
   background-color: orange;
   border: solid 2px #ffd478;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
 }
 
 .attribute-square.incorrect {
   background-color: #ff3131;
   border: solid 2px #f78e8e;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.attribute-square:nth-child(1) {
+  animation-delay: 0s;
+}
+.attribute-square:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.attribute-square:nth-child(3) {
+  animation-delay: 1.2s;
+}
+
+.attribute-square:nth-child(4) {
+  animation-delay: 1.8s;
+}
+
+.attribute-square:nth-child(5) {
+  animation-delay: 2.4s;
+}
+
+.attribute-square:nth-child(6) {
+  animation-delay: 3.2s;
+}
+
+.attribute-square:nth-child(7) {
+  animation-delay: 3.6s;
 }
 
 .attribute-square.incorrect.up::after {
