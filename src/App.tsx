@@ -22,6 +22,7 @@ import HintsHelper from "./components/HintsHelper.tsx";
 import fetchGameState from "./utils/fetchGameState.ts";
 import fetchGuesses from "./utils/fetchGuesses.ts";
 import findChampionByNameInTable from "./utils/findChampionByName.ts";
+import Modes from "./components/Modes.tsx";
 
 const ChampionContext = createContext<Champion | null>(null);
 const GameContext = createContext<GameContextType | null>(null);
@@ -170,6 +171,7 @@ function App() {
       <div className="background-container">
         <Header />
         <div className="container">
+          <Modes />
           <ChampionContext.Provider value={testChampion}>
             <AttemptsContext.Provider value={attempts}>
               <SearchLockContext.Provider value={contextValue}>

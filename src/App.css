@@ -101,6 +101,21 @@ body {
   z-index: 1;
 }
 
+.modes {
+  display: flex;
+  height: 60px;
+  width: 300px;
+  background-color: white;
+  color: white;
+  z-index: 2;
+  align-items: center;
+  justify-content: center;
+  border: solid 2px #af9767;
+  background-color: #1e2328;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
 .about-content {
   display: flex;
   position: relative;
