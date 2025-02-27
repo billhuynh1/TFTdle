@@ -127,13 +127,18 @@ function App() {
   const renderLoading = (): React.JSX.Element | null => {
     if (isLoading) {
       return (
-        <ClipLoader
-          className="loader"
-          aria-label="Loading data"
-          size={50}
-          color="white"
-          speedMultiplier={0.5}
-        />
+        <>
+          <ClipLoader
+            className="loader"
+            aria-label="Loading data"
+            size={50}
+            color="white"
+            speedMultiplier={0.5}
+          />
+          <span style={{ color: "white", zIndex: "2" }}>
+            Give it a second...
+          </span>
+        </>
       );
     }
     if (guessedChampions.length > 0) {
