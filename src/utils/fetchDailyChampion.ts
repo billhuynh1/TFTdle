@@ -6,7 +6,7 @@ const fetchDailyChampion = async (
   maxRetries: number = 3,
   delay: number = 1000,
 ): Promise<Champion> => {
-  const API_BASE_URL = process.env.REACT_APP_BACKEND_URL;
+  const API_BASE_URL = process.env.REACT_APP_BACKEND_DEVELOPMENT_URL;
 
   try {
     const response = await axios.get(`${API_BASE_URL}/champs/v1/daily`);

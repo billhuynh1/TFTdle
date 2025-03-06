@@ -49,4 +49,39 @@ export interface SessionModel {
   createdAt: string;
 }
 
+export interface LayoutProps {
+  handleToggleAbout: () => void;
+  handleToggleDiscordPopup: () => void;
+  renderAbout: boolean;
+  renderDiscordPopup: boolean;
+  renderHints: boolean;
+}
+
+export interface ClassicPageProps {
+  testChampion?: Champion;
+  attempts: number;
+  isGameOver: boolean;
+  isSearchLock: boolean;
+  championList: Array<{ name: string; imageurl: string }>;
+  sessionId: string;
+  setGuessedChampions: React.Dispatch<React.SetStateAction<Champion[]>>;
+  setAttempts: React.Dispatch<React.SetStateAction<number>>;
+  setIsGameOver: React.Dispatch<React.SetStateAction<boolean>>;
+  renderLoading: () => React.JSX.Element;
+}
+
+export interface ChampionContextType {
+  testChampion: Champion | null;
+  championList: Champion[];
+  guessedChampions: Champion[];
+  setGuessedChampions: React.Dispatch<React.SetStateAction<Champion[]>>;
+  setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  isLoading: boolean;
+}
+
+export interface AttemptsContextType {
+  attempts: number;
+  setAttempts: React.Dispatch<React.SetStateAction<number>>;
+}
+
 export default Champion;

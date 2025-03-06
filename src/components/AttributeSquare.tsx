@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Champion } from "../type.ts";
-import { useChampionContext, useGame, useSearchLock } from "../App.tsx";
+import { useGame } from "../context/GameContext.tsx";
+import { useSearchLock } from "../context/SearchLockContext.tsx";
+import { useChampionContext } from "../context/ChampionContext.tsx";
 import checkPartialGuess from "../utils/checkPartialGuess.ts";
 
 interface AttributeSquareProps {
@@ -15,12 +17,12 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
   const [imagePath, setImagePath] = useState<string | undefined>(
     process.env.REACT_APP_AWS_S3_URL,
   );
-  const testChampion = useChampionContext();
-  const { isGameOver, setIsGameOver } = useGame();
-  const { isSearchLock, setIsSearchLock } = useSearchLock();
+  const { testChampion } = useChampionContext();
+  const { setIsGameOver } = useGame();
+  const { setIsSearchLock } = useSearchLock();
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Refactor the logic
+  // TODO: Refactor the logic
   useEffect(() => {
     if (!testChampion || !champion) return;
 
@@ -29,9 +31,7 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
       setTimeout(() => {
         setIsGameOver(true);
       }, 5000);
-      setIsSearchLock(true);
     }
-
     if (champion[pos] === testChampion[pos]) {
       setSquareColor("correct");
     } else if (
@@ -70,12 +70,15 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
   useEffect(() => {
     const resizeText = () => {
       if (!containerRef.current) return;
+      if (String(champion[pos]).includes(" ")) {
+        // Logic about something to do with if the string only has 2 words
+        // in a single string i.e "Form Swapper", keep it both on one line
+      }
       const containerWidth = containerRef.current.offsetWidth;
       const matchedWords = String(champion[pos]).match(/[^,]+(,|$)/g);
       const wordsArray = matchedWords
         ? matchedWords.map((word) => word.trim())
         : [];
-
       const newFontSize = wordsArray.map(() => 16); // Starting font size
       // Check if the text fits inside the container
       wordsArray.forEach((word, index) => {

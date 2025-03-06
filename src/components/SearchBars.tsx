@@ -1,53 +1,55 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Champion } from "../type.ts";
 import Button from "./Button.tsx";
 
-interface SearchBarProps {
-  championList: Champion[];
-  guessedChampions: Champion[];
-  setGuessedChampions: React.Dispatch<React.SetStateAction<Champion[]>>;
+interface SearchBarsProps<T extends Champion> {
+  items: T[];
+  guessedItems: T[];
+  setGuessedItems: React.Dispatch<React.SetStateAction<T[]>>;
   setAttempts: React.Dispatch<React.SetStateAction<number>>;
 }
 
-// Might have to make a generic type to use for finisher
-const SearchBar: React.FC<SearchBarProps> = ({
-  championList,
-  guessedChampions,
-  setGuessedChampions,
+// GENERIC VERSION, NEEDS TESTING
+const SearchBars = <T extends Champion>({
+  items,
+  guessedItems,
+  setGuessedItems,
   setAttempts,
-}) => {
+}: SearchBarsProps<T>) => {
   const [input, setInput] = useState<string>("");
-  const [filteredChampions, setFilteredChampions] = useState<Champion[]>([]);
+  const [filteredItems, setfilteredItems] = useState<T[]>([]);
   const [isListOpen, setIsListOpen] = useState(false);
   const [guesses, setGuesses] = useState<string[]>(() => {
     const storedGuesses = localStorage.getItem("guesses");
     return storedGuesses ? JSON.parse(storedGuesses) : [];
   });
   const imagePath = process.env.REACT_APP_AWS_S3_URL;
+  const location = useLocation();
+  const mode = location.pathname.replace("/", "");
 
   const handleSearch = async (searchQuery: string) => {
     if (searchQuery.length) {
       const regex = new RegExp(`^${searchQuery.toLowerCase()}`);
-      const guessedChampionNames = new Set(
-        guessedChampions.map((champion) => champion.name.toLowerCase()),
+      const guessedItemNames = new Set(
+        guessedItems.map((item) => item.name.toLowerCase()),
       );
 
-      const newFilteredChampions = championList.filter((champ: Champion) => {
-        const normalizedChampName = champ.name.toLowerCase();
+      const newfilteredItems = items.filter((item: T) => {
+        const normalizedItemName = item.name.toLowerCase();
         return (
-          regex.test(normalizedChampName) &&
-          !guessedChampionNames.has(normalizedChampName)
+          regex.test(normalizedItemName) &&
+          !guessedItemNames.has(normalizedItemName)
         );
       });
-      setFilteredChampions([...newFilteredChampions]);
+      setfilteredItems([...newfilteredItems]);
       setIsListOpen(true);
     } else {
-      setFilteredChampions([]);
+      setfilteredItems([]);
     }
   };
 
-  // Remove the any type, senior dev might crash out
-  const handleChange = (e: any) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newInput = e.target.value;
     const regex = /[a-zA-Z]+$/i;
 
@@ -57,57 +59,57 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
-  const handleSelectedChampion = async (champ: Champion) => {
+  const handleSelectedItem = async (item: T) => {
     setIsListOpen(false);
     setInput("");
     setAttempts((attempts) => attempts + 1);
-    setGuesses((prev) => [...prev, champ.name]);
-    setGuessedChampions((prev) => [champ, ...prev]);
+    setGuesses((prev) => [...prev, item.name]);
+    setGuessedItems((prev) => [item, ...prev]);
   };
 
   useEffect(() => {
-    localStorage.setItem("guesses", JSON.stringify(guesses));
+    localStorage.setItem(`${mode}_guesses`, JSON.stringify(guesses));
   }, [guesses]);
 
   const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
       if (
-        filteredChampions.length > 0 &&
-        !guessedChampions.includes(filteredChampions[0])
+        filteredItems.length > 0 &&
+        !guessedItems.includes(filteredItems[0])
       ) {
-        handleSelectedChampion(filteredChampions[0]);
+        handleSelectedItem(filteredItems[0]);
       }
     }
   };
 
   const handleClick = () => {
-    if (guessedChampions.includes(filteredChampions[0])) {
+    if (guessedItems.includes(filteredItems[0])) {
       // Fix this
-    } else if (input === filteredChampions[0].name) {
-      handleSelectedChampion(filteredChampions[0]);
+    } else if (input === filteredItems[0].name) {
+      handleSelectedItem(filteredItems[0]);
     }
   };
 
   // Returns list of champions from query
-  const renderedChampions =
-    filteredChampions.length > 0 && isListOpen ? (
+  const renderedItems =
+    filteredItems.length > 0 && isListOpen ? (
       <ul className="champion-list">
-        {filteredChampions.map((champ: Champion) => (
+        {filteredItems.map((item: T) => (
           <button
             className="champion-list-item"
             type="button"
-            key={champ.name}
-            onClick={() => handleSelectedChampion(champ)}
+            key={item.name}
+            onClick={() => handleSelectedItem(item)}
           >
             <img
-              src={`${imagePath}${champ.imageurl}`}
+              src={`${imagePath}${item.imageurl}`}
               loading="eager"
               alt="A list of champions"
               className="champion-image-list"
               width={40}
               height={40}
             />
-            {champ.name.replaceAll("_", " ")}
+            {item.name.replaceAll("_", " ")}
           </button>
         ))}
       </ul>
@@ -128,9 +130,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
         />
         <Button icon="images/golden_spat.png" onClick={handleClick} />
       </div>
-      {renderedChampions}
+      {renderedItems}
     </div>
   );
 };
 
-export default SearchBar;
+export default SearchBars;

@@ -22,6 +22,7 @@ body {
 
 .container {
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -344,7 +345,8 @@ body {
   align-items: center;
   max-width: 800px;
   height: 70px;
-  padding: 10px;
+  margin: 10px;
+  margin-bottom: 20px;
   z-index: 2;
 }
 
@@ -582,9 +584,9 @@ body {
 }
 
 .hintshelper__content {
-  border: 2px solid #c8aa6e;
   margin: 20px;
-  padding: 25px;
+  height: 55px;
+  width: 55px;
 }
 
 .hintshelper__content.correct {
@@ -599,6 +601,14 @@ body {
   background-color: #ff3131;
 }
 
+.layout-container {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .website {
   color: white;
   margin-bottom: 20px;
@@ -607,4 +617,10 @@ body {
 
 .loader {
   z-index: 2;
+}
+
+.finisher__header {
+  width: 400px;
+  height: 400px;
+  background-color: #1e2328;
 }
