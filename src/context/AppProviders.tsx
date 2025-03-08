@@ -4,7 +4,7 @@ import { GameContext } from "./GameContext.tsx";
 import { AttemptsContext } from "./AttemptsContext.tsx";
 import { SearchLockContext } from "./SearchLockContext.tsx";
 import Champion from "../type.ts";
-import fetchGameState from "../utils/fetchGameState.ts";
+import fetchClassicGameState from "../utils/fetchGameState.ts";
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -21,7 +21,7 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   const [guessedChampions, setGuessedChampions] = useState<Champion[]>([]);
 
   useEffect(() => {
-    fetchGameState(setChampionList, setTestChampion, setIsLoading);
+    fetchClassicGameState(setChampionList, setTestChampion, setIsLoading);
   }, []);
 
   const gameContextValue = useMemo(

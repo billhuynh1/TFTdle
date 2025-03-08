@@ -28,7 +28,6 @@ export interface ChampionGuess {
   sessionId: string;
   createdAt: string;
 }
-
 export interface Champion {
   imageurl: string;
   name: string;
@@ -37,6 +36,11 @@ export interface Champion {
   type: string;
   traits: string;
   attRange: string;
+}
+
+export interface Chibi {
+  name: string;
+  imageUrl: string;
 }
 
 export interface ChampionAnswerProps {
@@ -83,5 +87,3 @@ export interface AttemptsContextType {
   attempts: number;
   setAttempts: React.Dispatch<React.SetStateAction<number>>;
 }
-
-export default Champion;

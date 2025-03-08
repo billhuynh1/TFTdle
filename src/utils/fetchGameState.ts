@@ -3,7 +3,7 @@ import fetchChampions from "./fetchChampions.ts";
 import fetchDailyChampion from "./fetchDailyChampion.ts";
 import { Champion } from "../type.ts";
 
-const fetchGameState = async (
+const fetchClassicGameState = async (
   setChampionList: (list: Champion[]) => void,
   setTestChampion: (champion: Champion) => void,
   setIsLoading: React.Dispatch<React.SetStateAction<boolean>>,
@@ -22,4 +22,4 @@ const fetchGameState = async (
   }
 };
 
-export default fetchGameState;
+export default fetchClassicGameState;

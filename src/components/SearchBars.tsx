@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Champion } from "../type.ts";
 import Button from "./Button.tsx";
 
-interface SearchBarsProps<T extends Champion> {
+interface SearchBarsProps<T> {
   items: T[];
   guessedItems: T[];
   setGuessedItems: React.Dispatch<React.SetStateAction<T[]>>;
@@ -11,7 +10,7 @@ interface SearchBarsProps<T extends Champion> {
 }
 
 // GENERIC VERSION, NEEDS TESTING
-const SearchBars = <T extends Champion>({
+const SearchBars = <T extends { name: string; imageUrl: string }>({
   items,
   guessedItems,
   setGuessedItems,
@@ -24,13 +23,15 @@ const SearchBars = <T extends Champion>({
     const storedGuesses = localStorage.getItem("guesses");
     return storedGuesses ? JSON.parse(storedGuesses) : [];
   });
-  const imagePath = process.env.REACT_APP_AWS_S3_URL;
+  const imagePath = `${process.env.REACT_APP_AWS_S3_URL}chibi_images/`;
   const location = useLocation();
   const mode = location.pathname.replace("/", "");
 
+  console.log(imagePath);
+
   const handleSearch = async (searchQuery: string) => {
     if (searchQuery.length) {
-      const regex = new RegExp(`^${searchQuery.toLowerCase()}`);
+      const regex = new RegExp(`${searchQuery.toLowerCase()}`);
       const guessedItemNames = new Set(
         guessedItems.map((item) => item.name.toLowerCase()),
       );
@@ -102,7 +103,7 @@ const SearchBars = <T extends Champion>({
             onClick={() => handleSelectedItem(item)}
           >
             <img
-              src={`${imagePath}${item.imageurl}`}
+              src={`${imagePath}${item.imageUrl}`}
               loading="eager"
               alt="A list of champions"
               className="champion-image-list"
