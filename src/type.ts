@@ -41,6 +41,7 @@ export interface Champion {
 export interface Chibi {
   name: string;
   imageUrl: string;
+  gifUrl: string;
 }
 
 export interface ChampionAnswerProps {
