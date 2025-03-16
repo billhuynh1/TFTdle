@@ -27,8 +27,6 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
   const location = useLocation();
   const mode = location.pathname.replace("/", "");
 
-  console.log(imagePath);
-
   const handleSearch = async (searchQuery: string) => {
     if (searchQuery.length) {
       const regex = new RegExp(`${searchQuery.toLowerCase()}`);

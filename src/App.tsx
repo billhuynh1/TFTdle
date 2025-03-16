@@ -6,14 +6,12 @@ import FinisherPage from "./pages/Finisher.tsx";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<ClassicPage />} />
-          <Route path="/finisher" element={<FinisherPage />} />
-        </Route>
-      </Routes>
-    </Router>
+    <Routes>
+      <Route element={<Layout />}>
+        <Route path="/" element={<ClassicPage />} />
+        <Route path="/finisher" element={<FinisherPage />} />
+      </Route>
+    </Routes>
   );
 }
 

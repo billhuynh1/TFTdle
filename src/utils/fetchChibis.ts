@@ -7,6 +7,7 @@ const fetchChibis = async (): Promise<Chibi[]> => {
     throw error;
   }
   return data.map((item) => ({
+    id: item.id,
     name: item.name,
     imageUrl: item.image_url,
     gifUrl: item.gif_url,

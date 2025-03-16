@@ -39,6 +39,7 @@ export interface Champion {
 }
 
 export interface Chibi {
+  id: number;
   name: string;
   imageUrl: string;
   gifUrl: string;
@@ -87,4 +88,14 @@ export interface ChampionContextType {
 export interface AttemptsContextType {
   attempts: number;
   setAttempts: React.Dispatch<React.SetStateAction<number>>;
+}
+
+export interface ChibiContextType {
+  chibiFinisherAnswer: Chibi | undefined;
+  chibiList: Chibi[];
+  guessedChibis: Chibi[];
+  setGuessedChibis: React.Dispatch<React.SetStateAction<Chibi[]>>;
+  setChibiFinisherAnswer: React.Dispatch<
+    React.SetStateAction<Chibi | undefined>
+  >;
 }

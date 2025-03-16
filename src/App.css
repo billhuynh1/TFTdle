@@ -104,8 +104,8 @@ body {
 
 .modes {
   display: flex;
-  height: 60px;
-  width: 300px;
+  height: 70px;
+  width: 350px;
   background-color: white;
   color: white;
   z-index: 2;
@@ -634,4 +634,47 @@ body {
   width: 350px;
   clip-path: inset(0 0 0 0);
   border: solid 2px white;
+}
+
+.chibi__answer {
+  display: flex;
+  flex-direction: column;
+  width: 385px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.chibi__answer__item {
+  display: flex;
+  height: 90px;
+  margin: 3px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+}
+
+.chibi__answer__item.incorrect {
+  border: solid 2px #f78e8e;
+  background-color: #ff3131;
+}
+
+.chibi__answer__item.correct {
+  background-color: #00b42d;
+  border: solid 2px #5bf581;
+}
+
+.chibi__image {
+  border: solid 2px black;
+}
+
+.chibi__answer__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.chibi__answer_text {
+  padding: 5px;
 }
