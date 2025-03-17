@@ -17,7 +17,7 @@ import usePolling from "../hooks/usePolling.ts";
 
 const ClassicPage: React.FC = () => {
   const [renderHints, setRenderHints] = useState<boolean>(false);
-  const [today, setToday] = useState<string>(new Date().toDateString());
+  const [today, setToday] = useState<string>(new Date().toUTCString());
   const [lastVisit, setLastVisit] = useState<string | null>(() => {
     const storedDate = localStorage.getItem("lastVisit");
     if (storedDate === null) {

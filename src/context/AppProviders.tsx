@@ -7,6 +7,7 @@ import { Champion, Chibi } from "../type.ts";
 import fetchClassicGameState from "../utils/fetchGameState.ts";
 import fetchChibis from "../utils/fetchChibis.ts";
 import { ChibiContext } from "./ChibiContext.tsx";
+import { DateContext } from "./DateContext.tsx";
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -25,6 +26,17 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   const [chibiList, setChibiList] = useState<Chibi[]>([]);
   const [randomIndex, setRandomIndex] = useState<number>(0);
   const [guessedChibis, setGuessedChibis] = useState<Chibi[]>([]);
+  const [today, setToday] = useState<string>(
+    new Date().toISOString().split("T")[0],
+  );
+  const [lastVisit, setLastVisit] = useState<string>(() => {
+    const storedDate = localStorage.getItem("last_visit");
+    if (storedDate === null) {
+      localStorage.setItem("last_visit", today);
+      return today;
+    }
+    return storedDate;
+  });
 
   useEffect(() => {
     fetchClassicGameState(setChampionList, setTestChampion, setIsLoading);
@@ -79,6 +91,15 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
     ],
   );
 
+  const DateContextValue = useMemo(
+    () => ({
+      today,
+      lastVisit,
+      setLastVisit,
+    }),
+    [today, lastVisit, setLastVisit],
+  );
+
   // Fetch chibis from database
   useEffect(() => {
     const getChibis = async () => {
@@ -103,17 +124,19 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
 
   // Figure out the test champion, might have to move the api call logic into here.
   return (
-    <ChampionContext.Provider value={ChampionContextValue}>
-      <ChibiContext.Provider value={ChibiContextValue}>
-        <AttemptsContext.Provider value={AttemptsContextValue}>
-          <SearchLockContext.Provider value={searchLockContextValue}>
-            <GameContext.Provider value={gameContextValue}>
-              {children}
-            </GameContext.Provider>
-          </SearchLockContext.Provider>
-        </AttemptsContext.Provider>
-      </ChibiContext.Provider>
-    </ChampionContext.Provider>
+    <DateContext.Provider value={DateContextValue}>
+      <ChampionContext.Provider value={ChampionContextValue}>
+        <ChibiContext.Provider value={ChibiContextValue}>
+          <AttemptsContext.Provider value={AttemptsContextValue}>
+            <SearchLockContext.Provider value={searchLockContextValue}>
+              <GameContext.Provider value={gameContextValue}>
+                {children}
+              </GameContext.Provider>
+            </SearchLockContext.Provider>
+          </AttemptsContext.Provider>
+        </ChibiContext.Provider>
+      </ChampionContext.Provider>
+    </DateContext.Provider>
   );
 };
 

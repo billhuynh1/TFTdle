@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 
+// Might need to change to UTC time
 const usePolling = () => {
   useEffect(() => {
     const checkReset = () => {

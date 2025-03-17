@@ -1,4 +1,4 @@
-import Champion from "../type.ts";
+import { Champion } from "../type.ts";
 
 // const findChampionByNameInTable = async (
 //   champs: string[],

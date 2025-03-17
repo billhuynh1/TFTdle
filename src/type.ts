@@ -99,3 +99,9 @@ export interface ChibiContextType {
     React.SetStateAction<Chibi | undefined>
   >;
 }
+
+export interface DateContextType {
+  today: string;
+  lastVisit: string | null;
+  setLastVisit: React.Dispatch<React.SetStateAction<string | null>>;
+}

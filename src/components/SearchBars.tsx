@@ -16,16 +16,25 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
   setGuessedItems,
   setAttempts,
 }: SearchBarsProps<T>) => {
+  const location = useLocation();
+  const mode = location.pathname.replace("/", "");
   const [input, setInput] = useState<string>("");
   const [filteredItems, setfilteredItems] = useState<T[]>([]);
   const [isListOpen, setIsListOpen] = useState(false);
   const [guesses, setGuesses] = useState<string[]>(() => {
-    const storedGuesses = localStorage.getItem("guesses");
-    return storedGuesses ? JSON.parse(storedGuesses) : [];
+    const storedGuesses = localStorage.getItem(`${mode}_guesses`);
+    if (storedGuesses) {
+      try {
+        return JSON.parse(storedGuesses);
+      } catch (e) {
+        console.error("error parsing stored guesses", e);
+        return [];
+      }
+    }
+    // return storedGuesses ? JSON.parse(storedGuesses) : [];
+    return [];
   });
   const imagePath = `${process.env.REACT_APP_AWS_S3_URL}chibi_images/`;
-  const location = useLocation();
-  const mode = location.pathname.replace("/", "");
 
   const handleSearch = async (searchQuery: string) => {
     if (searchQuery.length) {
@@ -68,7 +77,7 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
 
   useEffect(() => {
     localStorage.setItem(`${mode}_guesses`, JSON.stringify(guesses));
-  }, [guesses]);
+  }, [guesses, mode]);
 
   const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter") {
