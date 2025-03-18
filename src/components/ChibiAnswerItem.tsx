@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Chibi } from "../type.ts";
 import { useChibiContext } from "../context/ChibiContext.tsx";
+import { useGame } from "../context/GameContext.tsx";
 
 interface ChibiAnswerItemProps {
   chibi: Chibi;
@@ -10,14 +11,16 @@ const ChibiAnswerItem: React.FC<ChibiAnswerItemProps> = ({ chibi }) => {
   const [chibiItemColor, setChibiItemColor] = useState<string>("");
   const imagePath = `${process.env.REACT_APP_AWS_S3_URL}chibi_images/`;
   const { chibiFinisherAnswer } = useChibiContext();
+  const { setIsFinisherGameOver } = useGame();
 
   useEffect(() => {
     if (chibi === chibiFinisherAnswer) {
       setChibiItemColor("correct");
+      setIsFinisherGameOver(true);
     } else {
       setChibiItemColor("incorrect");
     }
-  }, [chibi, chibiFinisherAnswer]);
+  }, [chibi, chibiFinisherAnswer, setIsFinisherGameOver]);
 
   return (
     <div className={`chibi__answer__item ${chibiItemColor}`}>

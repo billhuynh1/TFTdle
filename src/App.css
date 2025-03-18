@@ -104,13 +104,12 @@ body {
 
 .modes {
   display: flex;
-  height: 70px;
+  height: 80px;
   width: 350px;
-  background-color: white;
   color: white;
   z-index: 2;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   border: solid 2px #af9767;
   background-color: #1e2328;
   border-radius: 20px;
@@ -677,4 +676,24 @@ body {
 
 .chibi__answer_text {
   padding: 5px;
+}
+
+/* this shi look ahh */
+
+.mode__button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 25px;
+  width: 5px;
+  height: 5px;
+  border: solid 2px #c89b3c;
+  border-radius: 50%;
+  background-color: #1e2328;
+}
+
+.mode__button:hover {
+  transform: scale(1.1);
+  transition: ease-out 0.1s;
 }

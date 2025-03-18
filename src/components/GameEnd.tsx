@@ -12,8 +12,16 @@ const GameEnd: React.FC<GameEndProps> = ({
   champName,
 }) => {
   const currentTime = new Date();
-  const resetTime: Date = new Date();
-  resetTime.setHours(24, 0, 0, 0);
+  const resetTime = new Date(
+    Date.UTC(
+      currentTime.getUTCFullYear(),
+      currentTime.getUTCMonth(),
+      currentTime.getUTCDate() + 1,
+      0,
+      0,
+      0,
+    ),
+  );
 
   const [showContent, setShowContent] = useState<boolean>(false);
   const [difference, setDifference] = useState<number>(
@@ -90,6 +98,7 @@ const GameEnd: React.FC<GameEndProps> = ({
         <span className="timer-header">Next Champion in:</span>
         <span className="timer-content">{formatTime(difference)}</span>
       </div>
+      <span className="timer-content-footer">(UTC time)</span>
     </div>
   );
 };

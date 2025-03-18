@@ -5,8 +5,10 @@ const usePolling = () => {
   useEffect(() => {
     const checkReset = () => {
       const now = new Date();
-      if (now.getHours() === 0 && now.getMinutes() === 0) {
-        localStorage.clear();
+      if (now.getUTCHours() === 0 && now.getUTCMinutes() === 0) {
+        // localStorage.clear();
+        localStorage.removeItem("finisher_guesses");
+        localStorage.removeItem("guesses");
         alert("New daily! Please refresh the page.");
       }
     };

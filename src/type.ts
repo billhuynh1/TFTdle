@@ -15,6 +15,10 @@ export interface ChampionAttributes extends AttributeSquareInterface {
 export interface GameContextType {
   isGameOver?: boolean;
   setIsGameOver: React.Dispatch<React.SetStateAction<boolean>>;
+  isFinisherGameOver?: boolean;
+  setIsFinisherGameOver: React.Dispatch<React.SetStateAction<boolean>>;
+  randomIndex: number;
+  setRandomIndex: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export interface SearchLockContextType {

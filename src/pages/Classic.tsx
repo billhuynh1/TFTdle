@@ -17,7 +17,9 @@ import usePolling from "../hooks/usePolling.ts";
 
 const ClassicPage: React.FC = () => {
   const [renderHints, setRenderHints] = useState<boolean>(false);
-  const [today, setToday] = useState<string>(new Date().toUTCString());
+  const [today, setToday] = useState<string>(
+    new Date().toISOString().split("T")[0],
+  );
   const [lastVisit, setLastVisit] = useState<string | null>(() => {
     const storedDate = localStorage.getItem("lastVisit");
     if (storedDate === null) {
@@ -27,7 +29,7 @@ const ClassicPage: React.FC = () => {
     return storedDate;
   });
 
-  const { isGameOver } = useGame();
+  const { isGameOver, randomIndex, setRandomIndex } = useGame();
   const { isSearchLock, setIsSearchLock } = useSearchLock();
   const {
     championList,
@@ -38,11 +40,13 @@ const ClassicPage: React.FC = () => {
   } = useChampionContext();
   const { attempts, setAttempts } = useAttemptsContext();
 
+  // Could move this to App.
   const useDailyReset = (): void => {
     useEffect(() => {
       if (today !== lastVisit) {
         setIsSearchLock(false);
-        localStorage.clear();
+        localStorage.removeItem("guesses");
+        localStorage.removeItem("finisher_guesses");
         localStorage.setItem("lastVisit", today);
       }
     }, []);

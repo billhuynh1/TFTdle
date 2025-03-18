@@ -6,35 +6,35 @@ const Modes: React.FC = () => {
     <nav className="modes">
       <Link to="/">
         <button
-          className="classic-mode__button"
+          className="mode__button mode__button-classic"
           type="button"
           aria-label="classic mode button"
         >
-          CLASSIC
+          C
         </button>
       </Link>
       <Link to="/finisher">
         <button
-          className="finisher-mode__button"
+          className="mode__button mode__button-finisher"
           type="button"
           aria-label="finsher mode button"
         >
-          FINISHER
+          F
         </button>
       </Link>
       <button
-        className="xxxx-mode__button"
+        className="mode__button mode__button-xxxx"
         type="button"
         aria-label="xxxx mode button"
       >
-        PLACEHOLDER
+        P
       </button>
       <button
-        className="xxxx-mode__button"
+        className="mode__button mode__button-xxxx"
         type="button"
         aria-label="xxxx mode button"
       >
-        PLACEHOLDER
+        P
       </button>
     </nav>
   );

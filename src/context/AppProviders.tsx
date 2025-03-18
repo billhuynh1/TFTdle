@@ -7,7 +7,6 @@ import { Champion, Chibi } from "../type.ts";
 import fetchClassicGameState from "../utils/fetchGameState.ts";
 import fetchChibis from "../utils/fetchChibis.ts";
 import { ChibiContext } from "./ChibiContext.tsx";
-import { DateContext } from "./DateContext.tsx";
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -16,6 +15,7 @@ interface AppProvidersProps {
 // DONT FORGET TO CHANGE API BACKEND URL
 const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
+  const [isFinisherGameOver, setIsFinisherGameOver] = useState<boolean>(false);
   const [attempts, setAttempts] = useState<number>(0);
   const [isSearchLock, setIsSearchLock] = useState<boolean>(false);
   const [testChampion, setTestChampion] = useState<Champion | null>(null);
@@ -45,8 +45,22 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   // logic on setting the chibi finisher ansswer here
 
   const gameContextValue = useMemo(
-    () => ({ isGameOver, setIsGameOver }),
-    [isGameOver],
+    () => ({
+      isGameOver,
+      setIsGameOver,
+      isFinisherGameOver,
+      setIsFinisherGameOver,
+      randomIndex,
+      setRandomIndex,
+    }),
+    [
+      isGameOver,
+      setIsGameOver,
+      isFinisherGameOver,
+      setIsFinisherGameOver,
+      randomIndex,
+      setRandomIndex,
+    ],
   );
 
   const searchLockContextValue = useMemo(
@@ -109,34 +123,36 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
     getChibis();
   }, []);
 
+
+  // Could store the random index into localstorage and use that to index the chibiFinisher answer,
+  // need to figure out initialization and daily resets
   useEffect(() => {
-    if (chibiList.length > 0) {
+    if (chibiList.length > 0 && ) {
       setChibiFinisherAnswer(chibiList[randomIndex]);
     }
   }, [chibiList, randomIndex]);
 
   useEffect(() => {
-    if (chibiList.length > 0) {
-      // setRandomIndex(Math.floor(Math.random() * chibiListLength));
-      setRandomIndex(25);
+    setChibiFinisherAnswer
+    if (chibiList.length > 0 && ) {
+      setRandomIndex(Math.floor(Math.random() * chibiList.length));
+      setChibiFinisherAnswer(chibiList[randomIndex])
     }
   }, [chibiList]);
 
   // Figure out the test champion, might have to move the api call logic into here.
   return (
-    <DateContext.Provider value={DateContextValue}>
-      <ChampionContext.Provider value={ChampionContextValue}>
-        <ChibiContext.Provider value={ChibiContextValue}>
-          <AttemptsContext.Provider value={AttemptsContextValue}>
-            <SearchLockContext.Provider value={searchLockContextValue}>
-              <GameContext.Provider value={gameContextValue}>
-                {children}
-              </GameContext.Provider>
-            </SearchLockContext.Provider>
-          </AttemptsContext.Provider>
-        </ChibiContext.Provider>
-      </ChampionContext.Provider>
-    </DateContext.Provider>
+    <ChampionContext.Provider value={ChampionContextValue}>
+      <ChibiContext.Provider value={ChibiContextValue}>
+        <AttemptsContext.Provider value={AttemptsContextValue}>
+          <SearchLockContext.Provider value={searchLockContextValue}>
+            <GameContext.Provider value={gameContextValue}>
+              {children}
+            </GameContext.Provider>
+          </SearchLockContext.Provider>
+        </AttemptsContext.Provider>
+      </ChibiContext.Provider>
+    </ChampionContext.Provider>
   );
 };
 

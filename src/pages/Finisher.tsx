@@ -4,7 +4,8 @@ import SearchBars from "../components/SearchBars.tsx";
 import ChibiAnswer from "../components/ChibiAnswer.tsx";
 import { useChibiContext } from "../context/ChibiContext.tsx";
 import { Chibi } from "../type.ts";
-import { useDateContext } from "../context/DateContext.tsx";
+import GameEnd from "../components/GameEnd.tsx";
+import { useGame } from "../context/GameContext.tsx";
 
 const FinisherPage: React.FC = () => {
   const location = useLocation();
@@ -14,19 +15,7 @@ const FinisherPage: React.FC = () => {
   const gifPath = "https://tftdle.s3.us-east-2.amazonaws.com/finishers/";
   const { chibiList, guessedChibis, setGuessedChibis, chibiFinisherAnswer } =
     useChibiContext();
-  const { today, lastVisit } = useDateContext();
-
-  // Local storage should reset 4 pm PST, 12 AM UTC
-  const useDailyReset = (): void => {
-    useEffect(() => {
-      if (today !== lastVisit) {
-        localStorage.removeItem(`${mode}_guesses`);
-        localStorage.setItem("last_visit", today);
-      }
-    }, []);
-  };
-
-  useDailyReset();
+  const { isFinisherGameOver } = useGame();
 
   // Util function
   const fetchGuesses = (): string => {
@@ -70,12 +59,16 @@ const FinisherPage: React.FC = () => {
           style={{ filter: `blur(${blurValue}px)` }}
         />
       </div>
-      <SearchBars
-        items={chibiList}
-        guessedItems={guessedChibis}
-        setGuessedItems={setGuessedChibis}
-        setAttempts={setAttempts}
-      />
+      {!isFinisherGameOver ? (
+        <SearchBars
+          items={chibiList}
+          guessedItems={guessedChibis}
+          setGuessedItems={setGuessedChibis}
+          setAttempts={setAttempts}
+        />
+      ) : (
+        <GameEnd />
+      )}
       <ChibiAnswer guessedChibis={guessedChibis} />
     </>
   );
