@@ -4,14 +4,14 @@ import SearchBars from "../components/SearchBars.tsx";
 import ChibiAnswer from "../components/ChibiAnswer.tsx";
 import { useChibiContext } from "../context/ChibiContext.tsx";
 import { Chibi } from "../type.ts";
-import GameEnd from "../components/GameEnd.tsx";
 import { useGame } from "../context/GameContext.tsx";
+import ChibiGameEnd from "../components/ChibiGameEnd.tsx";
 
 const FinisherPage: React.FC = () => {
   const location = useLocation();
   const mode = location.pathname.replace("/", "");
   const [attempts, setAttempts] = useState<number>(0);
-  const [blurValue, setBlurValue] = useState<number>(0);
+  const [blurValue, setBlurValue] = useState<number>(30);
   const gifPath = "https://tftdle.s3.us-east-2.amazonaws.com/finishers/";
   const { chibiList, guessedChibis, setGuessedChibis, chibiFinisherAnswer } =
     useChibiContext();
@@ -42,16 +42,30 @@ const FinisherPage: React.FC = () => {
     const updateGuesses = (chibis: string[]) => {
       const guesses = findChibiByNameInTable(chibis, chibiList);
       setGuessedChibis(guesses);
-      // Setting attempts
     };
     updateGuesses(guessesFromStorage);
   }, [chibiFinisherAnswer, chibiList]);
+
+  useEffect(() => {
+    setBlurValue(Math.max(30 - guessedChibis.length, 0));
+  }, [guessedChibis]);
+
+  useEffect(() => {
+    if (isFinisherGameOver) {
+      setBlurValue(0); // Set blur to 0 when game is over
+    }
+  }, [isFinisherGameOver]);
+
+  // If the user guesses right, blueValue should be 0
 
   // Use hooks usedailyreset and usepolling to clear localStorage and reset chibi finisher answer.
 
   return (
     <>
       <div className="finisher__header">
+        <span className="finisher__header__text">
+          Which chibi finisher is this
+        </span>
         <img
           src={`${gifPath}${chibiFinisherAnswer?.gifUrl}`}
           alt="Gif of chibi finisher"
@@ -67,7 +81,10 @@ const FinisherPage: React.FC = () => {
           setAttempts={setAttempts}
         />
       ) : (
-        <GameEnd />
+        <ChibiGameEnd
+          chibi={chibiFinisherAnswer}
+          attempts={guessedChibis.length}
+        />
       )}
       <ChibiAnswer guessedChibis={guessedChibis} />
     </>

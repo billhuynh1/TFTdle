@@ -22,7 +22,6 @@ const GameEnd: React.FC<GameEndProps> = ({
       0,
     ),
   );
-
   const [showContent, setShowContent] = useState<boolean>(false);
   const [difference, setDifference] = useState<number>(
     resetTime.getTime() - currentTime.getTime(),

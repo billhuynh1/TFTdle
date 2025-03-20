@@ -533,6 +533,7 @@ body {
   align-items: center;
   padding: 5px;
   left: 0;
+  text-align: left;
   font-size: 18px;
   border: none;
 }
@@ -624,9 +625,10 @@ body {
   align-items: center;
   justify-content: center;
   width: 350px;
-  height: 200px;
+  height: 230px;
   padding: 20px;
   background-color: #1e2328;
+  font-family: "Times New Roman", Times, serif;
 }
 
 .chibi-finisher {
@@ -696,4 +698,11 @@ body {
 .mode__button:hover {
   transform: scale(1.1);
   transition: ease-out 0.1s;
+}
+
+.finisher__header__text {
+  color: #e4e6ed;
+  font-size: 20px;
+  margin: 10px;
+  margin-top: -10px;
 }

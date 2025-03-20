@@ -18,7 +18,7 @@ const fetchClassicGameState = async (
     setIsLoading(false);
   } catch (error) {
     console.error("Error fetching data:", error);
-    alert("Error fetching data, refresh the page, or try again later!");
+    alert("Server is messed up, refresh the page, or try again later!");
   }
 };
 

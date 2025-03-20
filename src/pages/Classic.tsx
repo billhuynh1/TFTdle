@@ -17,20 +17,8 @@ import usePolling from "../hooks/usePolling.ts";
 
 const ClassicPage: React.FC = () => {
   const [renderHints, setRenderHints] = useState<boolean>(false);
-  const [today, setToday] = useState<string>(
-    new Date().toISOString().split("T")[0],
-  );
-  const [lastVisit, setLastVisit] = useState<string | null>(() => {
-    const storedDate = localStorage.getItem("lastVisit");
-    if (storedDate === null) {
-      localStorage.setItem("lastVisit", today);
-      return today;
-    }
-    return storedDate;
-  });
-
-  const { isGameOver, randomIndex, setRandomIndex } = useGame();
-  const { isSearchLock, setIsSearchLock } = useSearchLock();
+  const { isGameOver } = useGame();
+  const { isSearchLock } = useSearchLock();
   const {
     championList,
     testChampion,
@@ -39,20 +27,6 @@ const ClassicPage: React.FC = () => {
     isLoading,
   } = useChampionContext();
   const { attempts, setAttempts } = useAttemptsContext();
-
-  // Could move this to App.
-  const useDailyReset = (): void => {
-    useEffect(() => {
-      if (today !== lastVisit) {
-        setIsSearchLock(false);
-        localStorage.removeItem("guesses");
-        localStorage.removeItem("finisher_guesses");
-        localStorage.setItem("lastVisit", today);
-      }
-    }, []);
-  };
-
-  useDailyReset();
 
   useEffect(() => {
     if (!testChampion) return;
@@ -96,6 +70,7 @@ const ClassicPage: React.FC = () => {
         </>
       );
     }
+
     if (guessedChampions.length > 0) {
       return <AttributeHeader />;
     }
@@ -108,8 +83,6 @@ const ClassicPage: React.FC = () => {
       setRenderHints(true);
     }
   }, [guessedChampions]);
-
-  usePolling();
 
   return (
     <>

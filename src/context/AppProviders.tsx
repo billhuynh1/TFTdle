@@ -7,6 +7,7 @@ import { Champion, Chibi } from "../type.ts";
 import fetchClassicGameState from "../utils/fetchGameState.ts";
 import fetchChibis from "../utils/fetchChibis.ts";
 import { ChibiContext } from "./ChibiContext.tsx";
+import usePolling from "../hooks/usePolling.ts";
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -29,14 +30,46 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   const [today, setToday] = useState<string>(
     new Date().toISOString().split("T")[0],
   );
-  const [lastVisit, setLastVisit] = useState<string>(() => {
-    const storedDate = localStorage.getItem("last_visit");
+  const [lastVisit, setLastVisit] = useState<string | null>(() => {
+    const storedDate = localStorage.getItem("lastVisit");
     if (storedDate === null) {
-      localStorage.setItem("last_visit", today);
+      localStorage.setItem("lastVisit", today);
       return today;
     }
     return storedDate;
   });
+
+  const useDailyReset = (): void => {
+    useEffect(() => {
+      if (today !== lastVisit) {
+        setIsSearchLock(false);
+        localStorage.removeItem("guesses");
+        localStorage.removeItem("finisher_guesses");
+        localStorage.setItem("lastVisit", today);
+      }
+    }, [today, lastVisit]);
+  };
+
+  useDailyReset();
+
+  usePolling();
+
+  const getDayOfYear = (date: Date): number => {
+    const startOfYear = new Date(date.getFullYear(), 0, 0);
+    const diff = date.getTime() - startOfYear.getTime(); // Milliseconds since Jan 1st
+    return Math.floor(diff / (1000 * 60 * 60 * 24)); // Convert to days
+  };
+
+  // Gets daily finisher answer
+  useEffect(() => {
+    if (chibiList.length > 0) {
+      setRandomIndex(getDayOfYear(new Date()) % chibiList.length);
+    }
+  }, [chibiList]);
+
+  useEffect(() => {
+    setChibiFinisherAnswer(chibiList[randomIndex]);
+  }, [randomIndex]);
 
   useEffect(() => {
     fetchClassicGameState(setChampionList, setTestChampion, setIsLoading);
@@ -105,15 +138,6 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
     ],
   );
 
-  const DateContextValue = useMemo(
-    () => ({
-      today,
-      lastVisit,
-      setLastVisit,
-    }),
-    [today, lastVisit, setLastVisit],
-  );
-
   // Fetch chibis from database
   useEffect(() => {
     const getChibis = async () => {
@@ -122,23 +146,6 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
     };
     getChibis();
   }, []);
-
-
-  // Could store the random index into localstorage and use that to index the chibiFinisher answer,
-  // need to figure out initialization and daily resets
-  useEffect(() => {
-    if (chibiList.length > 0 && ) {
-      setChibiFinisherAnswer(chibiList[randomIndex]);
-    }
-  }, [chibiList, randomIndex]);
-
-  useEffect(() => {
-    setChibiFinisherAnswer
-    if (chibiList.length > 0 && ) {
-      setRandomIndex(Math.floor(Math.random() * chibiList.length));
-      setChibiFinisherAnswer(chibiList[randomIndex])
-    }
-  }, [chibiList]);
 
   // Figure out the test champion, might have to move the api call logic into here.
   return (

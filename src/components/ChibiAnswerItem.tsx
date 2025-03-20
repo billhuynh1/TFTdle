@@ -22,6 +22,8 @@ const ChibiAnswerItem: React.FC<ChibiAnswerItemProps> = ({ chibi }) => {
     }
   }, [chibi, chibiFinisherAnswer, setIsFinisherGameOver]);
 
+  // Animation with each guess
+
   return (
     <div className={`chibi__answer__item ${chibiItemColor}`}>
       <div className="chibi__answer__content">
