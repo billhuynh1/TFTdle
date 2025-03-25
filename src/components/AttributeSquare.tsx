@@ -14,9 +14,7 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
   const [squareColor, setSquareColor] = useState<string>("");
   const [fontSize, setFontSize] = useState<number[]>([]); // Starting font size
   const [wordsArray, setWordsArray] = useState<string[] | number[]>([]);
-  const [imagePath, setImagePath] = useState<string | undefined>(
-    process.env.REACT_APP_AWS_S3_URL,
-  );
+  const imagePath = `${process.env.REACT_APP_AWS_S3_URL}champions_set_13_assets/`;
   const { testChampion } = useChampionContext();
   const { setIsGameOver } = useGame();
   const { setIsSearchLock } = useSearchLock();

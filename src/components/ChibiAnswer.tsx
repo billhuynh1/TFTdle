@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Chibi } from "../type.ts";
 import ChibiAnswerItem from "./ChibiAnswerItem.tsx";
 

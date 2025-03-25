@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faImage, faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import ModeButtonHover from "./ModeButtonHover.tsx";
 
 const Modes: React.FC = () => {
   return (
@@ -10,7 +13,8 @@ const Modes: React.FC = () => {
           type="button"
           aria-label="classic mode button"
         >
-          C
+          <FontAwesomeIcon icon={faUser} />
+          <ModeButtonHover mode="classic" />
         </button>
       </Link>
       <Link to="/finisher">
@@ -19,7 +23,8 @@ const Modes: React.FC = () => {
           type="button"
           aria-label="finsher mode button"
         >
-          F
+          <FontAwesomeIcon icon={faImage} />
+          <ModeButtonHover mode="finisher" />
         </button>
       </Link>
       <button
@@ -27,14 +32,16 @@ const Modes: React.FC = () => {
         type="button"
         aria-label="xxxx mode button"
       >
-        P
+        <FontAwesomeIcon icon={faEllipsis} />
+        <ModeButtonHover mode="coming soon..." />
       </button>
       <button
         className="mode__button mode__button-xxxx"
         type="button"
         aria-label="xxxx mode button"
       >
-        P
+        <FontAwesomeIcon icon={faEllipsis} />
+        <ModeButtonHover mode="coming soon..." />
       </button>
     </nav>
   );

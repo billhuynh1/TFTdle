@@ -14,6 +14,11 @@
   font-style: normal;
 }
 
+:root {
+  --primary-color: #1e2328;
+  --secondary-color: #af9767;
+}
+
 html,
 body {
   height: 100%;
@@ -84,7 +89,7 @@ body {
     0 0 20px rgba(255, 215, 0, 1),
     0 0 40px rgba(255, 215, 0, 0.8),
     0 0 60px rgba(255, 215, 0, 0.6);
-  z-index: 10;
+  z-index: 2;
 }
 
 .header__logo {
@@ -105,13 +110,13 @@ body {
 .modes {
   display: flex;
   height: 80px;
-  width: 350px;
+  width: 300px;
   color: white;
   z-index: 2;
   align-items: center;
   justify-content: space-evenly;
-  border: solid 2px #af9767;
-  background-color: #1e2328;
+  border: solid 2px var(--secondary-color);
+  background-color: var(--primary-color);
   border-radius: 20px;
   margin-bottom: 10px;
 }
@@ -120,10 +125,10 @@ body {
   display: flex;
   position: relative;
   flex-direction: column;
-  background-color: #1e2328;
+  background-color: var(--primary-color);
   font-family: "Friz Quadrata Std", Mobilo, Helvetica, Arial;
   color: white;
-  border: solid 2px #af9767;
+  border: solid 2px var(--secondary-color);
   border-radius: 20px;
   padding: 30px;
   text-align: left;
@@ -145,8 +150,8 @@ body {
 .footer-container {
   display: flex;
   border-radius: 20px;
-  border: solid 2px #af9767;
-  background-color: #1e2328;
+  border: solid 2px var(--secondary-color);
+  background-color: var(--primary-color);
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -162,8 +167,8 @@ body {
   position: relative;
   justify-content: center;
   align-items: center;
-  background-color: #1e2328;
-  border: solid 2px #af9767;
+  background-color: var(--primary-color);
+  border: solid 2px var(--secondary-color);
   top: -40px;
   width: 200px;
   height: 50px;
@@ -192,18 +197,15 @@ body {
 }
 
 .game-end {
-  display: grid;
-  grid-template-rows: 150px 20px 80px auto;
-  grid-template-areas:
-    "header"
-    "content"
-    "champ"
-    "attempts"
-    "timer";
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   font-family: "Times New Roman", Times, serif;
   width: 400px;
   height: 400px;
-  margin-top: 10px;
+  margin: 10px;
   background: linear-gradient(to top, #0d1f10, #247c2b);
   border: 2px solid #4bf190;
   border-radius: 8px;
@@ -212,30 +214,44 @@ body {
 }
 
 .game-end h1 {
-  grid-area: header;
 }
 
 .game-end__header {
-  grid-area: header;
-}
-
-.game-end__content {
-  grid-area: content;
+  position: absolute;
+  top: 0;
 }
 
 .game-end__champ {
-  grid-area: champ;
+  display: grid;
+  grid-template-columns: 70px 1/2fr;
+  grid-template-rows: 70px auto;
+  grid-template-areas: "icon container";
+}
+
+.game-end__container {
+  grid-area: container;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  overflow-wrap: break-word;
+  text-align: left;
 }
 
 .game-end-champ-icon {
-  padding: 5px;
+  grid-area: icon;
+  flex-shrink: 0;
+  border: 2px solid black;
 }
 
 .game-end__champ__text {
-  padding: 5px;
+  margin: 5px;
+  color: white;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.game-end__content {
+  margin-left: 5px;
 }
 
 .timer-header {
@@ -254,8 +270,8 @@ body {
   font-weight: 600;
 }
 
-.attempts {
-  grid-area: attempts;
+.game-end__chibi__attempts {
+  margin: 20px;
 }
 
 .button {
@@ -288,7 +304,7 @@ body {
   right: 1rem;
   border: none;
   border-radius: 25%;
-  background-color: #1e2328;
+  background-color: var(--primary-color);
   transform: scale(1.5);
 }
 
@@ -300,14 +316,14 @@ body {
 .game-header {
   display: flex;
   flex-direction: column;
-  background-color: #1e2328;
+  background-color: var(--primary-color);
   justify-content: center;
   align-items: center;
   height: 100px;
   width: 300px;
-  border-radius: 10px;
+  border-radius: 5px;
   padding: 30px;
-  border: 3px solid #af9767;
+  border: 3px solid var(--secondary-color);
   font-size: large;
   z-index: 2;
 }
@@ -334,7 +350,7 @@ body {
   padding: 10px;
   width: 100%;
   border: 3px solid #0397ab;
-  background-color: #1e2328;
+  background-color: var(--primary-color);
   z-index: 2;
 }
 
@@ -549,8 +565,8 @@ body {
 .hintshelper {
   display: flex;
   flex-direction: column;
-  background-color: #1e2328;
-  border: solid 2px #af9767;
+  background-color: var(--primary-color);
+  border: solid 2px var(--secondary-color);
   border-radius: 20px;
   z-index: 2;
   width: 500px;
@@ -627,8 +643,9 @@ body {
   width: 350px;
   height: 230px;
   padding: 20px;
-  background-color: #1e2328;
-  font-family: "Times New Roman", Times, serif;
+  background-color: var(--primary-color);
+  border: var(--secondary-color) solid 2px;
+  border-radius: 5px;
 }
 
 .chibi-finisher {
@@ -657,11 +674,13 @@ body {
 .chibi__answer__item.incorrect {
   border: solid 2px #f78e8e;
   background-color: #ff3131;
+  animation: wobble 0.6s ease-in-out;
 }
 
 .chibi__answer__item.correct {
   background-color: #00b42d;
   border: solid 2px #5bf581;
+  animation: throbbing 1s ease-in-out;
 }
 
 .chibi__image {
@@ -686,13 +705,15 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
   color: white;
   padding: 25px;
   width: 5px;
   height: 5px;
-  border: solid 2px #c89b3c;
+  border: solid 2px var(--secondary-color);
   border-radius: 50%;
-  background-color: #1e2328;
+  background-color: var(--primary-color);
+  transition: transform 0.1 ease-out;
 }
 
 .mode__button:hover {
@@ -700,9 +721,71 @@ body {
   transition: ease-out 0.1s;
 }
 
+.mode__button:hover .mode__hover {
+  display: flex;
+}
+
+.mode__hover {
+  display: none;
+  background-color: var(--primary-color);
+  border: solid 2px var(--secondary-color);
+  border-radius: 5px;
+  width: 100px;
+  height: 50px;
+  position: absolute;
+  bottom: 100%;
+  margin: 3px;
+  z-index: 99;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .finisher__header__text {
   color: #e4e6ed;
-  font-size: 20px;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-shadow: black 1px 0 10px;
   margin: 10px;
   margin-top: -10px;
+}
+
+.game-end__chibi__attempts {
+  color: white;
+}
+
+@keyframes wobble {
+  0% {
+    transform: translateX(0);
+  }
+  15% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  30% {
+    transform: translateX(2px) rotate(1deg);
+  }
+  45% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  60% {
+    transform: translateX(2px) rotate(1deg);
+  }
+  75% {
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes throbbing {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
 }

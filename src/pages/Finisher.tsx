@@ -47,18 +47,17 @@ const FinisherPage: React.FC = () => {
   }, [chibiFinisherAnswer, chibiList]);
 
   useEffect(() => {
-    setBlurValue(Math.max(30 - guessedChibis.length, 0));
+    setBlurValue(Math.max(30 - guessedChibis.length - 3, 0));
   }, [guessedChibis]);
 
   useEffect(() => {
     if (isFinisherGameOver) {
+      // When switching between pages, the blur value resets to 30
       setBlurValue(0); // Set blur to 0 when game is over
     }
   }, [isFinisherGameOver]);
 
-  // If the user guesses right, blueValue should be 0
-
-  // Use hooks usedailyreset and usepolling to clear localStorage and reset chibi finisher answer.
+  // Needs confetti when game is over
 
   return (
     <>

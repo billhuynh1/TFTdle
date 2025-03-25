@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 interface GameEndProps {
   attempts: number;
@@ -26,8 +26,17 @@ const GameEnd: React.FC<GameEndProps> = ({
   const [difference, setDifference] = useState<number>(
     resetTime.getTime() - currentTime.getTime(),
   );
+  const imagePath = `${process.env.REACT_APP_AWS_S3_URL}champions_set_13_assets/`;
+  const gameEndRef = useRef<HTMLDivElement>(null);
 
-  const imagePath = process.env.REACT_APP_AWS_S3_URL;
+  const handleAnimationEnd = () => {
+    if (gameEndRef.current) {
+      gameEndRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -61,7 +70,11 @@ const GameEnd: React.FC<GameEndProps> = ({
 
   // Use grid templates
   return (
-    <div className="game-end fade-in">
+    <div
+      ref={gameEndRef}
+      className="game-end fade-in"
+      onAnimationEnd={handleAnimationEnd}
+    >
       <h1
         className="game-end__header"
         style={{ color: "white", fontSize: "50px" }}

@@ -23,7 +23,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     const storedGuesses = localStorage.getItem("guesses");
     return storedGuesses ? JSON.parse(storedGuesses) : [];
   });
-  const imagePath = process.env.REACT_APP_AWS_S3_URL;
+  const imagePath = `${process.env.REACT_APP_AWS_S3_URL}champions_set_13_assets/`;
 
   const handleSearch = async (searchQuery: string) => {
     if (searchQuery.length) {

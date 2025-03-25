@@ -13,7 +13,6 @@ import HintsHelper from "../components/HintsHelper.tsx";
 import AttributeHeader from "../components/AttributeHeader.tsx";
 import findChampionByNameInTable from "../utils/findChampionByName.ts";
 import fetchGuesses from "../utils/fetchGuesses.ts";
-import usePolling from "../hooks/usePolling.ts";
 
 const ClassicPage: React.FC = () => {
   const [renderHints, setRenderHints] = useState<boolean>(false);

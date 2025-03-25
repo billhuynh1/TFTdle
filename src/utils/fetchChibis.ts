@@ -6,6 +6,7 @@ const fetchChibis = async (): Promise<Chibi[]> => {
   if (error) {
     throw error;
   }
+  console.log(data[0].id); // Log the first item to check the structure
   return data.map((item) => ({
     id: item.id,
     name: item.name,
