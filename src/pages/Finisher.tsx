@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import confetti from "canvas-confetti";
 import SearchBars from "../components/SearchBars.tsx";
 import ChibiAnswer from "../components/ChibiAnswer.tsx";
 import { useChibiContext } from "../context/ChibiContext.tsx";
@@ -12,7 +13,8 @@ const FinisherPage: React.FC = () => {
   const mode = location.pathname.replace("/", "");
   const [attempts, setAttempts] = useState<number>(0);
   const [blurValue, setBlurValue] = useState<number>(30);
-  const gifPath = "https://tftdle.s3.us-east-2.amazonaws.com/finishers/";
+  const gifPath = `${process.env.REACT_APP_AWS_S3_URL}finishers/`;
+
   const { chibiList, guessedChibis, setGuessedChibis, chibiFinisherAnswer } =
     useChibiContext();
   const { isFinisherGameOver } = useGame();
@@ -47,7 +49,7 @@ const FinisherPage: React.FC = () => {
   }, [chibiFinisherAnswer, chibiList]);
 
   useEffect(() => {
-    setBlurValue(Math.max(30 - guessedChibis.length - 3, 0));
+    setBlurValue(Math.max(30 - guessedChibis.length - 5, 0));
   }, [guessedChibis]);
 
   useEffect(() => {
@@ -55,9 +57,17 @@ const FinisherPage: React.FC = () => {
       // When switching between pages, the blur value resets to 30
       setBlurValue(0); // Set blur to 0 when game is over
     }
-  }, [isFinisherGameOver]);
+  }, [isFinisherGameOver, guessedChibis]);
 
   // Needs confetti when game is over
+
+  const showConfetti = () => {
+    confetti({ particleCount: 150, spread: 70, origin: { x: 0.5, y: 0.5 } });
+  };
+
+  if (isFinisherGameOver) {
+    showConfetti();
+  }
 
   return (
     <>

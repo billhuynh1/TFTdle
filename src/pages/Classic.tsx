@@ -30,7 +30,9 @@ const ClassicPage: React.FC = () => {
   useEffect(() => {
     if (!testChampion) return;
 
-    const guessesFromStorage: string[] = JSON.parse(fetchGuesses());
+    const guessesFromStorage: string[] = JSON.parse(fetchGuesses())
+      ? JSON.parse(fetchGuesses())
+      : [];
     const updateGuesses = async (champs: string[]) => {
       const guesses = findChampionByNameInTable(champs, championList);
       await setGuessedChampions(guesses);

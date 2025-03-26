@@ -40,11 +40,13 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
     if (searchQuery.length) {
       const regex = new RegExp(`${searchQuery.toLowerCase()}`);
       const guessedItemNames = new Set(
-        guessedItems.map((item) => item.name.toLowerCase()),
+        guessedItems.map((item) =>
+          item.name.toLowerCase().replaceAll("_", " "),
+        ),
       );
 
       const newfilteredItems = items.filter((item: T) => {
-        const normalizedItemName = item.name.toLowerCase();
+        const normalizedItemName = item.name.toLowerCase().replaceAll("_", " ");
         return (
           regex.test(normalizedItemName) &&
           !guessedItemNames.has(normalizedItemName)
@@ -59,7 +61,8 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newInput = e.target.value;
-    const regex = /[a-zA-Z]+$/i;
+    // Only allow alphabetical characters
+    const regex = /^[a-zA-Z\s]*$/i;
 
     if (newInput === "" || regex.test(newInput)) {
       setInput(newInput);

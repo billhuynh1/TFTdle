@@ -1,4 +1,7 @@
+import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 
 interface GameEndProps {
   attempts: number;
@@ -83,9 +86,9 @@ const GameEnd: React.FC<GameEndProps> = ({
       </h1>
       <span
         className="game-end__content"
-        style={{ color: "white", padding: "", fontSize: "20px" }}
+        style={{ color: "white", fontSize: "1.3em" }}
       >
-        The champion was:
+        The champion was
       </span>
       <div className="game-end__champ">
         <img
@@ -111,6 +114,15 @@ const GameEnd: React.FC<GameEndProps> = ({
         <span className="timer-content">{formatTime(difference)}</span>
       </div>
       <span className="timer-content-footer">(UTC time)</span>
+      <Link to="/finisher">
+        <button
+          className="next-mode-button"
+          type="button"
+          aria-label="finsher mode button"
+        >
+          <span className="next-mode-button-text">Next mode: Finisher</span>
+        </button>
+      </Link>
     </div>
   );
 };

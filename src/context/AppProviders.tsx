@@ -8,6 +8,7 @@ import fetchClassicGameState from "../utils/fetchGameState.ts";
 import fetchChibis from "../utils/fetchChibis.ts";
 import { ChibiContext } from "./ChibiContext.tsx";
 import usePolling from "../hooks/usePolling.ts";
+import fetchChampions from "../utils/fetchChampions.ts";
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -20,13 +21,15 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   const [attempts, setAttempts] = useState<number>(0);
   const [isSearchLock, setIsSearchLock] = useState<boolean>(false);
   const [testChampion, setTestChampion] = useState<Champion | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [championList, setChampionList] = useState<Champion[]>([]);
   const [guessedChampions, setGuessedChampions] = useState<Champion[]>([]);
   const [chibiFinisherAnswer, setChibiFinisherAnswer] = useState<Chibi>();
   const [chibiList, setChibiList] = useState<Chibi[]>([]);
+  // Need to change name of random index
   const [randomIndex, setRandomIndex] = useState<number>(0);
   const [guessedChibis, setGuessedChibis] = useState<Chibi[]>([]);
+  const [championIndex, setChampionIndex] = useState<number>(0);
   const [today, setToday] = useState<string>(
     new Date().toISOString().split("T")[0],
   );
@@ -38,6 +41,8 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
     }
     return storedDate;
   });
+
+  // Cache champion list and chibi list
 
   const useDailyReset = (): void => {
     useEffect(() => {
@@ -68,14 +73,19 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   }, [chibiList]);
 
   useEffect(() => {
+    if (championList.length > 0) {
+      setChampionIndex(getDayOfYear(new Date()) % championList.length);
+    }
+  }, [championList]);
+
+  useEffect(() => {
     setChibiFinisherAnswer(chibiList[randomIndex]);
   }, [randomIndex]);
 
   useEffect(() => {
-    fetchClassicGameState(setChampionList, setTestChampion, setIsLoading);
-  }, []);
-
-  // logic on setting the chibi finisher ansswer here
+    // fetchClassicGameState(setChampionList, setTestChampion, setIsLoading);
+    setTestChampion(championList[championIndex]);
+  }, [championIndex]);
 
   const gameContextValue = useMemo(
     () => ({
@@ -145,6 +155,15 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
       setChibiList(chibis);
     };
     getChibis();
+  }, []);
+
+  // Fetch champs from database
+  useEffect(() => {
+    const getChamps = async () => {
+      const champs = await fetchChampions();
+      setChampionList(champs);
+    };
+    getChamps();
   }, []);
 
   // Figure out the test champion, might have to move the api call logic into here.

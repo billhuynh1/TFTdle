@@ -59,27 +59,27 @@ const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
       >
         👏gg ez👏
       </h1>
-      <div className="game-end__champ">
+      <span
+        className="game-end__content game-end__content--finisher"
+        style={{ color: "white", fontSize: "1.3em" }}
+      >
+        The chibi was
+      </span>
+      <div className="game-end__chibi">
         <img
           src={`${imagePath}${chibi?.imageUrl}`}
           className="game-end-champ-icon"
-          alt="Correct champion"
+          alt="Correct chibi"
           width={60}
           height={60}
         />
         <div className="game-end__container">
-          <span
-            className="game-end__content game-end__content--finisher"
-            style={{ color: "white", fontSize: "20px" }}
-          >
-            The chibi was
-          </span>
-          <span className="game-end__champ__text ">
+          <span className="game-end__chibi__text">
             {chibi?.name?.replaceAll("_", " ")}
           </span>
         </div>
       </div>
-      <span className="game-end__chibi__attempts game-end__content--finisher">
+      <span className="game-end__chibi__attempts">
         Number of attempts: <span style={{ color: "gold" }}>{attempts}</span>
       </span>
     </div>

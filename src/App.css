@@ -204,13 +204,16 @@ body {
   flex-direction: column;
   font-family: "Times New Roman", Times, serif;
   width: 400px;
-  height: 400px;
+  height: 500px;
   margin: 10px;
-  background: linear-gradient(to top, #0d1f10, #247c2b);
-  border: 2px solid #4bf190;
+  background: linear-gradient(to top, var(--primary-color), #00b42d);
+  border: 2px solid #5bf581;
   border-radius: 8px;
   z-index: 2;
   text-shadow: black 2px 0 0px;
+}
+
+.game-end__header--finisher {
 }
 
 .game-end h1 {
@@ -224,6 +227,13 @@ body {
 .game-end__champ {
   display: grid;
   grid-template-columns: 70px 1/2fr;
+  grid-template-rows: 70px auto;
+  grid-template-areas: "icon container";
+}
+
+.game-end__chibi {
+  display: grid;
+  grid-template-columns: 70px 100px;
   grid-template-rows: 70px auto;
   grid-template-areas: "icon container";
 }
@@ -248,10 +258,24 @@ body {
   color: white;
   font-weight: bold;
   font-size: 1.2em;
+  align-self: center;
+}
+
+.game-end__chibi__text {
+  color: white;
+  font-weight: bold;
+  font-size: 1.2em;
+  align-self: center;
 }
 
 .game-end__content {
   margin-left: 5px;
+  margin: 10px;
+  margin-top: 50px;
+}
+
+.game-end:hover {
+  filter: brightness(1.3);
 }
 
 .timer-header {
@@ -270,8 +294,39 @@ body {
   font-weight: 600;
 }
 
+.timer-content-footer {
+  color: white;
+  font-size: 0.7em;
+}
+
 .game-end__chibi__attempts {
   margin: 20px;
+}
+
+.next-mode-button {
+  background-color: var(--primary-color);
+  margin-top: 30px;
+  padding: 20px;
+  padding-left: 50px;
+  padding-right: 50px;
+  border: 2px solid var(--secondary-color);
+  border-radius: 10px;
+}
+
+.next-mode-button:hover {
+  transform: scale(1.05);
+  transition: ease-in-out 0.1s;
+}
+
+.next-mode-button-text {
+  color: white;
+  font-size: 1.2em;
+  font-weight: 700;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.attempts {
+  margin: 10px;
 }
 
 .button {
