@@ -233,7 +233,7 @@ body {
 
 .game-end__chibi {
   display: grid;
-  grid-template-columns: 70px 100px;
+  grid-template-columns: 70px 150px;
   grid-template-rows: 70px auto;
   grid-template-areas: "icon container";
 }
