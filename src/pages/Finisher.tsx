@@ -40,7 +40,7 @@ const FinisherPage: React.FC = () => {
   useEffect(() => {
     if (!chibiFinisherAnswer) return;
 
-    const guessesFromStorage: string[] = JSON.parse(fetchGuesses());
+    const guessesFromStorage: string[] = JSON.parse(fetchGuesses()) || [];
     const updateGuesses = (chibis: string[]) => {
       const guesses = findChibiByNameInTable(chibis, chibiList);
       setGuessedChibis(guesses);
