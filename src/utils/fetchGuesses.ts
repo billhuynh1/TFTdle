@@ -1,5 +1,5 @@
-const fetchGuesses = (): string => {
-  const guesses: string = localStorage.getItem("guesses") || "";
+const fetchGuesses = (): string | null => {
+  const guesses: string | null = localStorage.getItem("guesses");
   return guesses;
 };
 
