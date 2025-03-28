@@ -5,6 +5,7 @@ import Footer from "./Footer.tsx";
 import Modes from "./Modes.tsx";
 import DiscordPopup from "./DiscordPopup.tsx";
 import About from "./About.tsx";
+import usePageTracking from "../hooks/usePageTracking.tsx";
 
 const Layout: React.FC = () => {
   const [renderAbout, setrenderAbout] = useState<boolean>(false);
@@ -17,6 +18,8 @@ const Layout: React.FC = () => {
   const handleToggleDiscordPopup = () => {
     setrenderDiscordPopup((renderDiscordPopup) => !renderDiscordPopup);
   };
+
+  usePageTracking();
 
   return (
     <div className="App">
