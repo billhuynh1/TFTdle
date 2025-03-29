@@ -4,7 +4,6 @@ import { GameContext } from "./GameContext.tsx";
 import { AttemptsContext } from "./AttemptsContext.tsx";
 import { SearchLockContext } from "./SearchLockContext.tsx";
 import { Champion, Chibi } from "../type.ts";
-import fetchClassicGameState from "../utils/fetchGameState.ts";
 import fetchChibis from "../utils/fetchChibis.ts";
 import { ChibiContext } from "./ChibiContext.tsx";
 import usePolling from "../hooks/usePolling.ts";
@@ -58,6 +57,24 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   useDailyReset();
 
   usePolling();
+
+  // Fetch chibis from database
+  useEffect(() => {
+    const getChibis = async () => {
+      const chibis = await fetchChibis();
+      setChibiList(chibis);
+    };
+    getChibis();
+  }, []);
+
+  // Fetch champs from database
+  useEffect(() => {
+    const getChamps = async () => {
+      const champs = await fetchChampions();
+      setChampionList(champs);
+    };
+    getChamps();
+  }, []);
 
   const getDayOfYear = (date: Date): number => {
     const startOfYear = Date.UTC(date.getUTCFullYear(), 0, 0);
@@ -147,24 +164,6 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
       setGuessedChibis,
     ],
   );
-
-  // Fetch chibis from database
-  useEffect(() => {
-    const getChibis = async () => {
-      const chibis = await fetchChibis();
-      setChibiList(chibis);
-    };
-    getChibis();
-  }, []);
-
-  // Fetch champs from database
-  useEffect(() => {
-    const getChamps = async () => {
-      const champs = await fetchChampions();
-      setChampionList(champs);
-    };
-    getChamps();
-  }, []);
 
   // Figure out the test champion, might have to move the api call logic into here.
   return (

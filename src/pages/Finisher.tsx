@@ -12,7 +12,7 @@ const FinisherPage: React.FC = () => {
   const location = useLocation();
   const mode = location.pathname.replace("/", "");
   const [attempts, setAttempts] = useState<number>(0);
-  const [blurValue, setBlurValue] = useState<number>(30);
+  const [blurValue, setBlurValue] = useState<number>(50);
   const gifPath = `${process.env.REACT_APP_AWS_S3_URL}finishers/`;
 
   const { chibiList, guessedChibis, setGuessedChibis, chibiFinisherAnswer } =
@@ -49,7 +49,7 @@ const FinisherPage: React.FC = () => {
   }, [chibiFinisherAnswer, chibiList]);
 
   useEffect(() => {
-    setBlurValue(Math.max(30 - guessedChibis.length - 5, 0));
+    setBlurValue(Math.max(50 - guessedChibis.length - 5, 0));
   }, [guessedChibis]);
 
   useEffect(() => {
