@@ -4,7 +4,6 @@
 const AttributeHeader = () => {
   const attributeContents: string[] = [
     "Champion",
-    "Name",
     "Gender",
     "Cost",
     "Type",

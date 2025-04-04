@@ -570,8 +570,7 @@ body {
 }
 
 .champion-image {
-  position: relative;
-  padding: 5px;
+  margin: 5px;
   height: 75px;
   width: 75px;
 }
@@ -843,4 +842,26 @@ body {
   100% {
     transform: scale(1);
   }
+}
+
+.champion-image-container {
+  position: relative;
+  height: 85px;
+  width: 85px;
+}
+
+.champion-image-container:hover .champion-name-tooltip {
+  display: block;
+}
+
+.champion-name-tooltip {
+  display: none;
+  position: absolute;
+  top: 50%; /* Position it directly below the image */
+  left: 50%; /* Move to the horizontal center */
+  transform: translateX(-50%); /* Pull it back by 50% of its width */
+  width: 40px;
+  height: 40px;
+  color: white;
+  background-color: black;
 }

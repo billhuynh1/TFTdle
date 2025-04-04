@@ -106,34 +106,49 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
     resizeText(); // Initial check when component mounts
   }, [champion, pos]);
 
-  return (
-    <>
-      {isImage(champion[pos]) ? (
+  const renderImage = (url: string) => {
+    return (
+      <div className="champion-image-container">
         <img
           className="champion-image"
-          src={`${imagePath}${champion.imageurl}`}
+          src={`${imagePath}${url}`}
           alt="Champion"
+          width={75}
+          height={75}
         />
-      ) : (
-        <div
-          ref={containerRef}
-          className={`attribute-square ${squareColor} fade-in`}
-        >
-          {wordsArray.map((words, index) => (
-            <span
-              className="square-content"
-              // eslint-disable-next-line react/no-array-index-key
-              key={index}
-              style={{
-                fontSize: `${fontSize[index]}px`,
-                lineHeight: "16px",
-              }}
-            >
-              {String(words).replaceAll("_", " ")}
-            </span>
-          ))}
-        </div>
-      )}
+        <div className="champion-name-tooltip" />
+      </div>
+    );
+  };
+
+  const renderAttributeSquare = () => {
+    return !(champion[pos] === champion.name) ? (
+      <div
+        ref={containerRef}
+        className={`attribute-square ${squareColor} fade-in`}
+      >
+        {wordsArray.map((words, index) => (
+          <span
+            className="square-content"
+            // eslint-disable-next-line react/no-array-index-key
+            key={index}
+            style={{
+              fontSize: `${fontSize[index]}px`,
+              lineHeight: "16px",
+            }}
+          >
+            {String(words).replaceAll("_", " ")}
+          </span>
+        ))}
+      </div>
+    ) : null;
+  };
+
+  return (
+    <>
+      {isImage(champion[pos])
+        ? renderImage(champion[pos] as string)
+        : renderAttributeSquare()}
     </>
   );
 };
