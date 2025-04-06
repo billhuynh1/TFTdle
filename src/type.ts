@@ -109,3 +109,20 @@ export interface DateContextType {
   lastVisit: string | null;
   setLastVisit: React.Dispatch<React.SetStateAction<string | null>>;
 }
+
+export type LittleLegend = {
+  id: number;
+  name: string;
+  baseType: string;
+  imageUrl: string;
+};
+
+export type LittleLegendContextType = {
+  littleLegendList: LittleLegend[];
+  guessedLittleLegends: LittleLegend[];
+  setGuessedLittleLegends: React.Dispatch<React.SetStateAction<LittleLegend[]>>;
+  littleLegendAnswer: LittleLegend | undefined;
+  setLittleLegendAnswer: React.Dispatch<
+    React.SetStateAction<LittleLegend | undefined>
+  >;
+};

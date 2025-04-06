@@ -3,11 +3,13 @@ import { ChampionContext } from "./ChampionContext.tsx";
 import { GameContext } from "./GameContext.tsx";
 import { AttemptsContext } from "./AttemptsContext.tsx";
 import { SearchLockContext } from "./SearchLockContext.tsx";
-import { Champion, Chibi } from "../type.ts";
+import { LittleLegendContext } from "./LittleLegendContext.tsx";
+import { Champion, Chibi, LittleLegend } from "../type.ts";
 import fetchChibis from "../utils/fetchChibis.ts";
 import { ChibiContext } from "./ChibiContext.tsx";
 import usePolling from "../hooks/usePolling.ts";
 import fetchChampions from "../utils/fetchChampions.ts";
+import fetchLittleLegends from "../utils/fetchLittleLegends.ts";
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -24,11 +26,17 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   const [championList, setChampionList] = useState<Champion[]>([]);
   const [guessedChampions, setGuessedChampions] = useState<Champion[]>([]);
   const [chibiFinisherAnswer, setChibiFinisherAnswer] = useState<Chibi>();
+  const [littleLegendList, setLittleLegendList] = useState<LittleLegend[]>([]);
+  const [guessedLittleLegends, setGuessedLittleLegends] = useState<
+    LittleLegend[]
+  >([]);
+  const [littleLegendAnswer, setLittleLegendAnswer] = useState<LittleLegend>();
   const [chibiList, setChibiList] = useState<Chibi[]>([]);
   // Need to change name of random index
   const [randomIndex, setRandomIndex] = useState<number>(0);
   const [guessedChibis, setGuessedChibis] = useState<Chibi[]>([]);
   const [championIndex, setChampionIndex] = useState<number>(0);
+  const [littleLegendIndex, setLittleLegendIndex] = useState<number>(0);
   const [today, setToday] = useState<string>(
     new Date().toISOString().split("T")[0],
   );
@@ -58,51 +66,55 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
 
   usePolling();
 
-  // Fetch chibis from database
   useEffect(() => {
-    const getChibis = async () => {
-      const chibis = await fetchChibis();
-      setChibiList(chibis);
+    const fetchAllData = async () => {
+      try {
+        const [chibis, champs, littleLegends] = await Promise.all([
+          fetchChibis(),
+          fetchChampions(),
+          fetchLittleLegends(),
+        ]);
+
+        setChibiList(chibis);
+        setChampionList(champs);
+        setLittleLegendList(littleLegends);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     };
-    getChibis();
+
+    fetchAllData();
   }, []);
 
-  // Fetch champs from database
-  useEffect(() => {
-    const getChamps = async () => {
-      const champs = await fetchChampions();
-      setChampionList(champs);
-    };
-    getChamps();
-  }, []);
-
+  // Util
   const getDayOfYear = (date: Date): number => {
     const startOfYear = Date.UTC(date.getUTCFullYear(), 0, 0);
     const diff = date.getTime() - startOfYear; // Milliseconds since Jan 1st
     return Math.floor(diff / (1000 * 60 * 60 * 24)); // Convert to days
   };
 
-  // Gets daily finisher answer
+  // Gets daily answers
   useEffect(() => {
+    const dayOfYear = getDayOfYear(new Date());
+
     if (chibiList.length > 0) {
-      setRandomIndex(getDayOfYear(new Date()) % chibiList.length);
+      const chibiIndex = dayOfYear % chibiList.length;
+      setRandomIndex(chibiIndex);
+      setChibiFinisherAnswer(chibiList[chibiIndex]);
     }
-  }, [chibiList]);
 
-  useEffect(() => {
     if (championList.length > 0) {
-      setChampionIndex(getDayOfYear(new Date()) % championList.length);
+      const champIndex = dayOfYear % championList.length;
+      setChampionIndex(champIndex);
+      setTestChampion(championList[champIndex]);
     }
-  }, [championList]);
 
-  useEffect(() => {
-    setChibiFinisherAnswer(chibiList[randomIndex]);
-  }, [randomIndex]);
-
-  useEffect(() => {
-    // fetchClassicGameState(setChampionList, setTestChampion, setIsLoading);
-    setTestChampion(championList[championIndex]);
-  }, [championIndex]);
+    if (littleLegendList.length > 0) {
+      const littleLegendIndex = dayOfYear % littleLegendList.length;
+      setLittleLegendIndex(littleLegendIndex);
+      setLittleLegendAnswer(littleLegendList[littleLegendIndex]);
+    }
+  }, [chibiList, championList, littleLegendList]);
 
   const gameContextValue = useMemo(
     () => ({
@@ -165,17 +177,35 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
     ],
   );
 
+  const littleLegendContextValue = useMemo(
+    () => ({
+      littleLegendAnswer,
+      setLittleLegendAnswer,
+      littleLegendList,
+      guessedLittleLegends,
+      setGuessedLittleLegends,
+    }),
+    [
+      littleLegendAnswer,
+      setLittleLegendAnswer,
+      littleLegendList,
+      guessedLittleLegends,
+      setGuessedLittleLegends,
+    ],
+  );
   // Figure out the test champion, might have to move the api call logic into here.
   return (
     <ChampionContext.Provider value={ChampionContextValue}>
       <ChibiContext.Provider value={ChibiContextValue}>
-        <AttemptsContext.Provider value={AttemptsContextValue}>
-          <SearchLockContext.Provider value={searchLockContextValue}>
-            <GameContext.Provider value={gameContextValue}>
-              {children}
-            </GameContext.Provider>
-          </SearchLockContext.Provider>
-        </AttemptsContext.Provider>
+        <LittleLegendContext.Provider value={littleLegendContextValue}>
+          <AttemptsContext.Provider value={AttemptsContextValue}>
+            <SearchLockContext.Provider value={searchLockContextValue}>
+              <GameContext.Provider value={gameContextValue}>
+                {children}
+              </GameContext.Provider>
+            </SearchLockContext.Provider>
+          </AttemptsContext.Provider>
+        </LittleLegendContext.Provider>
       </ChibiContext.Provider>
     </ChampionContext.Provider>
   );

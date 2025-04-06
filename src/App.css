@@ -851,17 +851,60 @@ body {
 }
 
 .champion-image-container:hover .champion-name-tooltip {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.champion-image-container:hover .champion-image {
+  filter: brightness(0.8);
 }
 
 .champion-name-tooltip {
   display: none;
   position: absolute;
-  top: 50%; /* Position it directly below the image */
-  left: 50%; /* Move to the horizontal center */
-  transform: translateX(-50%); /* Pull it back by 50% of its width */
-  width: 40px;
-  height: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  min-height: 20px;
+  height: auto;
   color: white;
-  background-color: black;
+  border: var(--secondary-color) solid 2px;
+  background-color: var(--primary-color);
+  font-size: 1em;
+  word-break: break-all;
+  text-shadow: black 2px 0 1px;
+  border-radius: 3px;
+}
+
+.little-legend__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 275px;
+  height: 300px;
+  padding: 20px;
+  background-color: var(--primary-color);
+  border: var(--secondary-color) solid 2px;
+  border-radius: 5px;
+  font-size: 1em;
+}
+
+.little-legend__header__text {
+  color: white;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-shadow: black 1px 0 10px;
+}
+
+.little-legend__image {
+  border: solid 2px white;
+  margin: 10px;
+}
+
+.little-legend__footer__text {
+  color: rgb(146, 146, 146);
+  font-size: 0.8em;
 }

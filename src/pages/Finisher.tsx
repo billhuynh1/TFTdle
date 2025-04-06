@@ -69,6 +69,8 @@ const FinisherPage: React.FC = () => {
     showConfetti();
   }
 
+  console.log(chibiFinisherAnswer);
+
   return (
     <>
       <div className="finisher__header">

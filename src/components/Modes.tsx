@@ -27,14 +27,16 @@ const Modes: React.FC = () => {
           <ModeButtonHover mode="finisher" />
         </button>
       </Link>
-      <button
-        className="mode__button mode__button-xxxx"
-        type="button"
-        aria-label="xxxx mode button"
-      >
-        <FontAwesomeIcon icon={faEllipsis} />
-        <ModeButtonHover mode="coming soon..." />
-      </button>
+      <Link to="/littlelegend">
+        <button
+          className="mode__button mode__button-little-legend"
+          type="button"
+          aria-label="little legend mode button"
+        >
+          <FontAwesomeIcon icon={faEllipsis} />
+          <ModeButtonHover mode="little legend" />
+        </button>
+      </Link>
       <button
         className="mode__button mode__button-xxxx"
         type="button"
