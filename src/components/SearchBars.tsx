@@ -7,6 +7,7 @@ interface SearchBarsProps<T> {
   guessedItems: T[];
   setGuessedItems: React.Dispatch<React.SetStateAction<T[]>>;
   setAttempts: React.Dispatch<React.SetStateAction<number>>;
+  pathForImages?: string;
 }
 
 // GENERIC VERSION, NEEDS TESTING
@@ -15,6 +16,7 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
   guessedItems,
   setGuessedItems,
   setAttempts,
+  pathForImages,
 }: SearchBarsProps<T>) => {
   const location = useLocation();
   const mode = location.pathname.replace("/", "");
@@ -34,7 +36,7 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
     // return storedGuesses ? JSON.parse(storedGuesses) : [];
     return [];
   });
-  const imagePath = `${process.env.REACT_APP_AWS_S3_URL}chibi_images/`;
+  const imagePath = `${process.env.REACT_APP_AWS_S3_URL}${pathForImages}/`;
 
   const handleSearch = async (searchQuery: string) => {
     if (searchQuery.length) {
@@ -114,7 +116,7 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
           >
             <img
               src={`${imagePath}${item.imageUrl}`}
-              loading="eager"
+              loading="lazy"
               alt="A list of champions"
               className="champion-image-list"
               width={40}

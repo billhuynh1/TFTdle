@@ -10,6 +10,7 @@ import { ChibiContext } from "./ChibiContext.tsx";
 import usePolling from "../hooks/usePolling.ts";
 import fetchChampions from "../utils/fetchChampions.ts";
 import fetchLittleLegends from "../utils/fetchLittleLegends.ts";
+import getDayOfYear from "../utils/getDayOfYear.ts";
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -57,6 +58,7 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
         setIsSearchLock(false);
         localStorage.removeItem("guesses");
         localStorage.removeItem("finisher_guesses");
+        localStorage.removeItem("littlelegend_guesses");
         localStorage.setItem("lastVisit", today);
       }
     }, [today, lastVisit]);
@@ -87,11 +89,11 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   }, []);
 
   // Util
-  const getDayOfYear = (date: Date): number => {
-    const startOfYear = Date.UTC(date.getUTCFullYear(), 0, 0);
-    const diff = date.getTime() - startOfYear; // Milliseconds since Jan 1st
-    return Math.floor(diff / (1000 * 60 * 60 * 24)); // Convert to days
-  };
+  // const getDayOfYear = (date: Date): number => {
+  //   const startOfYear = Date.UTC(date.getUTCFullYear(), 0, 0);
+  //   const diff = date.getTime() - startOfYear; // Milliseconds since Jan 1st
+  //   return Math.floor(diff / (1000 * 60 * 60 * 24)); // Convert to days
+  // };
 
   // Gets daily answers
   useEffect(() => {
