@@ -1,13 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Chibi } from "../type.ts";
+import { LittleLegend } from "../type.ts";
 
-interface ChibiGameEndProps {
-  chibi: Chibi | undefined;
+interface LittleLegendGameEndProps {
+  littleLegend: LittleLegend | undefined;
   attempts: number;
 }
 
-const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
+const GameEnd: React.FC<LittleLegendGameEndProps> = ({
+  littleLegend,
+  attempts,
+}) => {
   const currentTime = new Date();
   const resetTime = new Date(
     Date.UTC(
@@ -23,8 +26,8 @@ const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
   const [difference, setDifference] = useState<number>(
     resetTime.getTime() - currentTime.getTime(),
   );
-  const imagePath = `${process.env.REACT_APP_AWS_S3_URL}chibi_images/`;
-  const chibiGameEndRef = useRef<HTMLDivElement>(null);
+  const imagePath = `${process.env.REACT_APP_AWS_S3_URL}little_legends/`;
+  const littleLegendGameEndRef = useRef<HTMLDivElement>(null);
 
   const formatTime = (milliseconds: number): string => {
     const totalSeconds = Math.floor(milliseconds / 1000);
@@ -35,8 +38,8 @@ const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
   };
 
   const handleAnimationEnd = () => {
-    if (chibiGameEndRef.current) {
-      chibiGameEndRef.current?.scrollIntoView({
+    if (littleLegendGameEndRef.current) {
+      littleLegendGameEndRef.current?.scrollIntoView({
         behavior: "smooth",
         block: "center",
       });
@@ -68,7 +71,7 @@ const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
   // Use grid templates
   return (
     <div
-      ref={chibiGameEndRef}
+      ref={littleLegendGameEndRef}
       className="game-end game-end__header--finisher fade-in"
       onAnimationEnd={handleAnimationEnd}
     >
@@ -76,7 +79,7 @@ const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
         className="game-end__header game-end__header--finisher"
         style={{ color: "white", fontSize: "50px" }}
       >
-        👏gg ez👏
+        👏a G👏
       </h1>
       <span
         className="game-end__content game-end__content--finisher"
@@ -86,7 +89,7 @@ const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
       </span>
       <div className="game-end__chibi">
         <img
-          src={`${imagePath}${chibi?.imageUrl}`}
+          src={`${imagePath}${littleLegend?.imageUrl}`}
           className="game-end-champ-icon"
           alt="Correct chibi"
           width={60}
@@ -94,7 +97,7 @@ const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
         />
         <div className="game-end__container">
           <span className="game-end__chibi__text">
-            {chibi?.name?.replaceAll("_", " ")}
+            {littleLegend?.name?.replaceAll("_", " ")}
           </span>
         </div>
       </div>
@@ -110,10 +113,10 @@ const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
         <button
           className="next-mode-button"
           type="button"
-          aria-label="finsher mode button"
+          aria-label="next game mode button"
         >
           <span className="next-mode-button-text">
-            Next mode: Little Legend
+            Next mode: Coming soon...
           </span>
         </button>
       </Link>

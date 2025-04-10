@@ -1,7 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faImage, faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faImage,
+  faEllipsis,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 import ModeButtonHover from "./ModeButtonHover.tsx";
 
 const Modes: React.FC = () => {
@@ -33,7 +38,7 @@ const Modes: React.FC = () => {
           type="button"
           aria-label="little legend mode button"
         >
-          <FontAwesomeIcon icon={faEllipsis} />
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
           <ModeButtonHover mode="little legend" />
         </button>
       </Link>

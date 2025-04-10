@@ -885,7 +885,8 @@ body {
   align-items: center;
   justify-content: center;
   width: 325px;
-  height: 300px;
+  min-height: 300px;
+  height: auto;
   padding: 20px;
   background-color: var(--primary-color);
   border: var(--secondary-color) solid 2px;

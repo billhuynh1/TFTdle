@@ -1,9 +1,11 @@
+import React, { useEffect } from "react";
 import { useGame } from "../context/GameContext.tsx";
 
 interface AnswersItemProps<T> {
   item: T;
   pathOfImages: string;
   itemColor: string;
+  setIsGameOver: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const AnswersItem = <
@@ -12,12 +14,16 @@ const AnswersItem = <
   item,
   pathOfImages,
   itemColor,
+  setIsGameOver,
 }: AnswersItemProps<T>) => {
-  // const [itemColor, setItemColor] = useState<string>("");
   const imagePath = `${process.env.REACT_APP_AWS_S3_URL}${pathOfImages}/`;
-  const { setIsFinisherGameOver } = useGame();
 
   // If item color is correct, set game over to true
+  useEffect(() => {
+    if (itemColor === "correct") {
+      setIsGameOver(true);
+    }
+  }, []);
 
   return (
     <div className={`answers__item ${itemColor}`}>

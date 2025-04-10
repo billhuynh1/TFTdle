@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
+import LittleLegendFollowUp from "./LittleLegendFollowUp.tsx";
 import getDayOfYear from "../utils/getDayOfYear.ts";
 
-const LittleLegendHeader: React.FC = () => {
+type LittleLegendHeaderProps = {
+  isGameOver: boolean;
+};
+
+const LittleLegendHeader: React.FC<LittleLegendHeaderProps> = ({
+  isGameOver,
+}) => {
   const { littleLegendAnswer, guessedLittleLegends } = useLittleLegendContext();
-  const [backgroundPosition, setBackgroundPosition] = useState<string>("");
-  const [zoom, setZoom] = useState<string>("300%");
+  const [backgroundPosition, setBackgroundPosition] = useState<string>("300%");
+  const [zoom, setZoom] = useState<string>("");
   const imagePath: string = `${process.env.REACT_APP_AWS_S3_URL}little_legends/${littleLegendAnswer?.imageUrl}`;
 
   useEffect(() => {
@@ -29,10 +36,14 @@ const LittleLegendHeader: React.FC = () => {
 
   // Set the zoom level based on the number of guessed little legends
   useEffect(() => {
+    if (isGameOver) {
+      setZoom("100%");
+      return;
+    }
     if (guessedLittleLegends.length > 0 && zoom !== "100%") {
       setZoom(`${300 - guessedLittleLegends.length * 10}%`);
     }
-  }, [guessedLittleLegends]);
+  }, [guessedLittleLegends, isGameOver]);
 
   return (
     <main className="little-legend__header">
@@ -48,6 +59,7 @@ const LittleLegendHeader: React.FC = () => {
         }}
       />
       <span className="little-legend__footer__text">Each guess zooms out</span>
+      {isGameOver && <LittleLegendFollowUp />}
     </main>
   );
 };

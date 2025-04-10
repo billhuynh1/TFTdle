@@ -5,6 +5,7 @@ import SearchBars from "../components/SearchBars.tsx";
 import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
 import { LittleLegend } from "../type.ts";
 import AnswersItem from "../components/AnswersItem.tsx";
+import LittleLegendGameEnd from "../components/LittleLegendGameEnd.tsx";
 
 const LittleLegendPage: React.FC = () => {
   const {
@@ -13,6 +14,7 @@ const LittleLegendPage: React.FC = () => {
     setGuessedLittleLegends,
     littleLegendAnswer,
   } = useLittleLegendContext();
+  const [isGameOver, setIsGameOver] = React.useState<boolean>(false);
   const [attempts, setAttempts] = React.useState<number>(0);
   const location = useLocation();
   const mode = location.pathname.replace("/", "");
@@ -35,6 +37,15 @@ const LittleLegendPage: React.FC = () => {
     (littleLegend) => littleLegend.baseType === littleLegend.name,
   );
 
+  // Extracts the variants from the base type of the little legend
+  const littleLegendVariants: string[] = littleLegendList
+    .filter(
+      (littleLegend) => littleLegend.baseType === littleLegendAnswer?.baseType,
+    )
+    .map((littleLegend) =>
+      littleLegend.name.replaceAll(`${littleLegend.baseType}_`, ""),
+    );
+
   const fetchGuesses = (): string => {
     const guesses: string = localStorage.getItem(`${mode}_guesses`) || "";
     return guesses;
@@ -55,7 +66,11 @@ const LittleLegendPage: React.FC = () => {
 
   return (
     <>
-      <LittleLegendHeader />
+      <LittleLegendHeader isGameOver={isGameOver} />
+      <LittleLegendGameEnd
+        littleLegend={littleLegendAnswer}
+        attempts={guessedLittleLegends.length}
+      />
       <SearchBars
         items={littleLegendBaseList}
         guessedItems={guessedLittleLegends}
@@ -76,6 +91,7 @@ const LittleLegendPage: React.FC = () => {
               item={littleLegend}
               pathOfImages="little_legends"
               itemColor={itemColor}
+              setIsGameOver={setIsGameOver}
             />
           );
         })}
