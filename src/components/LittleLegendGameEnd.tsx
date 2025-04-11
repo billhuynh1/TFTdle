@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { LittleLegend } from "../type.ts";
+import LittleLegendBonus from "./LittleLegendBonus.tsx";
 
 interface LittleLegendGameEndProps {
   littleLegend: LittleLegend | undefined;
@@ -85,9 +86,9 @@ const GameEnd: React.FC<LittleLegendGameEndProps> = ({
         className="game-end__content game-end__content--finisher"
         style={{ color: "white", fontSize: "1.3em" }}
       >
-        The chibi was
+        The little legend was
       </span>
-      <div className="game-end__chibi">
+      <div className="game-end__champ little-legend">
         <img
           src={`${imagePath}${littleLegend?.imageUrl}`}
           className="game-end-champ-icon"
@@ -96,11 +97,12 @@ const GameEnd: React.FC<LittleLegendGameEndProps> = ({
           height={60}
         />
         <div className="game-end__container">
-          <span className="game-end__chibi__text">
-            {littleLegend?.name?.replaceAll("_", " ")}
+          <span className="game-end__text little-legend">
+            {littleLegend?.baseType?.replaceAll("_", " ")}
           </span>
         </div>
       </div>
+      <LittleLegendBonus littleLegend={littleLegend} />
       <span className="game-end__chibi__attempts">
         Number of attempts: <span style={{ color: "gold" }}>{attempts}</span>
       </span>

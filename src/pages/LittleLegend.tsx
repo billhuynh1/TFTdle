@@ -37,15 +37,6 @@ const LittleLegendPage: React.FC = () => {
     (littleLegend) => littleLegend.baseType === littleLegend.name,
   );
 
-  // Extracts the variants from the base type of the little legend
-  const littleLegendVariants: string[] = littleLegendList
-    .filter(
-      (littleLegend) => littleLegend.baseType === littleLegendAnswer?.baseType,
-    )
-    .map((littleLegend) =>
-      littleLegend.name.replaceAll(`${littleLegend.baseType}_`, ""),
-    );
-
   const fetchGuesses = (): string => {
     const guesses: string = localStorage.getItem(`${mode}_guesses`) || "";
     return guesses;

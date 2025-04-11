@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
-import LittleLegendFollowUp from "./LittleLegendFollowUp.tsx";
 import getDayOfYear from "../utils/getDayOfYear.ts";
 
 type LittleLegendHeaderProps = {
@@ -59,7 +58,6 @@ const LittleLegendHeader: React.FC<LittleLegendHeaderProps> = ({
         }}
       />
       <span className="little-legend__footer__text">Each guess zooms out</span>
-      {isGameOver && <LittleLegendFollowUp />}
     </main>
   );
 };
