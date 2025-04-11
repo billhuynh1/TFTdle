@@ -307,6 +307,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   background-color: var(--primary-color);
   margin: 30px;
   width: 80%;
