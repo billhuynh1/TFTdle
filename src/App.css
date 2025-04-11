@@ -304,19 +304,21 @@ body {
 }
 
 .next-mode-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   background-color: var(--primary-color);
-  margin-top: 30px;
+  margin: 30px;
   width: 80%;
-  padding: 5%;
-  padding-left: 50px;
-  padding-right: 50px;
+  height: 60px;
   border: 2px solid var(--secondary-color);
   border-radius: 10px;
+  animation: throbbing ease-in-out 1.5s infinite;
+  text-align: center;
 }
 
 .next-mode-button:hover {
-  transform: scale(1.05);
-  transition: ease-in-out 0.1s;
+  filter: brightness(1.2);
 }
 
 .next-mode-button-text {
@@ -991,6 +993,7 @@ body {
   grid-template-rows: repeat(3, 1fr);
   justify-items: start;
   margin: 10px;
+  margin-bottom: 15px;
   width: 90%;
   gap: 10px;
 }
@@ -1003,13 +1006,24 @@ body {
   background-color: var(--primary-color);
   border: solid 2px var(--secondary-color);
   border-radius: 5px;
-  padding: 20%;
-  filter: brightness(1.4);
-  white-space: normal;
+  filter: brightness(1.3);
   font-size: 0.8em;
   width: 100%;
   height: 100%;
-  font-weight: 600;
+  padding: 10%;
+  font-weight: 500;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: 0.08em;
+  white-space: normal;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  text-align: center;
+}
+
+.little-legend-bonus__btn:hover {
+  transform: scale(1.05);
+  transition: ease-out 0.1s;
+  filter: brightness(1.2);
 }
 
 .little-legend-bouns__question {
