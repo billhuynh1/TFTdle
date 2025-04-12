@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useGame } from "../context/GameContext.tsx";
 
 interface AnswersItemProps<T> {
   item: T;

@@ -207,7 +207,7 @@ body {
   min-height: 500px;
   height: auto;
   margin: 10px;
-  background: linear-gradient(to top, var(--primary-color), #00b42d);
+  background: linear-gradient(to top, var(--primary-color), #08571c);
   border: 2px solid #5bf581;
   border-radius: 8px;
   z-index: 2;
@@ -817,21 +817,36 @@ body {
   0% {
     transform: translateX(0);
   }
-  15% {
-    transform: translateX(-2px) rotate(-1deg);
+  25% {
+    transform: translateX(0) rotate(-2deg);
+    transform: scale(1.1);
   }
-  30% {
-    transform: translateX(2px) rotate(1deg);
-  }
-  45% {
-    transform: translateX(-2px) rotate(-1deg);
-  }
-  60% {
-    transform: translateX(2px) rotate(1deg);
+  50% {
+    transform: translateX(0) rotate(2deg);
   }
   75% {
-    transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(0) rotate(-2deg);
   }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes wobble2 {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateX(0) rotate(2deg);
+  }
+  75% {
+    transform: translateX(0) rotate(-2deg);
+  }
+
   100% {
     transform: translateX(0);
   }
@@ -938,7 +953,7 @@ body {
 .answers__item.incorrect {
   border: solid 2px #f78e8e;
   background-color: #ff3131;
-  animation: wobble 0.6s ease-in-out;
+  animation: wobble 0.3s ease-in-out;
 }
 
 .answers__item.correct {
@@ -990,8 +1005,8 @@ body {
 
 .little-legend-bonus__content {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   justify-items: start;
   margin: 10px;
   margin-bottom: 15px;
@@ -1008,13 +1023,12 @@ body {
   border: solid 2px var(--secondary-color);
   border-radius: 5px;
   filter: brightness(1.3);
-  font-size: 0.8em;
+  font-size: clamp(0.8em, 1em);
   width: 100%;
   height: 100%;
   padding: 10%;
-  font-weight: 500;
+  font-weight: 400;
   font-family: "Roboto", sans-serif;
-  letter-spacing: 0.08em;
   white-space: normal;
   overflow-wrap: break-word;
   word-break: break-word;
@@ -1027,7 +1041,44 @@ body {
   filter: brightness(1.2);
 }
 
-.little-legend-bouns__question {
+.little-legend-bonus__header {
+  font-size: 1em;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  margin: 5px;
+  margin-top: 15px;
+}
+
+.little-legend-bonus__question {
   font-weight: 600;
-  font-size: 1.1em;
+  font-size: 1.3em;
+}
+
+.little-legend-bonus__btn.correct {
+  background-color: #00b42d;
+  animation: throbbing 1s ease-in-out;
+}
+
+.little-legend-bonus__btn.incorrect {
+  background-color: #ff3131;
+  animation: wobble2 0.3s ease-in-out;
+  transform-origin: center center;
+}
+
+.little-legend-bonus__text {
+  color: white;
+  font-weight: bold;
+  font-size: 1.3em;
+  align-self: center;
+  margin: 5px;
+  margin-bottom: 10px;
+  animation: wobble 1s ease-in-out;
+}
+
+.little-legend-bonus__text.answer {
+  color: var(--secondary-color);
+  filter: brightness(1.5);
+  animation: throbbing 4s ease-in-out;
+  margin-bottom: 20px;
+  font-family: Georgia;
+  margin-top: -10px;
 }
