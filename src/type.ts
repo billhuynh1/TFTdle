@@ -125,4 +125,6 @@ export type LittleLegendContextType = {
   setLittleLegendAnswer: React.Dispatch<
     React.SetStateAction<LittleLegend | undefined>
   >;
+  isLittleLegendGameOver: boolean;
+  setIsLittleLegendGameOver: React.Dispatch<React.SetStateAction<boolean>>;
 };

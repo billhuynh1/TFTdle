@@ -10,8 +10,8 @@ const LittleLegendHeader: React.FC<LittleLegendHeaderProps> = ({
   isGameOver,
 }) => {
   const { littleLegendAnswer, guessedLittleLegends } = useLittleLegendContext();
-  const [backgroundPosition, setBackgroundPosition] = useState<string>("300%");
-  const [zoom, setZoom] = useState<string>("");
+  const [backgroundPosition, setBackgroundPosition] = useState<string>("");
+  const [zoom, setZoom] = useState<string>("350%");
   const imagePath: string = `${process.env.REACT_APP_AWS_S3_URL}little_legends/${littleLegendAnswer?.imageUrl}`;
 
   useEffect(() => {
@@ -40,7 +40,7 @@ const LittleLegendHeader: React.FC<LittleLegendHeaderProps> = ({
       return;
     }
     if (guessedLittleLegends.length > 0 && zoom !== "100%") {
-      setZoom(`${300 - guessedLittleLegends.length * 10}%`);
+      setZoom(`${350 - guessedLittleLegends.length * 13}%`);
     }
   }, [guessedLittleLegends, isGameOver]);
 

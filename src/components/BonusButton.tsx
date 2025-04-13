@@ -23,6 +23,7 @@ const BonusButton = ({
       className={`little-legend-bonus__btn ${color}`}
       onClick={() => {
         setChoice(variant);
+        localStorage.setItem("littleLegendBonusAnswer", variant);
       }}
       disabled={isDisabled}
     >

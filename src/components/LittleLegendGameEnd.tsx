@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { LittleLegend } from "../type.ts";
 import LittleLegendBonus from "./LittleLegendBonus.tsx";
+import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
 
 interface LittleLegendGameEndProps {
   littleLegend: LittleLegend | undefined;
@@ -23,6 +24,7 @@ const GameEnd: React.FC<LittleLegendGameEndProps> = ({
       0,
     ),
   );
+  const { isLittleLegendGameOver } = useLittleLegendContext();
   const [showContent, setShowContent] = useState<boolean>(false);
   const [difference, setDifference] = useState<number>(
     resetTime.getTime() - currentTime.getTime(),
@@ -102,7 +104,9 @@ const GameEnd: React.FC<LittleLegendGameEndProps> = ({
           </span>
         </div>
       </div>
-      <LittleLegendBonus littleLegend={littleLegend} />
+      {isLittleLegendGameOver && (
+        <LittleLegendBonus littleLegend={littleLegend} />
+      )}
       <span className="game-end__chibi__attempts">
         Number of attempts: <span style={{ color: "gold" }}>{attempts}</span>
       </span>

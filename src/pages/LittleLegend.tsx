@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import confetti from "canvas-confetti";
 import { useLocation } from "react-router-dom";
 import LittleLegendHeader from "../components/LittleLegendHeader.tsx";
 import SearchBars from "../components/SearchBars.tsx";
@@ -13,8 +14,9 @@ const LittleLegendPage: React.FC = () => {
     guessedLittleLegends,
     setGuessedLittleLegends,
     littleLegendAnswer,
+    isLittleLegendGameOver,
+    setIsLittleLegendGameOver,
   } = useLittleLegendContext();
-  const [isGameOver, setIsGameOver] = React.useState<boolean>(false);
   const [attempts, setAttempts] = React.useState<number>(0);
   const location = useLocation();
   const mode = location.pathname.replace("/", "");
@@ -42,6 +44,10 @@ const LittleLegendPage: React.FC = () => {
     return guesses;
   };
 
+  const showConfetti = () => {
+    confetti({ particleCount: 150, spread: 70, origin: { x: 0.5, y: 0.5 } });
+  };
+
   useEffect(() => {
     if (!littleLegendAnswer) return;
     const guessesFromStorage: string[] = JSON.parse(fetchGuesses()) || [];
@@ -57,18 +63,25 @@ const LittleLegendPage: React.FC = () => {
 
   return (
     <>
-      <LittleLegendHeader isGameOver={isGameOver} />
-      <LittleLegendGameEnd
-        littleLegend={littleLegendAnswer}
-        attempts={guessedLittleLegends.length}
-      />
-      <SearchBars
-        items={littleLegendBaseList}
-        guessedItems={guessedLittleLegends}
-        setGuessedItems={setGuessedLittleLegends}
-        setAttempts={setAttempts}
-        pathForImages="little_legends"
-      />
+      <LittleLegendHeader isGameOver={isLittleLegendGameOver} />
+      {isLittleLegendGameOver &&
+        (showConfetti(),
+        (
+          <LittleLegendGameEnd
+            littleLegend={littleLegendAnswer}
+            attempts={guessedLittleLegends.length}
+          />
+        ))}
+      {!isLittleLegendGameOver && (
+        <SearchBars
+          items={littleLegendBaseList}
+          guessedItems={guessedLittleLegends}
+          setGuessedItems={setGuessedLittleLegends}
+          setAttempts={setAttempts}
+          pathForImages="little_legends"
+        />
+      )}
+
       <div className="answers__container">
         {guessedLittleLegends.map((littleLegend) => {
           const itemColor =
@@ -82,7 +95,7 @@ const LittleLegendPage: React.FC = () => {
               item={littleLegend}
               pathOfImages="little_legends"
               itemColor={itemColor}
-              setIsGameOver={setIsGameOver}
+              setIsGameOver={setIsLittleLegendGameOver}
             />
           );
         })}

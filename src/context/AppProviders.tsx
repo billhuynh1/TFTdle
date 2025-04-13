@@ -18,6 +18,8 @@ interface AppProvidersProps {
 
 // DONT FORGET TO CHANGE API BACKEND URL
 const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
+  const [isLittleLegendGameOver, setIsLittleLegendGameOver] =
+    useState<boolean>(false);
   const [isGameOver, setIsGameOver] = useState<boolean>(false);
   const [isFinisherGameOver, setIsFinisherGameOver] = useState<boolean>(false);
   const [attempts, setAttempts] = useState<number>(0);
@@ -59,6 +61,7 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
         localStorage.removeItem("guesses");
         localStorage.removeItem("finisher_guesses");
         localStorage.removeItem("littlelegend_guesses");
+        localStorage.removeItem("littleLegendBonusAnswer");
         localStorage.setItem("lastVisit", today);
       }
     }, [today, lastVisit]);
@@ -179,13 +182,15 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
     ],
   );
 
-  const littleLegendContextValue = useMemo(
+  const LittleLegendContextValue = useMemo(
     () => ({
       littleLegendAnswer,
       setLittleLegendAnswer,
       littleLegendList,
       guessedLittleLegends,
       setGuessedLittleLegends,
+      isLittleLegendGameOver,
+      setIsLittleLegendGameOver,
     }),
     [
       littleLegendAnswer,
@@ -193,13 +198,15 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
       littleLegendList,
       guessedLittleLegends,
       setGuessedLittleLegends,
+      isLittleLegendGameOver,
+      setIsLittleLegendGameOver,
     ],
   );
   // Figure out the test champion, might have to move the api call logic into here.
   return (
     <ChampionContext.Provider value={ChampionContextValue}>
       <ChibiContext.Provider value={ChibiContextValue}>
-        <LittleLegendContext.Provider value={littleLegendContextValue}>
+        <LittleLegendContext.Provider value={LittleLegendContextValue}>
           <AttemptsContext.Provider value={AttemptsContextValue}>
             <SearchLockContext.Provider value={searchLockContextValue}>
               <GameContext.Provider value={gameContextValue}>

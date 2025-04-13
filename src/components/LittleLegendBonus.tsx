@@ -12,7 +12,9 @@ const LittleLegendBonus: React.FC<LittleLegendBonusProps> = ({
 }) => {
   const { littleLegendList, littleLegendAnswer } = useLittleLegendContext();
   const [bonusAnswer, setBonusAnswer] = React.useState<string | undefined>("");
-  const [choice, setChoice] = React.useState<string>("");
+  const [choice, setChoice] = React.useState<string>(() => {
+    return localStorage.getItem("littleLegendBonusAnswer") || "";
+  });
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
 
   useEffect(() => {
@@ -43,9 +45,9 @@ const LittleLegendBonus: React.FC<LittleLegendBonusProps> = ({
   const renderBonusText = (): React.JSX.Element | null => {
     if (!choice) return null;
 
-    const isCorrect = choice === bonusAnswer;
-    const className = `little-legend-bonus__text ${isCorrect ? "right" : "wrong"}`;
-    const message = isCorrect
+    const isCorrect: boolean = choice === bonusAnswer;
+    const className: string = `little-legend-bonus__text ${isCorrect ? "right" : "wrong"}`;
+    const message: string = isCorrect
       ? "✅ Correct! You guessed it right!"
       : "❌ Wrong! Maybe next time!";
 

@@ -10,6 +10,7 @@ const usePolling = () => {
         localStorage.removeItem("finisher_guesses");
         localStorage.removeItem("guesses");
         localStorage.removeItem("littlelegend_guesses");
+        localStorage.removeItem("littleLegendBonusAnswer");
         alert("New daily! Please refresh the page.");
       }
     };

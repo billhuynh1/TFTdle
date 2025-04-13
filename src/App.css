@@ -997,6 +997,7 @@ body {
   border: solid 2px var(--secondary-color);
   border-radius: 10px;
   height: auto;
+  animation: fadeIn 1s ease-in-out forwards;
 }
 
 .game-end__champ.little-legend {
