@@ -33,7 +33,9 @@ const LittleLegendBonus: React.FC<LittleLegendBonusProps> = ({
       (littleLegend) => littleLegend.baseType === littleLegendAnswer?.baseType,
     )
     .map((littleLegend) =>
-      littleLegend.name.replaceAll(`${littleLegend.baseType}_`, ""),
+      littleLegend.name
+        .replaceAll(`${littleLegend.baseType}_`, "")
+        .replaceAll("_", " "),
     );
 
   const getColor = (variant: string): string => {
@@ -57,7 +59,8 @@ const LittleLegendBonus: React.FC<LittleLegendBonusProps> = ({
         <span className="little-legend-bonus__text">It was</span>
         <span className="little-legend-bonus__text answer">
           {littleLegendAnswer?.name
-            .replaceAll(`${littleLegendAnswer.baseType}_`, "")
+            .replaceAll(`${littleLegendAnswer.baseType}`, "")
+            .replaceAll("_", " ")
             .concat(" ", littleLegendAnswer.baseType)}
         </span>
       </>
