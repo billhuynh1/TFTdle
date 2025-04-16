@@ -42,14 +42,16 @@ const Modes: React.FC = () => {
           <ModeButtonHover mode="little legend" />
         </button>
       </Link>
-      <button
-        className="mode__button mode__button-xxxx"
-        type="button"
-        aria-label="xxxx mode button"
-      >
-        <FontAwesomeIcon icon={faEllipsis} />
-        <ModeButtonHover mode="coming soon..." />
-      </button>
+      <Link to="/trait">
+        <button
+          className="mode__button mode__button-trait"
+          type="button"
+          aria-label="trait mode button"
+        >
+          <FontAwesomeIcon icon={faEllipsis} />
+          <ModeButtonHover mode="trait" />
+        </button>
+      </Link>
     </nav>
   );
 };
