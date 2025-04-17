@@ -128,3 +128,22 @@ export type LittleLegendContextType = {
   isLittleLegendGameOver: boolean;
   setIsLittleLegendGameOver: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export type Trait = {
+  id: number;
+  name: string;
+  description: string;
+  champs: string[];
+  imageUrl: string;
+  set: number;
+};
+
+export type TraitContextType = {
+  traitList: Trait[];
+  guessedTraits: Trait[];
+  setGuessedTraits: React.Dispatch<React.SetStateAction<Trait[]>>;
+  traitAnswer: Trait | undefined;
+  setTraitAnswer: React.Dispatch<React.SetStateAction<Trait | undefined>>;
+  isTraitGameOver: boolean;
+  setIsTraitGameOver: React.Dispatch<React.SetStateAction<boolean>>;
+};

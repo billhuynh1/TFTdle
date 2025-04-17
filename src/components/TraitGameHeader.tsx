@@ -1,14 +1,11 @@
 import React from "react";
+import { useTraitContext } from "../context/TraitContext.tsx";
 
 const TraitGameHeader = () => {
+  const { traitAnswer } = useTraitContext();
   return (
     <div className="game-header trait">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam consequat
-        leo odio, in sollicitudin erat congue eget. Maecenas lacus ipsum,
-        placerat in enim ac, vestibulum elementum tortor. Donec viverra
-        bibendum.
-      </p>
+      <p>{traitAnswer?.description}</p>
     </div>
   );
 };
