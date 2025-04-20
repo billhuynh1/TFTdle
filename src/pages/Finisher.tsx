@@ -41,7 +41,6 @@ const FinisherPage: React.FC = () => {
     if (!chibiFinisherAnswer) return;
 
     const guessesFromStorage: string[] = JSON.parse(fetchGuesses()) || [];
-    console.log("guesses from storage", guessesFromStorage);
     const updateGuesses = (chibis: string[]) => {
       const guesses = findChibiByNameInTable(chibis, chibiList);
       setGuessedChibis(guesses);
@@ -70,8 +69,6 @@ const FinisherPage: React.FC = () => {
   if (isFinisherGameOver) {
     showConfetti();
   }
-
-  console.log(chibiFinisherAnswer);
 
   return (
     <>

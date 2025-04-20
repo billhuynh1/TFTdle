@@ -76,7 +76,7 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
         localStorage.removeItem("finisher_guesses");
         localStorage.removeItem("littlelegend_guesses");
         localStorage.removeItem("littleLegendBonusAnswer");
-        localStorage.removeItem("traits");
+        localStorage.removeItem("trait_guesses");
         localStorage.setItem("lastVisit", today);
       }
     }, [today, lastVisit]);
@@ -108,6 +108,11 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
     fetchAllData();
   }, []);
 
+  useEffect(() => {
+    if (traitList.length > 0) {
+      console.log("trait list", traitList);
+    }
+  }, [traitList]);
   // Gets daily answers
   useEffect(() => {
     const dayOfYear = getDayOfYear(new Date());
