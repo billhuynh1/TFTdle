@@ -758,8 +758,6 @@ body {
   margin: 5px;
 }
 
-/* this shi look ahh */
-
 .mode__button {
   display: flex;
   align-items: center;
@@ -792,12 +790,24 @@ body {
   width: 100px;
   height: 50px;
   position: absolute;
-  bottom: 100%;
+  bottom: 110%;
   margin: 3px;
   z-index: 99;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.mode__hover::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: white transparent transparent transparent;
+  z-index: 10;
 }
 
 .finisher__header__text {
@@ -1103,11 +1113,98 @@ body {
 .game-header-trait__header {
   color: white;
   font-size: 1em;
-  font-weight: bold;
+  font-weight: 600;
   text-shadow: black 1px 0 10px;
 }
 
 .game-header-trait__description {
   font-style: italic;
   margin-top: 20px;
+  font-size: 1.2em;
+  font-weight: 500;
+  margin: 30px;
+}
+
+.trait-hint-helper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  width: 100%;
+  height: auto;
+}
+
+.trait-hint-helper__text {
+  font-size: 1em;
+  font-weight: 500;
+}
+
+.trait-hint-helper__text--hidden {
+  filter: opacity(0.5);
+}
+
+.trait-hint-helper__text--visible {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 100%;
+}
+
+.trait-hint-helper__icon {
+  position: relative;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.trait-hint-helper__icon:hover .trait-hint-helper__tooltip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trait-hint-helper__icon:hover {
+  box-shadow: 0 0 30px rgba(255, 255, 255, 1);
+  border-radius: 50%;
+}
+
+.trait-hint-helper__icon::before {
+  content: "";
+  position: absolute;
+  top: -50px;
+  bottom: -50px;
+  left: -50px;
+  right: -50px;
+  z-index: 10;
+}
+
+.trait-hint-helper__tooltip {
+  display: none;
+  background-color: white;
+  filter: opacity(0.9);
+  color: black;
+  position: absolute;
+  width: 200px;
+  height: auto;
+  padding: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 120%;
+  font-weight: 500;
+  border: solid 2px var(--secondary-color);
+  border-radius: 5px;
+  z-index: 10;
+}
+
+.trait-hint-helper__tooltip::before {
+  content: "";
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
 }

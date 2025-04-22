@@ -10,6 +10,7 @@ import usePageTracking from "../hooks/usePageTracking.tsx";
 const Layout: React.FC = () => {
   const [renderAbout, setrenderAbout] = useState<boolean>(false);
   const [renderDiscordPopup, setrenderDiscordPopup] = useState<boolean>(false);
+  const year = new Date().getFullYear();
 
   const handleToggleAbout = () => {
     setrenderAbout((renderAbout) => !renderAbout);
@@ -32,7 +33,7 @@ const Layout: React.FC = () => {
             handleToggleAbout={handleToggleAbout}
             handleToggleDiscordPopup={handleToggleDiscordPopup}
           />
-          <span className="website">tft-dle.com - 2025</span>
+          <span className="website">tft-dle.com - {year}</span>
           {renderAbout && <About handleToggleAbout={handleToggleAbout} />}
           {renderDiscordPopup && <DiscordPopup />}
         </main>

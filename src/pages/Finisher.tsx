@@ -74,7 +74,7 @@ const FinisherPage: React.FC = () => {
     <>
       <div className="finisher__header">
         <span className="finisher__header__text">
-          Which chibi finisher is this
+          Which chibi finisher is this?
         </span>
         <img
           src={`${gifPath}${chibiFinisherAnswer?.gifUrl}`}
