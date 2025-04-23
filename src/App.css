@@ -1099,10 +1099,12 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 325px;
+  width: 400px;
   min-height: 100px;
   height: auto;
   padding: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
   background-color: var(--primary-color);
   border: var(--secondary-color) solid 2px;
   border-radius: 5px;
@@ -1119,10 +1121,21 @@ body {
 
 .game-header-trait__description {
   font-style: italic;
-  margin-top: 20px;
-  font-size: 1.2em;
+  font-size: 1.3em;
   font-weight: 500;
   margin: 30px;
+  text-align: center;
+  line-height: 1.5;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.7);
+}
+
+.quote-mark {
+  position: relative;
+  top: -0.6rem;
+  font-size: 1rem;
+  color: #ffd478;
+  font-family: serif;
+  font-weight: bold;
 }
 
 .trait-hint-helper {
@@ -1130,12 +1143,15 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
   width: 100%;
   height: auto;
 }
 
 .trait-hint-helper__text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   font-size: 1em;
   font-weight: 500;
 }
@@ -1145,12 +1161,9 @@ body {
 }
 
 .trait-hint-helper__text--visible {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   color: white;
   width: 100%;
+  animation: throbbing ease-in-out 1.5s;
 }
 
 .trait-hint-helper__icon {
@@ -1174,7 +1187,7 @@ body {
   content: "";
   position: absolute;
   top: -50px;
-  bottom: -50px;
+  bottom: -10px;
   left: -50px;
   right: -50px;
   z-index: 10;
@@ -1196,6 +1209,7 @@ body {
   border: solid 2px var(--secondary-color);
   border-radius: 5px;
   z-index: 10;
+  text-align: left;
 }
 
 .trait-hint-helper__tooltip::before {
@@ -1207,4 +1221,27 @@ body {
   border-width: 6px;
   border-style: solid;
   border-color: transparent transparent white transparent;
+}
+
+.select-options__container {
+  width: 100%;
+  margin: 15px;
+}
+
+.select-options {
+  color: white;
+  background-color: var(--primary-color);
+  border: 3px solid #0397ab;
+  width: 50%;
+  height: 40px;
+  z-index: 10;
+  font-size: 1em;
+}
+
+.select-options option {
+  padding: 0.5rem;
+}
+
+.select-options:hover {
+  filter: brightness(1.2);
 }

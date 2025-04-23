@@ -111,19 +111,17 @@ const GameEnd: React.FC<LittleLegendGameEndProps> = ({
         Number of attempts: <span style={{ color: "gold" }}>{attempts}</span>
       </span>
       <div className="timer-container">
-        <span className="timer-header">Next Champion in:</span>
+        <span className="timer-header">Next character in:</span>
         <span className="timer-content">{formatTime(difference)}</span>
       </div>
       <span className="timer-content-footer">(UTC time)</span>
-      <Link to="/littlelegend">
+      <Link to="/trait">
         <button
           className="next-mode-button"
           type="button"
           aria-label="next game mode button"
         >
-          <span className="next-mode-button-text">
-            Next mode: Coming soon...
-          </span>
+          <span className="next-mode-button-text">Next mode: Trait</span>
         </button>
       </Link>
     </div>

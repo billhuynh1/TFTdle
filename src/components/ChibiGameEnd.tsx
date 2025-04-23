@@ -102,7 +102,7 @@ const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
         Number of attempts: <span style={{ color: "gold" }}>{attempts}</span>
       </span>
       <div className="timer-container">
-        <span className="timer-header">Next Champion in:</span>
+        <span className="timer-header">Next character in:</span>
         <span className="timer-content">{formatTime(difference)}</span>
       </div>
       <span className="timer-content-footer">(UTC time)</span>

@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { LittleLegend } from "../type.ts";
 import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
 import BonusButton from "./BonusButton.tsx";
+import SelectOptions from "./SelectOptions.tsx";
 
 type LittleLegendBonusProps = {
   littleLegend: LittleLegend | undefined;
@@ -16,6 +17,7 @@ const LittleLegendBonus: React.FC<LittleLegendBonusProps> = ({
     return localStorage.getItem("littleLegendBonusAnswer") || "";
   });
   const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
+  const [isCorrect, setIsCorrect] = React.useState<boolean>(false);
 
   useEffect(() => {
     if (littleLegendAnswer) {
@@ -37,12 +39,6 @@ const LittleLegendBonus: React.FC<LittleLegendBonusProps> = ({
         .replaceAll(`${littleLegend.baseType}_`, "")
         .replaceAll("_", " "),
     );
-
-  const getColor = (variant: string): string => {
-    if (choice === bonusAnswer && variant === bonusAnswer) return "correct";
-    if (choice === variant && variant !== bonusAnswer) return "incorrect";
-    return "";
-  };
 
   const renderBonusText = (): React.JSX.Element | null => {
     if (!choice) return null;
@@ -67,9 +63,14 @@ const LittleLegendBonus: React.FC<LittleLegendBonusProps> = ({
     );
   };
 
+  const handleSelect = (selectedOption: string) => {
+    setChoice(selectedOption);
+    localStorage.setItem("littleLegendBonusAnswer", selectedOption);
+  };
+
   useEffect(() => {
-    if (choice) {
-      setIsDisabled(true);
+    if (choice === bonusAnswer) {
+      setIsCorrect(true);
     }
   }, [choice]);
 
@@ -79,19 +80,9 @@ const LittleLegendBonus: React.FC<LittleLegendBonusProps> = ({
       <span className="little-legend-bonus__question">
         Which variant is it?
       </span>
-      <div className="little-legend-bonus__content">
-        {littleLegendVariants.map((variant) => {
-          return (
-            <BonusButton
-              color={getColor(variant)}
-              variant={variant}
-              key={variant}
-              setChoice={setChoice}
-              isDisabled={isDisabled}
-            />
-          );
-        })}
-      </div>
+      {!choice && (
+        <SelectOptions options={littleLegendVariants} onSelect={handleSelect} />
+      )}
       {renderBonusText()}
     </div>
   );

@@ -133,7 +133,7 @@ export type Trait = {
   id: number;
   name: string;
   description: string;
-  champs: string[];
+  champs: string;
   imageUrl: string;
   set: number;
 };

@@ -9,9 +9,12 @@ const TraitGameHeader = (): React.ReactElement => {
       <span className="game-header-trait__header">
         Which trait has this description?
       </span>
-      <q className="game-header-trait__description">
+      <span className="game-header-trait__description">
+        <span className="quote-mark left">“</span>
         {traitAnswer?.description}
-      </q>
+        <span className="quote-mark right">“</span>
+      </span>
+
       <TraitHintHelper attempts={guessedTraits.length} />
     </div>
   );
