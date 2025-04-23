@@ -14,7 +14,6 @@ const TraitGameHeader = (): React.ReactElement => {
         {traitAnswer?.description}
         <span className="quote-mark right">“</span>
       </span>
-
       <TraitHintHelper attempts={guessedTraits.length} />
     </div>
   );

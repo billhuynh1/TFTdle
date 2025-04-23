@@ -1166,31 +1166,25 @@ body {
   animation: throbbing ease-in-out 1.5s;
 }
 
+.trait-hint-helper__icon-wrapper {
+  position: relative;
+  display: inline-block;
+  margin-top: 10px;
+}
+
+.trait-hint-helper__icon-wrapper:hover .trait-hint-helper__icon {
+  filter: brightness(1.3); /* Apply the filter on hover */
+}
+
 .trait-hint-helper__icon {
   position: relative;
-  margin-top: 10px;
   display: inline-block;
 }
 
-.trait-hint-helper__icon:hover .trait-hint-helper__tooltip {
+.trait-hint-helper__icon:hover + .trait-hint-helper__tooltip {
   display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.trait-hint-helper__icon:hover {
-  box-shadow: 0 0 30px rgba(255, 255, 255, 1);
-  border-radius: 50%;
-}
-
-.trait-hint-helper__icon::before {
-  content: "";
-  position: absolute;
-  top: -50px;
-  bottom: -10px;
-  left: -50px;
-  right: -50px;
-  z-index: 10;
+  z-index: 102;
+  opacity: 1;
 }
 
 .trait-hint-helper__tooltip {
@@ -1208,8 +1202,11 @@ body {
   font-weight: 500;
   border: solid 2px var(--secondary-color);
   border-radius: 5px;
-  z-index: 10;
+  z-index: 100;
+  pointer-events: none;
   text-align: left;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .trait-hint-helper__tooltip::before {
