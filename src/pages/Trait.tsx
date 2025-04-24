@@ -1,16 +1,23 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import confetti from "canvas-confetti";
 import TraitGameHeader from "../components/TraitGameHeader.tsx";
 import { useTraitContext } from "../context/TraitContext.tsx";
 import SearchBars from "../components/SearchBars.tsx";
 import AnswersItem from "../components/AnswersItem.tsx";
 import { Trait } from "../type.ts";
+import TraitGameEnd from "../components/TraitGameEnd.tsx";
 
 const TraitPage = (): React.ReactElement => {
-  const { traitList, traitAnswer, guessedTraits, setGuessedTraits } =
-    useTraitContext();
+  const {
+    traitList,
+    traitAnswer,
+    guessedTraits,
+    setGuessedTraits,
+    isTraitGameOver,
+    setIsTraitGameOver,
+  } = useTraitContext();
   const [attempts, setAttempts] = React.useState<number>(0);
-  const [isTraitGameOver, setIsTraitGameOver] = React.useState<boolean>(false);
   const location = useLocation();
   const mode = location.pathname.replace("/", "");
 
@@ -41,16 +48,25 @@ const TraitPage = (): React.ReactElement => {
     updateGuesses(guessesFromStorage);
   }, [traitAnswer, traitList]);
 
+  const showConfetti = () => {
+    confetti({ particleCount: 150, spread: 70, origin: { x: 0.5, y: 0.5 } });
+  };
+
   return (
     <>
       <TraitGameHeader />
-      <SearchBars
-        items={traitList}
-        guessedItems={guessedTraits}
-        setGuessedItems={setGuessedTraits}
-        setAttempts={setAttempts}
-        pathForImages=""
-      />
+      {isTraitGameOver &&
+        (showConfetti(),
+        (<TraitGameEnd trait={traitAnswer} attempts={guessedTraits.length} />))}
+      {!isTraitGameOver && (
+        <SearchBars
+          items={traitList}
+          guessedItems={guessedTraits}
+          setGuessedItems={setGuessedTraits}
+          setAttempts={setAttempts}
+          pathForImages=""
+        />
+      )}
       <div className="answers__container">
         {guessedTraits.map((trait) => {
           const itemColor = trait === traitAnswer ? "correct" : "incorrect";

@@ -41,7 +41,6 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   const [chibiList, setChibiList] = useState<Chibi[]>([]);
   const [isFinisherGameOver, setIsFinisherGameOver] = useState<boolean>(false);
   const [chibiFinisherAnswer, setChibiFinisherAnswer] = useState<Chibi>();
-  // Need to change name of random index
   const [randomIndex, setRandomIndex] = useState<number>(0);
   const [guessedChibis, setGuessedChibis] = useState<Chibi[]>([]);
 

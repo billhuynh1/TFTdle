@@ -2,14 +2,14 @@ import React from "react";
 
 type TooltipProps = {
   children: React.ReactNode;
-  text: string;
+  content: string;
 };
 
-const Tooltip = ({ children, text }: TooltipProps) => {
+const Tooltip = ({ children, content }: TooltipProps) => {
   return (
-    <div className="relative group inline-block">
+    <div className="tooltip-container">
       {children}
-      <span className="">{text}</span>
+      <span className="tooltip-content">{content}</span>
     </div>
   );
 };
