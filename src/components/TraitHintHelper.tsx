@@ -45,25 +45,26 @@ const TraitHintHelper = ({
           <Tooltip content="Champions in this trait.">
             <div className="icon-hover-wrapper">
               <img
-                src="images/tft_traits_texture.png"
-                alt="TFT trait"
-                className="trait-icon"
+                src="images/champion_icon.png"
+                alt="champ helmet"
+                className="champ-trait-icon"
+                width={40}
+                height={40}
               />
             </div>
           </Tooltip>
         </div>
       ) : (
         <span className="trait-hint-helper__text trait-hint-helper__text--visible">
-          Trait includes these champions:
+          Champions:
           <div className="trait-hint-helper__icon-wrapper">
             <div className="trait-hint-helper__icon">
-              <img src="images/tft_traits_texture.png" alt="TFT trait" />
               <img
                 src="images/champion_icon.png"
                 alt="champ helmet"
                 className="champ-trait-icon"
-                width={25}
-                height={25}
+                width={40}
+                height={40}
               />
             </div>
             <div className="trait-hint-helper__tooltip">{champsFromTrait}</div>

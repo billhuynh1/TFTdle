@@ -1,20 +1,33 @@
 import React, { useState } from "react";
 
-interface SelectOptionsProps {
-  options: string[];
-  onSelect: (selectedOption: string) => void;
+interface SelectOptionsProps<T extends string | number> {
+  options: T[];
+  onSelect: (selectedOption: T) => void;
 }
 
-const SelectOptions = ({
+const SelectOptions = <T extends string | number>({
   options,
   onSelect,
-}: SelectOptionsProps): React.ReactElement => {
-  const [selectedOption, setSelectedOption] = useState<string>(""); // State to hold the selected option
+}: SelectOptionsProps<T>): React.ReactElement => {
+  const [selectedOption, setSelectedOption] = useState<T | undefined>(
+    undefined,
+  );
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedValue = event.target.value;
-    setSelectedOption(selectedValue); // Update state
-    onSelect(selectedValue); // Call the onSelect function with the selected value
+    let selectedValue: T;
+
+    if (typeof options[0] === "string") {
+      // If options are strings
+      selectedValue = event.target.value as T;
+    } else {
+      // If options are numbers, convert to number
+      selectedValue = (
+        event.target.value ? parseInt(event.target.value, 10) : NaN
+      ) as T;
+    }
+
+    setSelectedOption(selectedValue);
+    onSelect(selectedValue);
   };
 
   return (

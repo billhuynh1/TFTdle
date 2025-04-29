@@ -55,7 +55,7 @@ const TraitPage = (): React.ReactElement => {
   return (
     <>
       <TraitGameHeader />
-      {isTraitGameOver &&
+      {!isTraitGameOver &&
         (showConfetti(),
         (<TraitGameEnd trait={traitAnswer} attempts={guessedTraits.length} />))}
       {!isTraitGameOver && (

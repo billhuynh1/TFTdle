@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Trait } from "../type.ts";
 import { useTraitContext } from "../context/TraitContext.tsx";
+import TraitBonus from "./TraitBonus.tsx";
 
 interface TraitGameEndProps {
   trait: Trait | undefined;
@@ -89,7 +90,7 @@ const TraitGameEnd = ({ trait, attempts }: TraitGameEndProps) => {
         <img
           src={`${imagePath}${trait?.imageUrl}`}
           className="game-end-champ-icon"
-          alt="Correct chibi"
+          alt="Correct trait"
           width={60}
           height={60}
         />
@@ -99,7 +100,7 @@ const TraitGameEnd = ({ trait, attempts }: TraitGameEndProps) => {
           </span>
         </div>
       </div>
-
+      <TraitBonus />
       <span className="game-end__chibi__attempts">
         Number of attempts: <span style={{ color: "gold" }}>{attempts}</span>
       </span>
