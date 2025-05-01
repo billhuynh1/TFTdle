@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { LittleLegend } from "../type.ts";
 import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
-import BonusButton from "./BonusButton.tsx";
 import SelectOptions from "./SelectOptions.tsx";
 
 type LittleLegendBonusProps = {
@@ -16,7 +15,6 @@ const LittleLegendBonus: React.FC<LittleLegendBonusProps> = ({
   const [choice, setChoice] = React.useState<string>(() => {
     return localStorage.getItem("littleLegendBonusAnswer") || "";
   });
-  const [isDisabled, setIsDisabled] = React.useState<boolean>(false);
   const [isCorrect, setIsCorrect] = React.useState<boolean>(false);
 
   useEffect(() => {
@@ -43,21 +41,28 @@ const LittleLegendBonus: React.FC<LittleLegendBonusProps> = ({
   const renderBonusText = (): React.JSX.Element | null => {
     if (!choice) return null;
 
-    const isCorrect: boolean = choice === bonusAnswer;
+    const isCorrect: boolean =
+      choice.replaceAll("_", " ") === bonusAnswer?.replaceAll("_", " ");
     const className: string = `little-legend-bonus__text ${isCorrect ? "right" : "wrong"}`;
-    const message: string = isCorrect
-      ? "✅ Correct! You guessed it right!"
-      : "❌ Wrong! Maybe next time!";
-
+    const textColor = isCorrect ? "#00b42d" : "#ff3131";
+    console.log(isCorrect, choice, bonusAnswer);
     return (
       <>
-        <span className={className}>{message}</span>
-        <span className="little-legend-bonus__text">It was</span>
+        <span className={className}>
+          <p>Your Guess</p>
+          <span style={{ color: `${textColor}` }}>{choice}</span>
+        </span>
+
         <span className="little-legend-bonus__text answer">
-          {littleLegendAnswer?.name
-            .replaceAll(`${littleLegendAnswer.baseType}`, "")
-            .replaceAll("_", " ")
-            .concat(" ", littleLegendAnswer.baseType)}
+          <p>Answer</p>
+          <span
+            style={{ color: "#00b42d", fontWeight: "600", fontSize: "1.2rem" }}
+          >
+            {" "}
+            {littleLegendAnswer?.name
+              .replaceAll(`${littleLegendAnswer.baseType}`, "")
+              .replaceAll("_", " ")}
+          </span>
         </span>
       </>
     );

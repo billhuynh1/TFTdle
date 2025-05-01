@@ -76,6 +76,7 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
         localStorage.removeItem("littlelegend_guesses");
         localStorage.removeItem("littleLegendBonusAnswer");
         localStorage.removeItem("trait_guesses");
+        localStorage.removeItem("traitBonusAnswer");
         localStorage.setItem("lastVisit", today);
       }
     }, [today, lastVisit]);

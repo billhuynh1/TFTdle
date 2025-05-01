@@ -52,10 +52,12 @@ const TraitPage = (): React.ReactElement => {
     confetti({ particleCount: 150, spread: 70, origin: { x: 0.5, y: 0.5 } });
   };
 
+  // localStorage.removeItem("traitBonusAnswer");
+
   return (
     <>
       <TraitGameHeader />
-      {!isTraitGameOver &&
+      {isTraitGameOver &&
         (showConfetti(),
         (<TraitGameEnd trait={traitAnswer} attempts={guessedTraits.length} />))}
       {!isTraitGameOver && (

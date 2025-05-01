@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { Trait } from "../type.ts";
 import { useTraitContext } from "../context/TraitContext.tsx";
 import TraitBonus from "./TraitBonus.tsx";
@@ -109,6 +110,7 @@ const TraitGameEnd = ({ trait, attempts }: TraitGameEndProps) => {
         <span className="timer-content">{formatTime(difference)}</span>
       </div>
       <span className="timer-content-footer">(UTC time)</span>
+      <span className="trait-game-end__footer">Thanks for playing!</span>
     </div>
   );
 };

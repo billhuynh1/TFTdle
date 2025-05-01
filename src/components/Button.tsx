@@ -8,7 +8,12 @@ type ButtonProps = {
 const Button: React.FC<ButtonProps> = ({ icon = "", onClick }) => {
   return (
     <button type="button" className="button" onClick={onClick}>
-      <img src={icon} className="button-img" aria-label="button spat" alt="" />
+      <img
+        src={icon}
+        className="button-img"
+        aria-label="button spat"
+        alt="arrow"
+      />
     </button>
   );
 };

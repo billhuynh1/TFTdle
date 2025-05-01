@@ -28,17 +28,26 @@ const TraitBonus = () => {
 
     const isCorrect: boolean = choice === traitAnswer?.set;
     const className: string = `trait-bonus__text ${isCorrect ? "right" : "wrong"}`;
-    const message: string = isCorrect ? "✅ Correct!" : "❌ Wrong!";
-
-    // If answer is incorrect, render "Wrong! You guessed {choice}"
+    const textColor = isCorrect ? "#00b42d" : "#ff3131";
 
     return (
       <>
-        <span className={className}>{message}</span>
-        <span className="trait-bonus__text answer">
-          It was{" "}
+        <span className={className}>
+          <p>Your guess</p>
           <span
-            style={{ color: "green", fontWeight: "600", fontSize: "1.3em" }}
+            style={{
+              color: `${textColor}`,
+              fontWeight: "600",
+              fontSize: "1.2rem",
+            }}
+          >
+            Set {choice}
+          </span>
+        </span>
+        <span className="trait-bonus__text answer">
+          <p>Answer</p>
+          <span
+            style={{ color: "#00b42d", fontWeight: "600", fontSize: "1.2rem" }}
           >
             Set {traitAnswer?.set}
           </span>
@@ -49,6 +58,7 @@ const TraitBonus = () => {
 
   return (
     <div className="trait-bonus">
+      <p>Bonus!</p>
       <span className="trait-bonus__header">Which set was this trait in?</span>
       {!choice && <SelectOptions options={sets} onSelect={handleSelect} />}
       {renderBonusText()}

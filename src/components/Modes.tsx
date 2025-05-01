@@ -38,7 +38,7 @@ const Modes: React.FC = () => {
           type="button"
           aria-label="little legend mode button"
         >
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
+          <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
           <ModeButtonHover mode="little legend" />
         </button>
       </Link>
@@ -48,7 +48,13 @@ const Modes: React.FC = () => {
           type="button"
           aria-label="trait mode button"
         >
-          <FontAwesomeIcon icon={faEllipsis} />
+          <img
+            src="./images/speech-bubble.svg"
+            alt="Speech bubble"
+            width={30}
+            height={30}
+            className="speech-bubble-button-icon"
+          />
           <ModeButtonHover mode="trait" />
         </button>
       </Link>

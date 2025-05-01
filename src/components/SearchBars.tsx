@@ -128,22 +128,25 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
       </ul>
     ) : null;
 
+  // List menu is broken
+
   return (
     <div className="searchbar-main-container">
-      <div className="searchbar-sub-container">
+      <div className="searchbar-wrapper">
         <input
           type="text"
           id="guess"
           className="search-bar"
+          title="Submit"
           placeholder="Type champion name ..."
           autoComplete="off"
           onChange={handleChange}
           onKeyDown={handleKeyInput}
           value={input}
         />
-        <Button icon="images/golden_spat.png" onClick={handleClick} />
+        {renderedItems}
       </div>
-      {renderedItems}
+      <Button icon="images/arrow_button_ui.png" onClick={handleClick} />
     </div>
   );
 };
