@@ -5,9 +5,27 @@ const fetchChampions = async (): Promise<Champion[]> => {
   const cachedChampions = localStorage.getItem("champions");
 
   if (cachedChampions) {
-    const champions: Champion[] = JSON.parse(cachedChampions);
+    const champions = JSON.parse(cachedChampions);
     if (champions.length > 0) {
-      return champions;
+      return champions.map(
+        (item: {
+          imageUrl: string;
+          name: string;
+          gender: string;
+          cost: number;
+          type: string;
+          traits: string;
+          attRange: number;
+        }) => ({
+          imageUrl: item.image_url,
+          name: item.name,
+          gender: item.gender,
+          cost: item.cost,
+          type: item.type,
+          traits: item.traits,
+          attRange: item.att_range,
+        }),
+      );
     }
   }
 
@@ -18,7 +36,25 @@ const fetchChampions = async (): Promise<Champion[]> => {
 
   localStorage.setItem("champions", JSON.stringify(data));
 
-  return data || [];
+  return data.map(
+    (item: {
+      imageUrl: string;
+      name: string;
+      gender: string;
+      cost: number;
+      type: string;
+      traits: string;
+      attRange: number;
+    }) => ({
+      imageUrl: item.image_url,
+      name: item.name,
+      gender: item.gender,
+      cost: item.cost,
+      type: item.type,
+      traits: item.traits,
+      attRange: item.att_range,
+    }),
+  );
 };
 
 export default fetchChampions;

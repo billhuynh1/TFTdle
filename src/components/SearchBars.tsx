@@ -11,7 +11,17 @@ interface SearchBarsProps<T> {
 }
 
 // GENERIC VERSION, NEEDS TESTING
-const SearchBars = <T extends { name: string; imageUrl: string }>({
+const SearchBars = <
+  T extends {
+    name: string;
+    imageUrl: string;
+    gender?: string;
+    cost?: number;
+    type: string;
+    traits?: string;
+    attRange?: string;
+  },
+>({
   items,
   guessedItems,
   setGuessedItems,
@@ -36,8 +46,9 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
     // return storedGuesses ? JSON.parse(storedGuesses) : [];
     return [];
   });
-  const imagePath = `${process.env.REACT_APP_AWS_S3_URL}${pathForImages}/`;
+  const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
+  const imagePath = `${process.env.REACT_APP_AWS_S3_URL}${pathForImages}/`;
   const handleSearch = async (searchQuery: string) => {
     if (searchQuery.length) {
       const regex = new RegExp(`${searchQuery.toLowerCase()}`);
@@ -64,7 +75,7 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newInput = e.target.value;
     // Only allow alphabetical characters
-    const regex = /^[a-zA-Z\s]*$/i;
+    const regex = /^[a-zA-Z0-9\s!@#$%^&*()_+\-={}[\];:'"\\|,.<>/?]*$/;
 
     if (newInput === "" || regex.test(newInput)) {
       setInput(newInput);
@@ -84,13 +95,35 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
     localStorage.setItem(`${mode}_guesses`, JSON.stringify(guesses));
   }, [guesses, mode]);
 
+  // const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  //   if (event.key === "Enter") {
+  //     if (
+  //       filteredItems.length > 0 &&
+  //       !guessedItems.includes(filteredItems[0])
+  //     ) {
+  //       handleSelectedItem(filteredItems[0]);
+  //     }
+  //   }
+  // };
+
   const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      if (
-        filteredItems.length > 0 &&
-        !guessedItems.includes(filteredItems[0])
-      ) {
-        handleSelectedItem(filteredItems[0]);
+    if (event.key === "ArrowDown") {
+      event.preventDefault();
+      setHighlightedIndex((prev) =>
+        prev < filteredItems.length - 1 ? prev + 1 : 0,
+      );
+    } else if (event.key === "ArrowUp") {
+      event.preventDefault();
+      setHighlightedIndex((prev) =>
+        prev > 0 ? prev - 1 : filteredItems.length - 1,
+      );
+    } else if (event.key === "Enter") {
+      const selected =
+        highlightedIndex >= 0
+          ? filteredItems[highlightedIndex]
+          : filteredItems[0];
+      if (selected && !guessedItems.includes(selected)) {
+        handleSelectedItem(selected);
       }
     }
   };
@@ -127,8 +160,6 @@ const SearchBars = <T extends { name: string; imageUrl: string }>({
         ))}
       </ul>
     ) : null;
-
-  // List menu is broken
 
   return (
     <div className="searchbar-main-container">

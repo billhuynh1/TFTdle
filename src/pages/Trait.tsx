@@ -57,16 +57,14 @@ const TraitPage = (): React.ReactElement => {
   return (
     <>
       <TraitGameHeader />
-      {isTraitGameOver &&
-        (showConfetti(),
-        (<TraitGameEnd trait={traitAnswer} attempts={guessedTraits.length} />))}
+
       {!isTraitGameOver && (
         <SearchBars
           items={traitList}
           guessedItems={guessedTraits}
           setGuessedItems={setGuessedTraits}
           setAttempts={setAttempts}
-          pathForImages=""
+          pathForImages="converted_trait_images"
         />
       )}
       <div className="answers__container">
@@ -84,6 +82,9 @@ const TraitPage = (): React.ReactElement => {
           );
         })}
       </div>
+      {isTraitGameOver &&
+        (showConfetti(),
+        (<TraitGameEnd trait={traitAnswer} attempts={guessedTraits.length} />))}
     </>
   );
 };

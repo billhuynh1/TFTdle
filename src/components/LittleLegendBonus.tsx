@@ -45,25 +45,36 @@ const LittleLegendBonus: React.FC<LittleLegendBonusProps> = ({
       choice.replaceAll("_", " ") === bonusAnswer?.replaceAll("_", " ");
     const className: string = `little-legend-bonus__text ${isCorrect ? "right" : "wrong"}`;
     const textColor = isCorrect ? "#00b42d" : "#ff3131";
-    console.log(isCorrect, choice, bonusAnswer);
     return (
       <>
         <span className={className}>
           <p>Your Guess</p>
           <span style={{ color: `${textColor}` }}>{choice}</span>
         </span>
-
-        <span className="little-legend-bonus__text answer">
-          <p>Answer</p>
+        {isCorrect ? (
           <span
-            style={{ color: "#00b42d", fontWeight: "600", fontSize: "1.2rem" }}
+            className="little-legend-bonus__text right wobble"
+            style={{ margin: "10px" }}
           >
-            {" "}
-            {littleLegendAnswer?.name
-              .replaceAll(`${littleLegendAnswer.baseType}`, "")
-              .replaceAll("_", " ")}
+            Good job!
           </span>
-        </span>
+        ) : (
+          <span className="little-legend-bonus__text answer">
+            <p>Answer</p>
+            <span
+              style={{
+                color: "#00b42d",
+                fontWeight: "600",
+                fontSize: "1.2rem",
+              }}
+            >
+              {" "}
+              {littleLegendAnswer?.name
+                .replaceAll(`${littleLegendAnswer.baseType}`, "")
+                .replaceAll("_", " ")}
+            </span>
+          </span>
+        )}
       </>
     );
   };

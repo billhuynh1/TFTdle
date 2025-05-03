@@ -91,13 +91,14 @@ const FinisherPage: React.FC = () => {
           setAttempts={setAttempts}
           pathForImages="chibi_images"
         />
-      ) : (
+      ) : null}
+      <ChibiAnswer guessedChibis={guessedChibis} />
+      {isFinisherGameOver && (
         <ChibiGameEnd
           chibi={chibiFinisherAnswer}
           attempts={guessedChibis.length}
         />
       )}
-      <ChibiAnswer guessedChibis={guessedChibis} />
     </>
   );
 };

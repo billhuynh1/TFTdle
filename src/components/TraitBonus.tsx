@@ -44,14 +44,27 @@ const TraitBonus = () => {
             Set {choice}
           </span>
         </span>
-        <span className="trait-bonus__text answer">
-          <p>Answer</p>
+        {isCorrect ? (
           <span
-            style={{ color: "#00b42d", fontWeight: "600", fontSize: "1.2rem" }}
+            className="little-legend-bonus__text right wobble"
+            style={{ marginBottom: "10px" }}
           >
-            Set {traitAnswer?.set}
+            Good job!
           </span>
-        </span>
+        ) : (
+          <span className="trait-bonus__text answer">
+            <p>Answer</p>
+            <span
+              style={{
+                color: "#00b42d",
+                fontWeight: "600",
+                fontSize: "1.2rem",
+              }}
+            >
+              Set {traitAnswer?.set}
+            </span>
+          </span>
+        )}
       </>
     );
   };

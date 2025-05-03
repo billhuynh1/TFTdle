@@ -2,6 +2,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import Modes from "./Modes.tsx";
 
 interface GameEndProps {
   attempts: number;
@@ -113,16 +114,22 @@ const GameEnd: React.FC<GameEndProps> = ({
         <span className="timer-header">Next character in:</span>
         <span className="timer-content">{formatTime(difference)}</span>
       </div>
-      <span className="timer-content-footer">(UTC time)</span>
+      <span className="timer-content-footer">(Timezone: UTC)</span>
+      <hr className="timer-separator" />
+      <span className="timer-separator__text">Next Mode:</span>
       <Link to="/finisher">
         <button
           className="next-mode-button"
           type="button"
           aria-label="finsher mode button"
         >
-          <span className="next-mode-button-text">Next mode: Finisher</span>
+          <span className="next-mode-button-text">Finisher</span>
+          <span className="next-mode-button__description">
+            Their last move, your best guess
+          </span>
         </button>
       </Link>
+      <Modes />
     </div>
   );
 };

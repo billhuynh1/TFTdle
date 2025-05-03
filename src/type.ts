@@ -33,7 +33,7 @@ export interface ChampionGuess {
   createdAt: string;
 }
 export interface Champion {
-  imageurl: string;
+  imageUrl: string;
   name: string;
   gender: string;
   cost: number;

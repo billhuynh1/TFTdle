@@ -7,12 +7,12 @@ import { useChampionContext } from "../context/ChampionContext.tsx";
 import { useAttemptsContext } from "../context/AttemptsContext.tsx";
 import GameHeader from "../components/GameHeader.tsx";
 import GameEnd from "../components/GameEnd.tsx";
-import SearchBar from "../components/SearchBar.tsx";
 import ChampionAnswer from "../components/ChampionAnswer.tsx";
 import HintsHelper from "../components/HintsHelper.tsx";
 import AttributeHeader from "../components/AttributeHeader.tsx";
 import findChampionByNameInTable from "../utils/findChampionByName.ts";
 import fetchGuesses from "../utils/fetchGuesses.ts";
+import SearchBars from "../components/SearchBars.tsx";
 
 const ClassicPage: React.FC = () => {
   const [renderHints, setRenderHints] = useState<boolean>(false);
@@ -88,28 +88,21 @@ const ClassicPage: React.FC = () => {
 
   return (
     <>
-      {!isGameOver && <GameHeader />}
-      {isGameOver ? (
-        <GameEnd
-          attempts={attempts}
-          champIcon={testChampion?.imageurl}
-          champName={testChampion?.name}
+      <GameHeader />
+      {!isGameOver ? (
+        <SearchBars
+          items={championList}
+          guessedItems={guessedChampions}
+          setGuessedItems={setGuessedChampions}
+          setAttempts={setAttempts}
+          pathForImages="champions_set_13_assets"
         />
-      ) : (
-        !isSearchLock && (
-          <SearchBar
-            championList={championList}
-            guessedChampions={guessedChampions}
-            setGuessedChampions={setGuessedChampions}
-            setAttempts={setAttempts}
-          />
-        )
-      )}
+      ) : null}
       {renderLoading()}
       {guessedChampions.map((champ) => (
         <ChampionAnswer
           key={champ.name}
-          imageurl={champ.imageurl}
+          imageUrl={champ.imageUrl}
           name={champ.name}
           gender={champ.gender}
           cost={champ.cost}
@@ -118,6 +111,13 @@ const ClassicPage: React.FC = () => {
           attRange={champ.attRange}
         />
       ))}
+      {isGameOver && (
+        <GameEnd
+          attempts={attempts}
+          champIcon={testChampion?.imageUrl}
+          champName={testChampion?.name}
+        />
+      )}
       <HintsHelper />
     </>
   );

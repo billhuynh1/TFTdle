@@ -39,18 +39,6 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
       )
     ) {
       setSquareColor("partial");
-    } else if (
-      typeof testChampion[pos] === "number" &&
-      typeof champion[pos] === "number" &&
-      testChampion[pos] > champion[pos]
-    ) {
-      setSquareColor("incorrect up");
-    } else if (
-      typeof testChampion[pos] === "number" &&
-      typeof champion[pos] === "number" &&
-      testChampion[pos] < champion[pos]
-    ) {
-      setSquareColor("incorrect down");
     } else {
       setSquareColor("incorrect");
     }

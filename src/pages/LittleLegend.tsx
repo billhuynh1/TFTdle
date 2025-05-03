@@ -64,15 +64,8 @@ const LittleLegendPage: React.FC = () => {
   return (
     <>
       <LittleLegendHeader isGameOver={isLittleLegendGameOver} />
-      {isLittleLegendGameOver &&
-        (showConfetti(),
-        (
-          <LittleLegendGameEnd
-            littleLegend={littleLegendAnswer}
-            attempts={guessedLittleLegends.length}
-          />
-        ))}
-      {!isLittleLegendGameOver && (
+
+      {isLittleLegendGameOver && (
         <SearchBars
           items={littleLegendBaseList}
           guessedItems={guessedLittleLegends}
@@ -100,6 +93,14 @@ const LittleLegendPage: React.FC = () => {
           );
         })}
       </div>
+      {isLittleLegendGameOver &&
+        (showConfetti(),
+        (
+          <LittleLegendGameEnd
+            littleLegend={littleLegendAnswer}
+            attempts={guessedLittleLegends.length}
+          />
+        ))}
     </>
   );
 };

@@ -154,8 +154,8 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 220px;
-  height: 120px;
+  width: 200px;
+  height: 100px;
   z-index: 2;
   margin-bottom: 10px;
   transform: scale(90%);
@@ -177,7 +177,7 @@ body {
   display: flex;
   align-items: flex-start;
   position: relative;
-  padding-top: 20px;
+  margin-top: 10px;
   gap: 10px;
 }
 
@@ -197,13 +197,13 @@ body {
 
 .game-end {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
-  width: 400px;
+  width: 450px;
   min-height: 500px;
   height: auto;
-  margin: 10px;
+  margin: 30px;
   background: linear-gradient(to top, var(--primary-color), #08571c);
   border: 2px solid #5bf581;
   border-radius: 8px;
@@ -211,13 +211,11 @@ body {
   text-shadow: black 2px 0 0px;
 }
 
-.game-end__header--finisher {
-}
-
-.game-end h1 {
-}
-
-.game-end__header {
+.game-end a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
 }
 
 .game-end__champ {
@@ -247,8 +245,9 @@ body {
   grid-area: icon;
   flex-shrink: 0;
   border: 2px solid black;
-  box-shadow: 0 0 0 3px #ffffff;
+  box-shadow: 0 0 0 2px #ffffff;
   border-radius: 5px;
+  background-color: var(--primary-color);
 }
 
 .game-end__champ__text {
@@ -304,15 +303,17 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   background-color: var(--primary-color);
-  margin: 30px;
-  width: 80%;
+  margin: 10px;
+  min-width: 80%;
+  width: auto;
   height: 60px;
   border: 2px solid var(--secondary-color);
   border-radius: 10px;
-  animation: throbbing ease-in-out 1.5s infinite;
-  text-align: center;
+  animation: throbbing ease-in-out 1s infinite;
+  font-family: "Times New Roman", Times, serif;
+  text-align: left;
+  padding: 10px;
 }
 
 .next-mode-button:hover {
@@ -321,9 +322,14 @@ body {
 
 .next-mode-button-text {
   color: white;
-  font-size: 1.2em;
-  font-weight: 700;
-  font-family: "Times New Roman", Times, serif;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+.next-mode-button__description {
+  color: hsla(0, 0%, 100%, 0.851);
+  font-size: 0.8rem;
+  font-weight: 200;
 }
 
 .attempts {
@@ -343,7 +349,7 @@ body {
 }
 
 .button-img:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   transition: ease-in 0.05s;
 }
 
@@ -591,9 +597,8 @@ body {
   position: absolute;
   flex-direction: column;
   list-style-type: none;
-  background-color: white;
+  background-color: #1e2328;
   width: 100%;
-  border: solid 2px black;
   padding-left: 0;
   overflow-y: auto;
   max-height: 250px;
@@ -612,16 +617,18 @@ body {
 .champion-list-item {
   display: flex;
   align-items: center;
-  background-color: white;
-  margin: 5px;
+  background-color: #1e2328;
+  margin: 3px;
   left: 0;
   text-align: left;
-  font-size: 18px;
+  font-size: 1rem;
   border: none;
+  color: white;
 }
 
 .champion-list-item:hover {
-  background-color: rgb(207, 207, 207);
+  background-color: #24282c;
+  transition: ease-in 0.15s;
 }
 
 .span {
@@ -745,7 +752,7 @@ body {
 
 .chibi__answer__item.correct {
   background-color: #00b42d;
-  border: solid 2px #5bf581;
+  border: solid 2px white;
   animation: throbbing 1s ease-in-out;
 }
 
@@ -874,7 +881,7 @@ body {
     transform: scale(1);
   }
   50% {
-    transform: scale(1.1);
+    transform: scale(1.04);
   }
   100% {
     transform: scale(1);
@@ -975,7 +982,7 @@ body {
 
 .answers__item.correct {
   background-color: #00b42d;
-  border: solid 2px #5bf581;
+  border: solid 2px white;
   animation: throbbing 1s ease-in-out;
 }
 
@@ -1009,6 +1016,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 80%;
+  margin: 10px;
   color: white;
   background-color: var(--primary-color);
   border: solid 2px var(--secondary-color);
@@ -1353,6 +1361,7 @@ body {
   background-color: var(--primary-color);
   border: solid 2px var(--secondary-color);
   margin: 5px;
+  margin-bottom: 10px;
   color: white;
   border-radius: 10px;
 }
@@ -1398,4 +1407,30 @@ body {
 
 .speech-bubble-button-icon {
   filter: invert(1);
+}
+
+.timer-separator {
+  color: white;
+  background-color: white;
+  height: 1px;
+  width: 30%;
+  margin-top: 25px;
+}
+
+.timer-separator__text {
+  color: white;
+  font-size: 1.2em;
+  font-weight: 500;
+  text-align: center;
+}
+
+.chibi-finisher.chibi-finisher-game-end {
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.game-end-champ-splash {
+  width: 75%;
+  border: solid 2px white;
+  margin-bottom: 10px;
 }

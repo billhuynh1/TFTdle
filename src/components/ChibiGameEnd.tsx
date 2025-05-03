@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { Chibi } from "../type.ts";
+import { useChibiContext } from "../context/ChibiContext.tsx";
+import Modes from "./Modes.tsx";
 
 interface ChibiGameEndProps {
   chibi: Chibi | undefined;
@@ -19,6 +21,8 @@ const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
       0,
     ),
   );
+  const { chibiFinisherAnswer } = useChibiContext();
+  const gifPath = `${process.env.REACT_APP_AWS_S3_URL}finishers/`;
   const [showContent, setShowContent] = useState<boolean>(false);
   const [difference, setDifference] = useState<number>(
     resetTime.getTime() - currentTime.getTime(),
@@ -101,22 +105,31 @@ const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
       <span className="game-end__chibi__attempts">
         Number of attempts: <span style={{ color: "gold" }}>{attempts}</span>
       </span>
+      <img
+        src={`${gifPath}${chibiFinisherAnswer?.gifUrl}`}
+        alt="Gif of chibi finisher"
+        className="chibi-finisher chibi-finisher-game-end"
+      />
       <div className="timer-container">
         <span className="timer-header">Next character in:</span>
         <span className="timer-content">{formatTime(difference)}</span>
       </div>
-      <span className="timer-content-footer">(UTC time)</span>
+      <span className="timer-content-footer">(Time Zone: UTC)</span>
+      <hr className="timer-separator" />
+      <span className="timer-separator__text">Next Mode:</span>
       <Link to="/littlelegend">
         <button
           className="next-mode-button"
           type="button"
           aria-label="finsher mode button"
         >
-          <span className="next-mode-button-text">
-            Next mode: Little Legend
+          <span className="next-mode-button-text">Splash</span>
+          <span className="next-mode-button__description">
+            Guess the little legend splash art
           </span>
         </button>
       </Link>
+      <Modes />
     </div>
   );
 };

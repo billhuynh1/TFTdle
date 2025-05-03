@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { LittleLegend } from "../type.ts";
 import LittleLegendBonus from "./LittleLegendBonus.tsx";
 import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
+import Modes from "./Modes.tsx";
 
 interface LittleLegendGameEndProps {
   littleLegend: LittleLegend | undefined;
@@ -104,26 +105,37 @@ const GameEnd: React.FC<LittleLegendGameEndProps> = ({
           </span>
         </div>
       </div>
-      {isLittleLegendGameOver && (
-        <LittleLegendBonus littleLegend={littleLegend} />
-      )}
       <span className="game-end__chibi__attempts">
         Number of attempts: <span style={{ color: "gold" }}>{attempts}</span>
       </span>
+      <img
+        src={`${imagePath}${littleLegend?.imageUrl}`}
+        className="game-end-champ-splash"
+        alt="Little legend splash art"
+      />
+      {isLittleLegendGameOver && (
+        <LittleLegendBonus littleLegend={littleLegend} />
+      )}
       <div className="timer-container">
         <span className="timer-header">Next character in:</span>
         <span className="timer-content">{formatTime(difference)}</span>
       </div>
-      <span className="timer-content-footer">(UTC time)</span>
+      <span className="timer-content-footer">(Timezone: UTC)</span>
+      <hr className="timer-separator" />
+      <span className="timer-separator__text">Next Mode:</span>
       <Link to="/trait">
         <button
           className="next-mode-button"
           type="button"
           aria-label="next game mode button"
         >
-          <span className="next-mode-button-text">Next mode: Trait</span>
+          <span className="next-mode-button-text">Trait</span>
+          <span className="next-mode-button__description">
+            Read the description. Which trait is it?
+          </span>
         </button>
       </Link>
+      <Modes />
     </div>
   );
 };

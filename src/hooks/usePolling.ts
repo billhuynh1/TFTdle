@@ -8,7 +8,7 @@ const usePolling = () => {
       if (now.getUTCHours() === 0 && now.getUTCMinutes() === 0) {
         // localStorage.clear();
         localStorage.removeItem("finisher_guesses");
-        localStorage.removeItem("guesses");
+        localStorage.removeItem("_guesses");
         localStorage.removeItem("littlelegend_guesses");
         localStorage.removeItem("trait_guesses");
         localStorage.removeItem("traitBonusAnswer");

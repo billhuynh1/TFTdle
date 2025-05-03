@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Trait } from "../type.ts";
 import { useTraitContext } from "../context/TraitContext.tsx";
 import TraitBonus from "./TraitBonus.tsx";
+import Modes from "./Modes.tsx";
 
 interface TraitGameEndProps {
   trait: Trait | undefined;
@@ -26,7 +27,7 @@ const TraitGameEnd = ({ trait, attempts }: TraitGameEndProps) => {
   const [difference, setDifference] = useState<number>(
     resetTime.getTime() - currentTime.getTime(),
   );
-  const imagePath = `${process.env.REACT_APP_AWS_S3_URL}traits/`;
+  const imagePath = `${process.env.REACT_APP_AWS_S3_URL}converted_trait_images/`;
   const traitGameEndRef = useRef<HTMLDivElement>(null);
 
   const formatTime = (milliseconds: number): string => {
@@ -101,16 +102,23 @@ const TraitGameEnd = ({ trait, attempts }: TraitGameEndProps) => {
           </span>
         </div>
       </div>
-      <TraitBonus />
       <span className="game-end__chibi__attempts">
         Number of attempts: <span style={{ color: "gold" }}>{attempts}</span>
       </span>
+      <TraitBonus />
       <div className="timer-container">
         <span className="timer-header">Next character in:</span>
         <span className="timer-content">{formatTime(difference)}</span>
       </div>
-      <span className="timer-content-footer">(UTC time)</span>
-      <span className="trait-game-end__footer">Thanks for playing!</span>
+      <span className="timer-content-footer">(Timezone: UTC)</span>
+      <hr className="timer-separator" />
+      <span className="timer-separator__text" style={{ marginBottom: "10px" }}>
+        Modes:
+      </span>
+      <Modes />
+      <span className="trait-game-end__footer" style={{ marginBottom: "20px" }}>
+        Thanks for playing!
+      </span>
     </div>
   );
 };
