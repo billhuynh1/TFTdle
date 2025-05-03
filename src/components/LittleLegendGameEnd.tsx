@@ -51,11 +51,9 @@ const GameEnd: React.FC<LittleLegendGameEndProps> = ({
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    requestAnimationFrame(() => {
       setShowContent(true);
-    }, 1000);
-
-    return () => clearTimeout(timer);
+    });
   }, []);
 
   useEffect(() => {

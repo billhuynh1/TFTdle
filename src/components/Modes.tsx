@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faUser,
+  faBurst,
   faImage,
-  faEllipsis,
   faMagnifyingGlass,
+  faQuestion,
 } from "@fortawesome/free-solid-svg-icons";
 import ModeButtonHover from "./ModeButtonHover.tsx";
 
@@ -18,7 +18,12 @@ const Modes: React.FC = () => {
           type="button"
           aria-label="classic mode button"
         >
-          <FontAwesomeIcon icon={faUser} />
+          <img
+            className="mode-button-base"
+            src="./images/tft_trait_black.png"
+            alt="button for navbar"
+          />
+          <FontAwesomeIcon className="mode-button-icon" icon={faQuestion} />
           <ModeButtonHover mode="classic" />
         </button>
       </Link>
@@ -28,7 +33,12 @@ const Modes: React.FC = () => {
           type="button"
           aria-label="finsher mode button"
         >
-          <FontAwesomeIcon icon={faImage} />
+          <img
+            className="mode-button-base"
+            src="./images/tft_trait_black.png"
+            alt="button for navbar"
+          />
+          <FontAwesomeIcon className="mode-button-icon" icon={faBurst} />
           <ModeButtonHover mode="finisher" />
         </button>
       </Link>
@@ -38,7 +48,16 @@ const Modes: React.FC = () => {
           type="button"
           aria-label="little legend mode button"
         >
-          <FontAwesomeIcon icon={faMagnifyingGlass} size="1x" />
+          <img
+            className="mode-button-base"
+            src="./images/tft_trait_black.png"
+            alt="button for navbar"
+          />
+          <FontAwesomeIcon
+            className="mode-button-icon"
+            icon={faMagnifyingGlass}
+            size="1x"
+          />
           <ModeButtonHover mode="little legend" />
         </button>
       </Link>
@@ -48,6 +67,11 @@ const Modes: React.FC = () => {
           type="button"
           aria-label="trait mode button"
         >
+          <img
+            className="mode-button-base"
+            src="./images/tft_trait_black.png"
+            alt="button for navbar"
+          />
           <img
             src="./images/speech-bubble.svg"
             alt="Speech bubble"

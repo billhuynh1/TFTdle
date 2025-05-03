@@ -48,11 +48,9 @@ const TraitGameEnd = ({ trait, attempts }: TraitGameEndProps) => {
   };
 
   useEffect(() => {
-    const timer = setTimeout(() => {
+    requestAnimationFrame(() => {
       setShowContent(true);
-    }, 1000);
-
-    return () => clearTimeout(timer);
+    });
   }, []);
 
   useEffect(() => {
