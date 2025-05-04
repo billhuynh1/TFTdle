@@ -210,6 +210,7 @@ body {
   z-index: 2;
   text-shadow: black 2px 0 0px;
   row-gap: 0.2rem;
+  padding-bottom: 3rem;
 }
 
 .game-end a {
@@ -850,18 +851,19 @@ body {
 
 .mode__hover {
   display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   background-color: var(--primary-color);
   border: solid 2px var(--secondary-color);
   border-radius: 5px;
-  width: 100px;
-  height: 50px;
+  min-width: 100px;
+  width: auto;
+  height: 40px;
   position: absolute;
   bottom: 100%;
   margin: 3px;
   z-index: 99;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
 }
 
 .mode__hover::after {
@@ -874,6 +876,13 @@ body {
   border-style: solid;
   border-color: white transparent transparent transparent;
   z-index: 10;
+}
+
+.mode__hover-text {
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 500;
+  text-align: center;
 }
 
 .finisher__header__text {
@@ -1484,4 +1493,19 @@ body {
   width: 75%;
   border: solid 2px white;
   margin-bottom: 10px;
+}
+
+.headers {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 15%;
+  height: auto;
+  background-color: var(--primary-color);
+  border: var(--secondary-color) solid 2px;
+  border-radius: 5px;
+  color: white;
+  padding: 1rem;
+  margin: 10px;
 }

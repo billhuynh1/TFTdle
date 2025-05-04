@@ -13,6 +13,7 @@ import fetchLittleLegends from "../utils/fetchLittleLegends.ts";
 import getDayOfYear from "../utils/getDayOfYear.ts";
 import fetchTraits from "../utils/fetchTraits.ts";
 import { TraitContext } from "./TraitContext.tsx";
+import resetDailyData from "../utils/resetDailyData.ts";
 
 interface AppProvidersProps {
   children: React.ReactNode;
@@ -56,33 +57,43 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
   const [today, setToday] = useState<string>(
     new Date().toISOString().split("T")[0],
   );
-  const [lastVisit, setLastVisit] = useState<string | null>(() => {
-    const storedDate = localStorage.getItem("lastVisit");
-    if (storedDate === null) {
-      localStorage.setItem("lastVisit", today);
-      return today;
-    }
-    return storedDate;
-  });
+  const [lastVisit, setLastVisit] = useState<string | null>(
+    localStorage.getItem("lastVisit"),
+  );
 
   // Cache champion list and chibi list
 
-  const useDailyReset = (): void => {
+  const useDailyReset = (lastVisit: string | null, today: string): void => {
     useEffect(() => {
+      if (!lastVisit || today === lastVisit) return;
+
+      const yesterday = new Date(Date.now() - 86400000)
+        .toISOString()
+        .split("T")[0];
+
+      const finishedModes = localStorage.getItem("finishedModes");
+      const allModes = ["/", "/finisher", "/littlelegend", "/trait"];
+      const allCompleted = allModes.every((mode) =>
+        finishedModes?.includes(mode),
+      );
+
+      if (lastVisit === yesterday && allCompleted) {
+        const prevStreak = parseInt(localStorage.getItem("streak") || "0", 10);
+        localStorage.setItem("streak", (prevStreak + 1).toString());
+      } else {
+        localStorage.setItem("streak", "0");
+      }
+
+      // Clear previous data
       if (today !== lastVisit) {
         setIsSearchLock(false);
-        localStorage.removeItem("_guesses");
-        localStorage.removeItem("finisher_guesses");
-        localStorage.removeItem("littlelegend_guesses");
-        localStorage.removeItem("littleLegendBonusAnswer");
-        localStorage.removeItem("trait_guesses");
-        localStorage.removeItem("traitBonusAnswer");
+        resetDailyData();
         localStorage.setItem("lastVisit", today);
       }
-    }, [today, lastVisit]);
+    }, [lastVisit, today]);
   };
 
-  useDailyReset();
+  useDailyReset(lastVisit, today);
 
   usePolling();
 

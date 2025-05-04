@@ -6,6 +6,7 @@ import Modes from "./Modes.tsx";
 import DiscordPopup from "./DiscordPopup.tsx";
 import About from "./About.tsx";
 import usePageTracking from "../hooks/usePageTracking.tsx";
+import Headers from "./Headers.tsx";
 
 const Layout: React.FC = () => {
   const [renderAbout, setrenderAbout] = useState<boolean>(false);
@@ -28,6 +29,7 @@ const Layout: React.FC = () => {
         <Header />
         <main className="container">
           <Modes />
+          <Headers />
           <Outlet />
           <Footer
             handleToggleAbout={handleToggleAbout}

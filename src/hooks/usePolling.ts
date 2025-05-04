@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import resetDailyData from "../utils/resetDailyData.ts";
 
 // Might need to change to UTC time
 const usePolling = () => {
@@ -6,12 +7,7 @@ const usePolling = () => {
     const checkReset = () => {
       const now = new Date();
       if (now.getUTCHours() === 0 && now.getUTCMinutes() === 0) {
-        // localStorage.clear();
-        localStorage.removeItem("finisher_guesses");
-        localStorage.removeItem("_guesses");
-        localStorage.removeItem("littlelegend_guesses");
-        localStorage.removeItem("trait_guesses");
-        localStorage.removeItem("traitBonusAnswer");
+        resetDailyData();
         alert("New daily! Please refresh the page.");
       }
     };
