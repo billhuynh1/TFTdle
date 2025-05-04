@@ -1,9 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { Champion } from "../type.ts";
 import { useGame } from "../context/GameContext.tsx";
 import { useSearchLock } from "../context/SearchLockContext.tsx";
 import { useChampionContext } from "../context/ChampionContext.tsx";
 import checkPartialGuess from "../utils/checkPartialGuess.ts";
+import { updateFinishedGameModes } from "../utils/updateFinishedGameModes.ts";
 
 interface AttributeSquareProps {
   pos: keyof Champion;
@@ -19,6 +21,7 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
   const { setIsGameOver } = useGame();
   const { setIsSearchLock } = useSearchLock();
   const containerRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   // TODO: Refactor the logic
   useEffect(() => {
@@ -26,6 +29,7 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
 
     if (champion.name === testChampion.name) {
       setIsSearchLock(true);
+      updateFinishedGameModes(location.pathname);
       setTimeout(() => {
         setIsGameOver(true);
       }, 5000);

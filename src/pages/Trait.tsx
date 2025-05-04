@@ -75,7 +75,7 @@ const TraitPage = (): React.ReactElement => {
             <AnswersItem
               key={trait.id}
               item={trait}
-              pathOfImages="traits"
+              pathOfImages="converted_trait_images"
               itemColor={itemColor}
               setIsGameOver={setIsTraitGameOver}
             />

@@ -359,7 +359,7 @@ body {
   height: 100%;
   object-fit: contain;
   image-rendering: pixelated;
-  background-color: black;
+  background-color: white;
   display: block;
 }
 
@@ -628,7 +628,12 @@ body {
 }
 
 .champion-list-item:hover {
-  background-color: #24282c;
+  background-color: #2d3135;
+  transition: ease-in 0.15s;
+}
+
+.champion-list-item.highlighted {
+  background-color: #2d3135;
   transition: ease-in 0.15s;
 }
 
@@ -715,7 +720,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 350px;
-  height: 230px;
+  height: auto;
   padding: 20px;
   background-color: var(--primary-color);
   border: var(--secondary-color) solid 2px;
@@ -723,9 +728,11 @@ body {
 }
 
 .chibi-finisher {
-  width: 350px;
+  width: 100%;
   clip-path: inset(0 0 0 0);
   border: solid 2px white;
+  border-radius: 5px;
+  margin: 10px;
 }
 
 .chibi__answer {
@@ -786,6 +793,7 @@ body {
   height: 68px;
   padding: 10px;
 }
+
 .mode-button-base {
   position: absolute;
   top: 0;
@@ -800,6 +808,35 @@ body {
   font-size: 1.4rem;
   z-index: 1;
   color: white;
+}
+
+.mode-button-check-wrapper {
+  position: absolute;
+  bottom: 5px;
+  right: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.mode-button-check-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: green;
+  z-index: 0;
+}
+
+.mode-button-check {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.9rem;
+  color: white;
+  z-index: 1;
 }
 
 .mode__button:hover {
@@ -819,7 +856,7 @@ body {
   width: 100px;
   height: 50px;
   position: absolute;
-  bottom: 110%;
+  bottom: 100%;
   margin: 3px;
   z-index: 99;
   align-items: center;
@@ -844,8 +881,6 @@ body {
   font-size: 1.1em;
   font-weight: bold;
   text-shadow: black 1px 0 10px;
-  margin: 10px;
-  margin-top: -10px;
 }
 
 .game-end__chibi__attempts {
@@ -1010,6 +1045,7 @@ body {
 }
 
 .answers__item__image {
+  background-color: var(--primary-color);
   border: solid 2px black;
 }
 

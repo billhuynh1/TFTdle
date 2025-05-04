@@ -50,7 +50,15 @@ const LittleLegendPage: React.FC = () => {
 
   useEffect(() => {
     if (!littleLegendAnswer) return;
-    const guessesFromStorage: string[] = JSON.parse(fetchGuesses()) || [];
+
+    let guessesFromStorage: string[] = [];
+    try {
+      const raw = fetchGuesses();
+      guessesFromStorage = raw ? JSON.parse(raw) : [];
+    } catch (err) {
+      console.warn("Invalid JSON in guesses. Resetting.");
+    }
+
     const updateGuesses = (littleLegends: string[]) => {
       const guesses = findLittleLegendByNameInTable(
         littleLegends,
@@ -58,6 +66,7 @@ const LittleLegendPage: React.FC = () => {
       );
       setGuessedLittleLegends(guesses);
     };
+
     updateGuesses(guessesFromStorage);
   }, [littleLegendAnswer, littleLegendList]);
 
@@ -65,7 +74,7 @@ const LittleLegendPage: React.FC = () => {
     <>
       <LittleLegendHeader isGameOver={isLittleLegendGameOver} />
 
-      {isLittleLegendGameOver && (
+      {!isLittleLegendGameOver && (
         <SearchBars
           items={littleLegendBaseList}
           guessedItems={guessedLittleLegends}

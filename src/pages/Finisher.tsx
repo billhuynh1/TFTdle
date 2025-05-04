@@ -82,6 +82,9 @@ const FinisherPage: React.FC = () => {
           className="chibi-finisher"
           style={{ filter: `blur(${blurValue}px)` }}
         />
+        <span className="little-legend__footer__text">
+          Each guess unblurs the finisher
+        </span>
       </div>
       {!isFinisherGameOver ? (
         <SearchBars

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Chibi } from "../type.ts";
 import { useChibiContext } from "../context/ChibiContext.tsx";
 import { useGame } from "../context/GameContext.tsx";
+import { updateFinishedGameModes } from "../utils/updateFinishedGameModes.ts";
 
 interface ChibiAnswerItemProps {
   chibi: Chibi;
@@ -12,11 +14,13 @@ const ChibiAnswerItem: React.FC<ChibiAnswerItemProps> = ({ chibi }) => {
   const imagePath = `${process.env.REACT_APP_AWS_S3_URL}chibi_images/`;
   const { chibiFinisherAnswer } = useChibiContext();
   const { setIsFinisherGameOver } = useGame();
+  const location = useLocation();
 
   useEffect(() => {
     if (chibi === chibiFinisherAnswer) {
       setChibiItemColor("correct");
       setIsFinisherGameOver(true);
+      updateFinishedGameModes(location.pathname);
     } else {
       setChibiItemColor("incorrect");
     }

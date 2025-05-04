@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Button from "./Button.tsx";
 
@@ -46,7 +46,8 @@ const SearchBars = <
     // return storedGuesses ? JSON.parse(storedGuesses) : [];
     return [];
   });
-  const [highlightedIndex, setHighlightedIndex] = useState(-1);
+  const [highlightedIndex, setHighlightedIndex] = useState(0);
+  const itemRefs = useRef<(HTMLButtonElement | null)[]>([]);
 
   const imagePath = `${process.env.REACT_APP_AWS_S3_URL}${pathForImages}/`;
   const handleSearch = async (searchQuery: string) => {
@@ -95,16 +96,12 @@ const SearchBars = <
     localStorage.setItem(`${mode}_guesses`, JSON.stringify(guesses));
   }, [guesses, mode]);
 
-  // const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
-  //   if (event.key === "Enter") {
-  //     if (
-  //       filteredItems.length > 0 &&
-  //       !guessedItems.includes(filteredItems[0])
-  //     ) {
-  //       handleSelectedItem(filteredItems[0]);
-  //     }
-  //   }
-  // };
+  useEffect(() => {
+    const el = itemRefs.current[highlightedIndex];
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [highlightedIndex]);
 
   const handleKeyInput = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "ArrowDown") {
@@ -140,11 +137,16 @@ const SearchBars = <
   const renderedItems =
     filteredItems.length > 0 && isListOpen ? (
       <ul className="champion-list">
-        {filteredItems.map((item: T) => (
+        {filteredItems.map((item: T, index: number) => (
           <button
-            className="champion-list-item"
+            className={`champion-list-item ${
+              index === highlightedIndex ? "highlighted" : ""
+            }`}
             type="button"
             key={item.name}
+            ref={(el) => {
+              itemRefs.current[index] = el;
+            }}
             onClick={() => handleSelectedItem(item)}
           >
             <img

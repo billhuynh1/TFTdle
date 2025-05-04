@@ -1,15 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBurst,
-  faImage,
+  faCheck,
+  faCircleCheck,
   faMagnifyingGlass,
   faQuestion,
 } from "@fortawesome/free-solid-svg-icons";
 import ModeButtonHover from "./ModeButtonHover.tsx";
+import { getFinishedModes } from "../utils/updateFinishedGameModes.ts";
 
 const Modes: React.FC = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+  const finishedModes = getFinishedModes();
+
   return (
     <nav className="modes">
       <Link to="/">
@@ -20,10 +26,16 @@ const Modes: React.FC = () => {
         >
           <img
             className="mode-button-base"
-            src="./images/tft_trait_black.png"
+            src={`${currentPath === "/" || finishedModes.includes("/") ? "./images/tft_trait_gold.png" : "./images/tft_trait_black.png"}`}
             alt="button for navbar"
           />
           <FontAwesomeIcon className="mode-button-icon" icon={faQuestion} />
+          {finishedModes.includes("/") && (
+            <div className="mode-button-check-wrapper">
+              <FontAwesomeIcon className="mode-button-check" icon={faCheck} />
+              <div className="mode-button-check-background" />
+            </div>
+          )}
           <ModeButtonHover mode="classic" />
         </button>
       </Link>
@@ -35,10 +47,16 @@ const Modes: React.FC = () => {
         >
           <img
             className="mode-button-base"
-            src="./images/tft_trait_black.png"
+            src={`${currentPath === "/finisher" || finishedModes.includes("/finisher") ? "./images/tft_trait_gold.png" : "./images/tft_trait_black.png"}`}
             alt="button for navbar"
           />
           <FontAwesomeIcon className="mode-button-icon" icon={faBurst} />
+          {finishedModes.includes("/finisher") && (
+            <div className="mode-button-check-wrapper">
+              <FontAwesomeIcon className="mode-button-check" icon={faCheck} />
+              <div className="mode-button-check-background" />
+            </div>
+          )}
           <ModeButtonHover mode="finisher" />
         </button>
       </Link>
@@ -50,7 +68,7 @@ const Modes: React.FC = () => {
         >
           <img
             className="mode-button-base"
-            src="./images/tft_trait_black.png"
+            src={`${currentPath === "/littlelegend" || finishedModes.includes("/littlelegend") ? "./images/tft_trait_gold.png" : "./images/tft_trait_black.png"}`}
             alt="button for navbar"
           />
           <FontAwesomeIcon
@@ -58,6 +76,12 @@ const Modes: React.FC = () => {
             icon={faMagnifyingGlass}
             size="1x"
           />
+          {finishedModes.includes("/littlelegend") && (
+            <div className="mode-button-check-wrapper">
+              <FontAwesomeIcon className="mode-button-check" icon={faCheck} />
+              <div className="mode-button-check-background" />
+            </div>
+          )}
           <ModeButtonHover mode="little legend" />
         </button>
       </Link>
@@ -69,7 +93,7 @@ const Modes: React.FC = () => {
         >
           <img
             className="mode-button-base"
-            src="./images/tft_trait_black.png"
+            src={`${currentPath === "/trait" || finishedModes.includes("/trait") ? "./images/tft_trait_gold.png" : "./images/tft_trait_black.png"}`}
             alt="button for navbar"
           />
           <img
@@ -79,6 +103,12 @@ const Modes: React.FC = () => {
             height={30}
             className="speech-bubble-button-icon"
           />
+          {finishedModes.includes("/trait") && (
+            <div className="mode-button-check-wrapper">
+              <FontAwesomeIcon className="mode-button-check" icon={faCheck} />
+              <div className="mode-button-check-background" />
+            </div>
+          )}
           <ModeButtonHover mode="trait" />
         </button>
       </Link>

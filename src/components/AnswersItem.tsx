@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import { updateFinishedGameModes } from "../utils/updateFinishedGameModes.ts";
 
 interface AnswersItemProps<T> {
   item: T;
@@ -16,11 +18,13 @@ const AnswersItem = <
   setIsGameOver,
 }: AnswersItemProps<T>) => {
   const imagePath = `${process.env.REACT_APP_AWS_S3_URL}${pathOfImages}/`;
+  const location = useLocation();
 
   // If item color is correct, set game over to true
   useEffect(() => {
     if (itemColor === "correct") {
       setIsGameOver(true);
+      updateFinishedGameModes(location.pathname);
     }
   }, []);
 
