@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBurst,
   faCheck,
-  faCircleCheck,
   faMagnifyingGlass,
   faQuestion,
 } from "@fortawesome/free-solid-svg-icons";
@@ -29,6 +28,7 @@ const Modes: React.FC = () => {
             src={`${currentPath === "/" || finishedModes.includes("/") ? "./images/tft_trait_gold.png" : "./images/tft_trait_black.png"}`}
             alt="button for navbar"
           />
+          {}
           <FontAwesomeIcon className="mode-button-icon" icon={faQuestion} />
           {finishedModes.includes("/") && (
             <div className="mode-button-check-wrapper">

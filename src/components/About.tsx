@@ -1,59 +1,37 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 
-interface AboutProps {
-  handleToggleAbout: () => void;
-}
-
-const About: React.FC<AboutProps> = ({ handleToggleAbout }) => {
-  const aboutRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (aboutRef.current) {
-      aboutRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, []);
-
+const About: React.FC = () => {
   return (
-    <div ref={aboutRef} className="about-container">
-      <div className="about-content">
-        <button
-          aria-label="Close"
-          type="button"
-          className="button-close"
-          onClick={handleToggleAbout}
-        >
-          ❌
-        </button>
-        <h2 style={{ fontSize: "60px", marginLeft: "50px" }}>About</h2>
-        <hr />
-        <span style={{ margin: "20px", fontSize: "20px", marginLeft: "50px" }}>
-          Guess today&apos; character from Teamfight Tactics!
-        </span>
-        <span
-          style={{
-            margin: "20px",
-            fontSize: "20px",
-            lineHeight: "1.5",
-            marginLeft: "50px",
-          }}
-        >
-          TFTdle was created under Riot Games&apos; &quot;Legal Jibber
-          Jabber&quot; policy using assets owned by Riot Games. Riot Games does
-          not endorse or sponsor this project.
-        </span>
-        <span style={{ margin: "20px", fontSize: "20px", marginLeft: "50px" }}>
+    <>
+      <div className="modal-category">
+        <span className="modal-info-text" style={{ lineHeight: "2" }}>
+          Guess today&apos;s champion, chibi, little legend, and trait from
+          Teamfight Tactics!
+          <br />
+          TFTdle was created under Riot Games&apos;{" "}
+          <a
+            style={{ color: "#57aecf" }}
+            href="https://www.riotgames.com/en/legal"
+          >
+            Legal Jibber Jabber
+          </a>{" "}
+          policy using assets owned by Riot Games.
+          <br />
+          Riot Games does not endorse or sponsor this project.
+          <br />
+          <br />
           Heavily inspired by Wordle, LOLdle, Smashdle, and Pokedle.
         </span>
-        <h2 style={{ fontSize: "60px", marginLeft: "50px" }}>Feedback</h2>
-        <hr />
-        <span style={{ margin: "20px", fontSize: "20px", marginLeft: "50px" }}>
-          Any errors? Suggestions?
-        </span>
-        <span style={{ margin: "20px", fontSize: "20px", marginLeft: "50px" }}>
-          Click the gmail button! There will be more features to come!
+      </div>
+      <h1 className="modal-title">Feedbacks or Questions</h1>
+      <hr />
+      <div className="modal-category">
+        <span className="modal-info-text">
+          If you have any suggestions or feedback, feel free to DM me on Reddit,
+          TikTok, or Email!
         </span>
       </div>
-    </div>
+    </>
   );
 };
 

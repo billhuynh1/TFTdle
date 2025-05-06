@@ -286,6 +286,13 @@ body {
   color: white;
   font-size: 30px;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.8rem;
+}
+
+.timer-container.timer-container-instructions {
+  margin-top: 20px;
 }
 
 .timer-content {
@@ -295,6 +302,12 @@ body {
 .timer-content-footer {
   color: white;
   font-size: 0.7em;
+  font-style: italic;
+  opacity: 0.5;
+}
+
+.timer-content-footer.timer-content-footer-instructions {
+  font-size: 0.7rem;
 }
 
 .game-end__chibi__attempts {
@@ -348,6 +361,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .button-img:hover {
@@ -793,6 +807,7 @@ body {
   width: 60px;
   height: 68px;
   padding: 10px;
+  cursor: pointer;
 }
 
 .mode-button-base {
@@ -802,6 +817,11 @@ body {
   width: 100%;
   height: 100%;
   z-index: 0;
+  cursor: pointer;
+}
+
+.mode-button-base.mode-active {
+  transform: scale(1.1);
 }
 
 .mode-button-icon {
@@ -880,7 +900,7 @@ body {
 
 .mode__hover-text {
   color: white;
-  font-size: 0.7rem;
+  font-size: 1rem;
   font-weight: 500;
   text-align: center;
 }
@@ -975,7 +995,7 @@ body {
   color: white;
   border: var(--secondary-color) solid 2px;
   background-color: var(--primary-color);
-  font-size: 1em;
+  font-size: 0.6rem;
   word-break: break-all;
   text-shadow: black 2px 0 1px;
   border-radius: 3px;
@@ -1363,8 +1383,8 @@ body {
   position: absolute;
   background-color: var(--primary-color);
   color: white;
-  padding: 20px;
   border-radius: 5px;
+  padding: 10px;
   border: 2px solid var(--secondary-color);
   font-size: 0.8em;
   z-index: 99;
@@ -1372,8 +1392,8 @@ body {
   left: 50%;
   transform: translateX(-50%);
   min-width: 100px;
-  width: auto;
   height: auto;
+  font-size: 1rem;
 }
 
 .tooltip-container:hover .tooltip-content {
@@ -1473,7 +1493,7 @@ body {
   color: white;
   background-color: white;
   height: 1px;
-  width: 30%;
+  width: 130px;
   margin-top: 25px;
 }
 
@@ -1500,12 +1520,237 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  width: 15%;
+  min-width: 250px;
   height: auto;
   background-color: var(--primary-color);
   border: var(--secondary-color) solid 2px;
   border-radius: 5px;
   color: white;
-  padding: 1rem;
   margin: 10px;
+  column-gap: 35px;
+  padding: 0.5rem;
+}
+
+.streak {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.streak-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 5px;
+  filter: brightness(1.3);
+}
+
+.streak-count {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+}
+
+.notes {
+  display: flex;
+  flex-direction: column;
+  background-color: #404549;
+  width: 50%;
+  border-radius: 3px;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  row-gap: 0.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.notes-text {
+  color: white;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: scale(1);
+    transform: translateY(-10%);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1rem;
+  background: var(--primary-color);
+  font-family: "Inter", sans-serif;
+  border-radius: 5px;
+  border: solid 2px var(--secondary-color);
+  width: 50%;
+  height: auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  padding-bottom: 7rem;
+  margin: 5rem;
+  text-shadow: black 2px 0 2px;
+  color: white;
+  text-align: left;
+  animation: fadeDown 0.3s ease-in-out;
+}
+
+.modal-content hr {
+  width: 95%;
+  color: white;
+  background-color: white;
+  height: 2px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background: transparent;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #fff;
+  border: 2px solid var(--secondary-color);
+  background-color: rgb(156, 29, 29);
+  border-radius: 2px;
+  text-shadow: black 2px 0 2px;
+}
+
+.modal-close:hover {
+  background-color: #d83737;
+  transition: ease-in 0.05s;
+}
+
+.modal-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  width: 95%;
+  text-align: left;
+  margin-bottom: -1rem;
+}
+
+.modal-sub-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  width: 95%;
+  text-align: left;
+  color: #06a7ac;
+}
+
+.modal-category {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  text-align: left;
+  height: auto;
+  row-gap: 0.8rem;
+  margin: 10px;
+}
+
+.modal-info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  color: #abffce;
+  font-size: 1rem;
+}
+
+.modal-info-text {
+  color: white;
+  margin-left: 5px;
+}
+
+.notes-date {
+  color: var(--secondary-color);
+  text-align: center;
+}
+
+.patch-notes-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.patch-notes-icon {
+  filter: brightness(0) invert(1);
+  width: 35px;
+  height: 35px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.patch-notes-icon:hover {
+  filter: brightness(2) invert(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.how-to-play-icon {
+  filter: brightness(0) invert(1);
+  opacity: 0.5;
+  width: 35px;
+  height: 35px;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+  cursor: pointer;
+}
+
+.how-to-play-icon:hover {
+  filter: brightness(0) invert(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.how-to-play-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.classic-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 95%;
+}
+
+.classic-instructions {
+  text-align: left;
+  width: 95%;
 }

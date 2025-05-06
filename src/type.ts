@@ -147,3 +147,9 @@ export type TraitContextType = {
   isTraitGameOver: boolean;
   setIsTraitGameOver: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export type PatchNote = {
+  version: string;
+  date: string;
+  changes: string[];
+};
