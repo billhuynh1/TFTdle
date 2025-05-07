@@ -100,7 +100,7 @@ const ClassicPage: React.FC = () => {
       <Modes />
       <Headers />
       <GameHeader />
-      {!isGameOver ? (
+      {isGameOver ? (
         <SearchBars
           items={championList}
           guessedItems={guessedChampions}

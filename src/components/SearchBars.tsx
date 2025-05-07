@@ -67,6 +67,7 @@ const SearchBars = <
         );
       });
       setfilteredItems([...newfilteredItems]);
+      setHighlightedIndex(0);
       setIsListOpen(true);
     } else {
       setfilteredItems([]);
