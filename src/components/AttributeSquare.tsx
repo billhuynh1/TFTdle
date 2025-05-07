@@ -108,7 +108,9 @@ const AttributeSquare: React.FC<AttributeSquareProps> = ({ pos, champion }) => {
           width={75}
           height={75}
         />
-        <div className="champion-name-tooltip">{champion.name}</div>
+        <div className="champion-name-tooltip">
+          {champion.name.replaceAll("_", " ")}
+        </div>
       </div>
     );
   };

@@ -121,7 +121,12 @@ const GameEnd: React.FC<ChibiGameEndProps> = ({ chibi, attempts }) => {
           type="button"
           aria-label="finsher mode button"
         >
-          <span className="next-mode-button-text">Splash</span>
+          <img
+            src="./images/littlelegend_button.png"
+            className="next-mode-button-icon"
+            alt="Next mode button"
+          />
+          <span className="next-mode-button-text">Little Legend</span>
           <span className="next-mode-button__description">
             Guess the little legend splash art
           </span>

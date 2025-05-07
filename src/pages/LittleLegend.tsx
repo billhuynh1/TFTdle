@@ -7,6 +7,8 @@ import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
 import { LittleLegend } from "../type.ts";
 import AnswersItem from "../components/AnswersItem.tsx";
 import LittleLegendGameEnd from "../components/LittleLegendGameEnd.tsx";
+import Headers from "../components/Headers.tsx";
+import Modes from "../components/Modes.tsx";
 
 const LittleLegendPage: React.FC = () => {
   const {
@@ -72,8 +74,9 @@ const LittleLegendPage: React.FC = () => {
 
   return (
     <>
+      <Modes />
+      <Headers />
       <LittleLegendHeader isGameOver={isLittleLegendGameOver} />
-
       {!isLittleLegendGameOver && (
         <SearchBars
           items={littleLegendBaseList}

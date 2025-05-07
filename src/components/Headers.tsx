@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-
+import Header from "./Header.tsx";
 import Streak from "./Streak.tsx";
 import PatchNotes from "./PatchNotes.tsx";
 import Modal from "./Modal.tsx";
@@ -24,7 +24,7 @@ const Headers = () => {
   // Switch case for instructions based on which game mode they are in.
   const getInstructionsForPage = (pathname: string) => {
     switch (pathname) {
-      case "/":
+      case "/classic":
         return <ClassicInstructions />;
       case "/finisher":
         return <FinisherInstructions />;

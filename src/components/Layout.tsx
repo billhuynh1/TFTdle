@@ -28,8 +28,6 @@ const Layout: React.FC = () => {
       <div className="background-container">
         <Header />
         <main className="container">
-          <Modes />
-          <Headers />
           <Outlet />
           <Footer
             handleToggleAbout={handleToggleAbout}

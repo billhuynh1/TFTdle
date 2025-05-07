@@ -63,41 +63,7 @@ body {
   font-size: 2.5rem;
   padding-top: 2vh;
   font-family: CustomFont;
-}
-
-.header h1 {
-  text-shadow:
-    -2px -2px 0 white,
-    2px -2px 0 white,
-    -2px 2px 0 white,
-    2px 2px 0 white,
-    0 0 20px white,
-    0 0 40px white,
-    0 0 60px white,
-    0 0 80px white,
-    0 0 20px white,
-    0 0 40px white,
-    0 0 60px white,
-    0 0 80px white,
-    0 0 20px white,
-    0 0 40px white,
-    0 0 60px white,
-    0 0 80px white,
-    0 0 20px white,
-    0 0 40px white,
-    0 0 20px rgba(255, 215, 0, 1),
-    0 0 40px rgba(255, 215, 0, 0.8),
-    0 0 60px rgba(255, 215, 0, 0.6);
   z-index: 2;
-}
-
-.header__logo {
-  width: 10%;
-  height: 70%;
-  position: absolute;
-  top: 20%;
-  z-index: 1;
-  opacity: 0.7;
 }
 
 .about-container {
@@ -318,33 +284,67 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: var(--primary-color);
+  position: relative;
+  background-color: transparent;
   margin: 10px;
-  min-width: 80%;
+  min-width: 240px;
   width: auto;
-  height: 60px;
-  border: 2px solid var(--secondary-color);
-  border-radius: 10px;
+  height: auto;
+  border: none;
   animation: throbbing ease-in-out 1s infinite;
   font-family: "Times New Roman", Times, serif;
-  text-align: left;
-  padding: 10px;
+  cursor: pointer;
 }
 
 .next-mode-button:hover {
-  filter: brightness(1.2);
+  filter: brightness(1.1);
+  animation-play-state: paused;
 }
 
 .next-mode-button-text {
+  position: absolute;
   color: white;
   font-weight: 600;
   font-size: 1.3rem;
+  bottom: 45%;
+  left: 73px;
+}
+
+.next-mode-button-icon {
+  width: 250px;
 }
 
 .next-mode-button__description {
+  position: absolute;
   color: hsla(0, 0%, 100%, 0.851);
   font-size: 0.8rem;
   font-weight: 200;
+  top: 55%;
+  left: 73px;
+}
+
+.next-mode-button-icon.home-button {
+  transform: scale(1.3);
+}
+
+.next-mode-button.home-button {
+  transform: scale(1.3);
+  animation-play-state: paused;
+}
+
+.next-mode-button.home-button:hover {
+  transform: scale(1.4);
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.8rem;
+  width: 100%;
+  height: auto;
+  margin: 30px;
 }
 
 .attempts {
@@ -515,7 +515,7 @@ body {
   border: solid 2px #5bf581;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
   opacity: 0;
-  animation: fadeIn 1s ease-in-out forwards;
+  animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 .attribute-square.partial {
@@ -523,7 +523,7 @@ body {
   border: solid 2px #ffd478;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
   opacity: 0;
-  animation: fadeIn 1s ease-in-out forwards;
+  animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 .attribute-square.incorrect {
@@ -531,7 +531,7 @@ body {
   border: solid 2px #f78e8e;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.8);
   opacity: 0;
-  animation: fadeIn 1s ease-in-out forwards;
+  animation: fadeIn 0.5s ease-in-out forwards;
 }
 
 .attribute-square:nth-child(1) {
@@ -1379,25 +1379,48 @@ body {
 }
 
 .tooltip-content {
-  display: none;
+  opacity: 0;
+  visibility: hidden;
   position: absolute;
   background-color: var(--primary-color);
   color: white;
   border-radius: 5px;
   padding: 10px;
   border: 2px solid var(--secondary-color);
-  font-size: 0.8em;
+  font-size: 1rem;
   z-index: 99;
   top: 110%;
   left: 50%;
   transform: translateX(-50%);
   min-width: 100px;
   height: auto;
-  font-size: 1rem;
+  transition:
+    opacity 0.2s ease-in-out,
+    visibility 0.2s ease-in-out;
+  pointer-events: none;
+}
+
+.tooltip-content.top {
+  top: auto;
+  bottom: 110%;
+}
+
+.tooltip-content.top::before {
+  content: "";
+  position: absolute;
+  top: 100%; /* Place arrow below the tooltip box */
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: white transparent transparent transparent; /* top arrow */
+  pointer-events: none;
 }
 
 .tooltip-container:hover .tooltip-content {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 .tooltip-content::before {
@@ -1409,6 +1432,7 @@ body {
   border-width: 6px;
   border-style: solid;
   border-color: transparent transparent white transparent;
+  pointer-events: none;
 }
 
 .icon-hover-wrapper {
@@ -1753,4 +1777,25 @@ body {
 .classic-instructions {
   text-align: left;
   width: 95%;
+}
+
+.home-page-header {
+  font-size: 1.2em;
+  font-weight: 500;
+  color: #fff;
+  text-shadow: black 2px 0 0px;
+}
+
+.header-button-home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: white;
+  z-index: 100;
+}
+
+.header-button-home:hover {
+  transform: scale(1.1);
 }

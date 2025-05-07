@@ -121,6 +121,11 @@ const GameEnd: React.FC<GameEndProps> = ({
           type="button"
           aria-label="finsher mode button"
         >
+          <img
+            src="./images/finisher_button.png"
+            className="next-mode-button-icon"
+            alt="Next mode button"
+          />
           <span className="next-mode-button-text">Finisher</span>
           <span className="next-mode-button__description">
             Their last move, your best guess

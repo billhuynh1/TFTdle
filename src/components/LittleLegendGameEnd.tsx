@@ -127,9 +127,14 @@ const GameEnd: React.FC<LittleLegendGameEndProps> = ({
           type="button"
           aria-label="next game mode button"
         >
+          <img
+            src="./images/trait_button.png"
+            className="next-mode-button-icon"
+            alt="Next mode button"
+          />
           <span className="next-mode-button-text">Trait</span>
           <span className="next-mode-button__description">
-            Read the description. Which trait is it?
+            Read the description, guess it
           </span>
         </button>
       </Link>

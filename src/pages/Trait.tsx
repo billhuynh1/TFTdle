@@ -7,6 +7,8 @@ import SearchBars from "../components/SearchBars.tsx";
 import AnswersItem from "../components/AnswersItem.tsx";
 import { Trait } from "../type.ts";
 import TraitGameEnd from "../components/TraitGameEnd.tsx";
+import Modes from "../components/Modes.tsx";
+import Headers from "../components/Headers.tsx";
 
 const TraitPage = (): React.ReactElement => {
   const {
@@ -52,12 +54,11 @@ const TraitPage = (): React.ReactElement => {
     confetti({ particleCount: 150, spread: 70, origin: { x: 0.5, y: 0.5 } });
   };
 
-  // localStorage.removeItem("traitBonusAnswer");
-
   return (
     <>
+      <Modes />
+      <Headers />
       <TraitGameHeader />
-
       {!isTraitGameOver && (
         <SearchBars
           items={traitList}

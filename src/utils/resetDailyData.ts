@@ -1,5 +1,5 @@
 const resetDailyData = () => {
-  localStorage.removeItem("_guesses");
+  localStorage.removeItem("classic_guesses");
   localStorage.removeItem("finisher_guesses");
   localStorage.removeItem("littlelegend_guesses");
   localStorage.removeItem("littleLegendBonusAnswer");

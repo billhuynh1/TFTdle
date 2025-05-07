@@ -7,6 +7,8 @@ import { useChibiContext } from "../context/ChibiContext.tsx";
 import { Chibi } from "../type.ts";
 import { useGame } from "../context/GameContext.tsx";
 import ChibiGameEnd from "../components/ChibiGameEnd.tsx";
+import Modes from "../components/Modes.tsx";
+import Headers from "../components/Headers.tsx";
 
 const FinisherPage: React.FC = () => {
   const location = useLocation();
@@ -72,6 +74,8 @@ const FinisherPage: React.FC = () => {
 
   return (
     <>
+      <Modes />
+      <Headers />
       <div className="finisher__header">
         <span className="finisher__header__text">
           Which chibi finisher is this?

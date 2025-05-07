@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 import confetti from "canvas-confetti";
 import { useGame } from "../context/GameContext.tsx";
@@ -11,8 +12,9 @@ import ChampionAnswer from "../components/ChampionAnswer.tsx";
 import HintsHelper from "../components/HintsHelper.tsx";
 import AttributeHeader from "../components/AttributeHeader.tsx";
 import findChampionByNameInTable from "../utils/findChampionByName.ts";
-import fetchGuesses from "../utils/fetchGuesses.ts";
 import SearchBars from "../components/SearchBars.tsx";
+import Modes from "../components/Modes.tsx";
+import Headers from "../components/Headers.tsx";
 
 const ClassicPage: React.FC = () => {
   const [renderHints, setRenderHints] = useState<boolean>(false);
@@ -26,6 +28,13 @@ const ClassicPage: React.FC = () => {
     isLoading,
   } = useChampionContext();
   const { attempts, setAttempts } = useAttemptsContext();
+  const location = useLocation();
+  const mode = location.pathname.replace("/", "");
+
+  const fetchGuesses = (): string => {
+    const guesses: string = localStorage.getItem(`${mode}_guesses`) || "";
+    return guesses;
+  };
 
   useEffect(() => {
     if (!testChampion) return;
@@ -88,6 +97,8 @@ const ClassicPage: React.FC = () => {
 
   return (
     <>
+      <Modes />
+      <Headers />
       <GameHeader />
       {!isGameOver ? (
         <SearchBars

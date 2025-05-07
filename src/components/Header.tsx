@@ -1,16 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   return (
     <div className="header">
-      <img src="images/tft_logo.png" className="header__logo" alt="TFT logo" />
-      <h1
-        style={{
-          fontWeight: "bold",
-        }}
-      >
-        TFTDLE
-      </h1>
+      <Link to="/">
+        <button
+          className="header-button-home"
+          type="button"
+          aria-label="header home button"
+        >
+          <h1>TFTDLE</h1>
+        </button>
+      </Link>
     </div>
   );
 };
