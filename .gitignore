@@ -4,6 +4,4 @@ node_modules
 .prettierrc
 *.json
 Dockerfile
-README.md
 BACKLOGS.md
-/src/data/
