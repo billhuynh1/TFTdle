@@ -17,6 +17,7 @@ const ClassicInstructions = () => {
         {classicInstructions.split(". ").map((sentence) => (
           <p>{sentence.trim() + (sentence.endsWith(".") ? "" : ".")}</p>
         ))}
+        <span>Set of champions are from either previous or current set.</span>
       </span>
       <h1 className="modal-title">Properties</h1>
       <hr />
@@ -73,7 +74,6 @@ const ClassicInstructions = () => {
           <span className="modal-info-highlight">Possible values: </span>
           <span className="modal-info-text">1, 2, 3, 4</span>
         </div>
-        <span style={{ marginTop: "20px" }}>GL HF</span>
       </div>
     </>
   );

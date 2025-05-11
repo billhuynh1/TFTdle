@@ -9,6 +9,7 @@ import { Trait } from "../type.ts";
 import TraitGameEnd from "../components/TraitGameEnd.tsx";
 import Modes from "../components/Modes.tsx";
 import Headers from "../components/Headers.tsx";
+import Share from "../components/Share.tsx";
 
 const TraitPage = (): React.ReactElement => {
   const {
@@ -85,7 +86,12 @@ const TraitPage = (): React.ReactElement => {
       </div>
       {isTraitGameOver &&
         (showConfetti(),
-        (<TraitGameEnd trait={traitAnswer} attempts={guessedTraits.length} />))}
+        (
+          <>
+            <TraitGameEnd trait={traitAnswer} attempts={guessedTraits.length} />
+            <Share mode={mode} />
+          </>
+        ))}
     </>
   );
 };

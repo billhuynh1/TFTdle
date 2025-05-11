@@ -9,6 +9,7 @@ import { useGame } from "../context/GameContext.tsx";
 import ChibiGameEnd from "../components/ChibiGameEnd.tsx";
 import Modes from "../components/Modes.tsx";
 import Headers from "../components/Headers.tsx";
+import Share from "../components/Share.tsx";
 
 const FinisherPage: React.FC = () => {
   const location = useLocation();
@@ -101,10 +102,13 @@ const FinisherPage: React.FC = () => {
       ) : null}
       <ChibiAnswer guessedChibis={guessedChibis} />
       {isFinisherGameOver && (
-        <ChibiGameEnd
-          chibi={chibiFinisherAnswer}
-          attempts={guessedChibis.length}
-        />
+        <>
+          <ChibiGameEnd
+            chibi={chibiFinisherAnswer}
+            attempts={guessedChibis.length}
+          />
+          <Share mode={mode} />
+        </>
       )}
     </>
   );

@@ -15,6 +15,7 @@ import findChampionByNameInTable from "../utils/findChampionByName.ts";
 import SearchBars from "../components/SearchBars.tsx";
 import Modes from "../components/Modes.tsx";
 import Headers from "../components/Headers.tsx";
+import Share from "../components/Share.tsx";
 
 const ClassicPage: React.FC = () => {
   const [renderHints, setRenderHints] = useState<boolean>(false);
@@ -100,7 +101,7 @@ const ClassicPage: React.FC = () => {
       <Modes />
       <Headers />
       <GameHeader />
-      {isGameOver ? (
+      {!isGameOver ? (
         <SearchBars
           items={championList}
           guessedItems={guessedChampions}
@@ -123,11 +124,14 @@ const ClassicPage: React.FC = () => {
         />
       ))}
       {isGameOver && (
-        <GameEnd
-          attempts={attempts}
-          champIcon={testChampion?.imageUrl}
-          champName={testChampion?.name}
-        />
+        <>
+          <GameEnd
+            attempts={attempts}
+            champIcon={testChampion?.imageUrl}
+            champName={testChampion?.name}
+          />
+          <Share mode={mode} />
+        </>
       )}
       <HintsHelper />
     </>

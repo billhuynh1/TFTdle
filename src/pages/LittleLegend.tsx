@@ -9,6 +9,7 @@ import AnswersItem from "../components/AnswersItem.tsx";
 import LittleLegendGameEnd from "../components/LittleLegendGameEnd.tsx";
 import Headers from "../components/Headers.tsx";
 import Modes from "../components/Modes.tsx";
+import Share from "../components/Share.tsx";
 
 const LittleLegendPage: React.FC = () => {
   const {
@@ -108,10 +109,13 @@ const LittleLegendPage: React.FC = () => {
       {isLittleLegendGameOver &&
         (showConfetti(),
         (
-          <LittleLegendGameEnd
-            littleLegend={littleLegendAnswer}
-            attempts={guessedLittleLegends.length}
-          />
+          <>
+            <LittleLegendGameEnd
+              littleLegend={littleLegendAnswer}
+              attempts={guessedLittleLegends.length}
+            />
+            <Share mode={mode} />
+          </>
         ))}
     </>
   );

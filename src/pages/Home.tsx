@@ -18,8 +18,8 @@ const Home = (): React.ReactElement => {
             className="next-mode-button-icon home-button"
             alt="Next mode button"
           />
-          <span className="next-mode-button-text">Classic</span>
-          <span className="next-mode-button__description">
+          <span className="next-mode-button-text home-button">Classic</span>
+          <span className="next-mode-button__description home-button">
             Every guess comes with a hint
           </span>
         </button>
@@ -35,8 +35,8 @@ const Home = (): React.ReactElement => {
             className="next-mode-button-icon home-button"
             alt="Next mode button"
           />
-          <span className="next-mode-button-text">Finisher</span>
-          <span className="next-mode-button__description">
+          <span className="next-mode-button-text home-button">Finisher</span>
+          <span className="next-mode-button__description home-button">
             Their last move, your best guess
           </span>
         </button>
@@ -52,8 +52,10 @@ const Home = (): React.ReactElement => {
             className="next-mode-button-icon home-button"
             alt="Next mode button"
           />
-          <span className="next-mode-button-text">Little Legend</span>
-          <span className="next-mode-button__description">
+          <span className="next-mode-button-text home-button">
+            Little Legend
+          </span>
+          <span className="next-mode-button__description home-button">
             Guess the little legend splash art
           </span>
         </button>
@@ -69,8 +71,8 @@ const Home = (): React.ReactElement => {
             className="next-mode-button-icon home-button"
             alt="Next mode button"
           />
-          <span className="next-mode-button-text">Trait</span>
-          <span className="next-mode-button__description">
+          <span className="next-mode-button-text home-button">Trait</span>
+          <span className="next-mode-button__description home-button">
             Read the description, guess it
           </span>
         </button>

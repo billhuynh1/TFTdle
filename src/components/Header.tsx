@@ -10,7 +10,7 @@ const Header: React.FC = () => {
           type="button"
           aria-label="header home button"
         >
-          <h1>TFTDLE</h1>
+          <img src="./images/tftdle_logo.svg" alt="TFTdle logo" />
         </button>
       </Link>
     </div>

@@ -73,7 +73,7 @@ const AppProviders: React.FC<AppProvidersProps> = ({ children }) => {
 
       const finishedModes = localStorage.getItem("finishedModes");
       const allModes = ["/classic", "/finisher", "/littlelegend", "/trait"];
-      const allCompleted = allModes.every((mode) =>
+      const allCompleted: boolean = allModes.every((mode) =>
         finishedModes?.includes(mode),
       );
 
