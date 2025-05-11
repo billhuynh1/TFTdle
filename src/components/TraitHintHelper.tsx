@@ -22,16 +22,16 @@ const TraitHintHelper = ({
     return () => clearTimeout(timeout);
   }, [attempts]);
 
-  const capitalizeWords = (input: string | undefined): string[] => {
-    if (!input) return [];
+  // const capitalizeWords = (input: string | undefined): string[] => {
+  //   if (!input) return [];
 
-    return input
-      .split(",") // Split by comma
-      .map((champ) => champ.trim()) // Trim whitespace
-      .map((champ) => champ.charAt(0).toUpperCase() + champ.slice(1)); // Capitalize
-  };
+  //   return input
+  //     .split(",") // Split by comma
+  //     .map((champ) => champ.trim()) // Trim whitespace
+  //     .map((champ) => champ.charAt(0).toUpperCase() + champ.slice(1)); // Capitalize
+  // };
 
-  const champsFromTrait = capitalizeWords(traitAnswer?.champs).join(", ");
+  // const champsFromTrait = capitalizeWords(traitAnswer?.champs).join(", ");
 
   return (
     <div className="trait-hint-helper">
@@ -67,7 +67,9 @@ const TraitHintHelper = ({
                 height={40}
               />
             </div>
-            <div className="trait-hint-helper__tooltip">{champsFromTrait}</div>
+            <div className="trait-hint-helper__tooltip">
+              {traitAnswer?.champs}
+            </div>
           </div>
         </span>
       )}

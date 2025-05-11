@@ -7,6 +7,15 @@ import LittleLegendPage from "./pages/LittleLegend.tsx";
 import TraitPage from "./pages/Trait.tsx";
 import Home from "./pages/Home.tsx";
 
+const CURRENT_VERSION = "v1.4";
+
+const storedVersion = localStorage.getItem("appVersion");
+
+if (storedVersion !== CURRENT_VERSION) {
+  localStorage.clear();
+  localStorage.setItem("appVersion", CURRENT_VERSION);
+}
+
 function App() {
   return (
     <Routes>
