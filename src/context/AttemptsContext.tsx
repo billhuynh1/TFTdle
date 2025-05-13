@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { AttemptsContextType } from "../type.ts";
+import { AttemptsContextType } from "../type";
 
 export const AttemptsContext = createContext<AttemptsContextType | undefined>(
   undefined,

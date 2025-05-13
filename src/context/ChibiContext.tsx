@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { ChibiContextType } from "../type.ts";
+import { ChibiContextType } from "../type";
 
 export const ChibiContext = createContext<ChibiContextType | undefined>(
   undefined,

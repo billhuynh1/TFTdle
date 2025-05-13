@@ -2,7 +2,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import Modes from "./Modes.tsx";
+import Modes from "./Modes";
 
 interface GameEndProps {
   attempts: number;

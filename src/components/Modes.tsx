@@ -7,9 +7,9 @@ import {
   faMagnifyingGlass,
   faQuestion,
 } from "@fortawesome/free-solid-svg-icons";
-import ModeButtonHover from "./ModeButtonHover.tsx";
-import { getFinishedModes } from "../utils/updateFinishedGameModes.ts";
-import Tooltip from "./ToolTip.tsx";
+import ModeButtonHover from "./ModeButtonHover";
+import { getFinishedModes } from "../utils/updateFinishedGameModes";
+import Tooltip from "./ToolTip";
 
 const Modes: React.FC = () => {
   const [isCurrentPath, setIsCurrentPath] = useState<boolean>(false);

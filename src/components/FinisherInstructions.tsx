@@ -1,4 +1,4 @@
-import Timer from "./Timer.tsx";
+import Timer from "./Timer";
 
 const FinisherInstructions = () => {
   const instructions =

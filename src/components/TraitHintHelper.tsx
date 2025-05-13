@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser, faUser } from "@fortawesome/free-solid-svg-icons";
-import { useTraitContext } from "../context/TraitContext.tsx";
-import Tooltip from "./ToolTip.tsx";
+import { useTraitContext } from "../context/TraitContext";
+import Tooltip from "./ToolTip";
 
 type TraitHintHelperProps = {
   attempts: number;

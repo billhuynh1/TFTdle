@@ -1,7 +1,7 @@
 import React from "react";
-import fetchChampions from "./fetchChampions.ts";
-import fetchDailyChampion from "./fetchDailyChampion.ts";
-import { Champion } from "../type.ts";
+import fetchChampions from "./fetchChampions";
+import fetchDailyChampion from "./fetchDailyChampion";
+import { Champion } from "../type";
 
 const fetchClassicGameState = async (
   setChampionList: (list: Champion[]) => void,

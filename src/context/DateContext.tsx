@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { DateContextType } from "../type.ts";
+import { DateContextType } from "../type";
 
 export const DateContext = createContext<DateContextType | undefined>(
   undefined,

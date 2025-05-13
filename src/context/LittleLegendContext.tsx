@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { LittleLegendContextType } from "../type.ts";
+import { LittleLegendContextType } from "../type";
 
 // Create the ChampionContext
 export const LittleLegendContext = createContext<

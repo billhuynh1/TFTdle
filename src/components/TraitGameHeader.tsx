@@ -1,6 +1,6 @@
 import React from "react";
-import { useTraitContext } from "../context/TraitContext.tsx";
-import TraitHintHelper from "./TraitHintHelper.tsx";
+import { useTraitContext } from "../context/TraitContext";
+import TraitHintHelper from "./TraitHintHelper";
 
 const TraitGameHeader = (): React.ReactElement => {
   const { traitAnswer, guessedTraits } = useTraitContext();

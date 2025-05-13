@@ -1,19 +1,19 @@
 import React, { useState, useMemo, useEffect } from "react";
-import { ChampionContext } from "./ChampionContext.tsx";
-import { GameContext } from "./GameContext.tsx";
-import { AttemptsContext } from "./AttemptsContext.tsx";
-import { SearchLockContext } from "./SearchLockContext.tsx";
-import { LittleLegendContext } from "./LittleLegendContext.tsx";
-import { Champion, Chibi, LittleLegend, Trait } from "../type.ts";
-import fetchChibis from "../utils/fetchChibis.ts";
-import { ChibiContext } from "./ChibiContext.tsx";
-import usePolling from "../hooks/usePolling.ts";
-import fetchChampions from "../utils/fetchChampions.ts";
-import fetchLittleLegends from "../utils/fetchLittleLegends.ts";
-import getDayOfYear from "../utils/getDayOfYear.ts";
-import fetchTraits from "../utils/fetchTraits.ts";
-import { TraitContext } from "./TraitContext.tsx";
-import resetDailyData from "../utils/resetDailyData.ts";
+import { ChampionContext } from "./ChampionContext";
+import { GameContext } from "./GameContext";
+import { AttemptsContext } from "./AttemptsContext";
+import { SearchLockContext } from "./SearchLockContext";
+import { LittleLegendContext } from "./LittleLegendContext";
+import { Champion, Chibi, LittleLegend, Trait } from "../type";
+import fetchChibis from "../utils/fetchChibis";
+import { ChibiContext } from "./ChibiContext";
+import usePolling from "../hooks/usePolling";
+import fetchChampions from "../utils/fetchChampions";
+import fetchLittleLegends from "../utils/fetchLittleLegends";
+import getDayOfYear from "../utils/getDayOfYear";
+import fetchTraits from "../utils/fetchTraits";
+import { TraitContext } from "./TraitContext";
+import resetDailyData from "../utils/resetDailyData";
 
 interface AppProvidersProps {
   children: React.ReactNode;

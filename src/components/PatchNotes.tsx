@@ -1,5 +1,5 @@
-import patches from "../data/patches.ts";
-import { PatchNote } from "../type.ts";
+import patches from "../data/patches";
+import { PatchNote } from "../type";
 
 const PatchNotes = () => {
   const patchNotes: PatchNote[] = patches;

@@ -1,5 +1,5 @@
 import React from "react";
-import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
+import { useLittleLegendContext } from "../context/LittleLegendContext";
 
 type BonusButtonProps = {
   color: string;

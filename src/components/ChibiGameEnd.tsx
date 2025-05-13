@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Chibi } from "../type.ts";
-import { useChibiContext } from "../context/ChibiContext.tsx";
-import Modes from "./Modes.tsx";
+import { Chibi } from "../type";
+import { useChibiContext } from "../context/ChibiContext";
+import Modes from "./Modes";
 
 interface ChibiGameEndProps {
   chibi: Chibi | undefined;

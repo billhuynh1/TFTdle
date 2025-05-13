@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import Header from "./Header.tsx";
-import Streak from "./Streak.tsx";
-import PatchNotes from "./PatchNotes.tsx";
-import Modal from "./Modal.tsx";
-import ToolTip from "./ToolTip.tsx";
-import ClassicInstructions from "./ClassicInstructions.tsx";
-import FinisherInstructions from "./FinisherInstructions.tsx";
-import LittleLegendInstructions from "./LittleLegendInstructions.tsx";
-import TraitInstructions from "./TraitInstructions.tsx";
+import Header from "./Header";
+import Streak from "./Streak";
+import PatchNotes from "./PatchNotes";
+import Modal from "./Modal";
+import ToolTip from "./ToolTip";
+import ClassicInstructions from "./ClassicInstructions";
+import FinisherInstructions from "./FinisherInstructions";
+import LittleLegendInstructions from "./LittleLegendInstructions";
+import TraitInstructions from "./TraitInstructions";
 
 const Headers = () => {
   // Make StreakCounter component, PatchNotes component, and HowToPlay component

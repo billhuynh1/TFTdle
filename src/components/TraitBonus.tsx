@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useTraitContext } from "../context/TraitContext.tsx";
-import SelectOptions from "./SelectOptions.tsx";
+import { useTraitContext } from "../context/TraitContext";
+import SelectOptions from "./SelectOptions";
 
 const TraitBonus = () => {
   const { traitAnswer } = useTraitContext();

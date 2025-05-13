@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import confetti from "canvas-confetti";
-import TraitGameHeader from "../components/TraitGameHeader.tsx";
-import { useTraitContext } from "../context/TraitContext.tsx";
-import SearchBars from "../components/SearchBars.tsx";
-import AnswersItem from "../components/AnswersItem.tsx";
-import { Trait } from "../type.ts";
-import TraitGameEnd from "../components/TraitGameEnd.tsx";
-import Modes from "../components/Modes.tsx";
-import Headers from "../components/Headers.tsx";
-import Share from "../components/Share.tsx";
+import TraitGameHeader from "../components/TraitGameHeader";
+import { useTraitContext } from "../context/TraitContext";
+import SearchBars from "../components/SearchBars";
+import AnswersItem from "../components/AnswersItem";
+import { Trait } from "../type";
+import TraitGameEnd from "../components/TraitGameEnd";
+import Modes from "../components/Modes";
+import Headers from "../components/Headers";
+import Share from "../components/Share";
 
 const TraitPage = (): React.ReactElement => {
   const {

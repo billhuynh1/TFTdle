@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Chibi } from "../type.ts";
-import { useChibiContext } from "../context/ChibiContext.tsx";
-import { useGame } from "../context/GameContext.tsx";
-import { updateFinishedGameModes } from "../utils/updateFinishedGameModes.ts";
+import { Chibi } from "../type";
+import { useChibiContext } from "../context/ChibiContext";
+import { useGame } from "../context/GameContext";
+import { updateFinishedGameModes } from "../utils/updateFinishedGameModes";
 
 interface ChibiAnswerItemProps {
   chibi: Chibi;

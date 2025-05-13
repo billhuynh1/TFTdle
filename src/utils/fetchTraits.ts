@@ -1,5 +1,5 @@
 import supabase from "./supabaseClient";
-import { Trait } from "../type.ts";
+import { Trait } from "../type";
 
 const fetchTraits = async (): Promise<Trait[]> => {
   const cachedTraits = localStorage.getItem("traits");

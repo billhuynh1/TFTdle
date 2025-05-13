@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { Champion } from "../type.ts";
-import { useGame } from "../context/GameContext.tsx";
-import { useSearchLock } from "../context/SearchLockContext.tsx";
-import { useChampionContext } from "../context/ChampionContext.tsx";
-import checkPartialGuess from "../utils/checkPartialGuess.ts";
-import { updateFinishedGameModes } from "../utils/updateFinishedGameModes.ts";
+import { Champion } from "../type";
+import { useGame } from "../context/GameContext";
+import { useSearchLock } from "../context/SearchLockContext";
+import { useChampionContext } from "../context/ChampionContext";
+import checkPartialGuess from "../utils/checkPartialGuess";
+import { updateFinishedGameModes } from "../utils/updateFinishedGameModes";
 
 interface AttributeSquareProps {
   pos: keyof Champion;

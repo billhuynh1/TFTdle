@@ -7,9 +7,9 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
-import Modal from "./Modal.tsx";
-import About from "./About.tsx";
-import Tooltip from "./ToolTip.tsx";
+import Modal from "./Modal";
+import About from "./About";
+import Tooltip from "./ToolTip";
 
 interface FooterProps {
   handleToggleAbout: () => void;

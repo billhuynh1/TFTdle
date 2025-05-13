@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { updateFinishedGameModes } from "../utils/updateFinishedGameModes.ts";
+import { updateFinishedGameModes } from "../utils/updateFinishedGameModes";
 
 interface AnswersItemProps<T> {
   item: T;

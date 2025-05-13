@@ -1,11 +1,11 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Layout from "./components/Layout.tsx";
-import ClassicPage from "./pages/Classic.tsx";
-import FinisherPage from "./pages/Finisher.tsx";
-import LittleLegendPage from "./pages/LittleLegend.tsx";
-import TraitPage from "./pages/Trait.tsx";
-import Home from "./pages/Home.tsx";
+import Layout from "./components/Layout";
+import ClassicPage from "./pages/Classic";
+import FinisherPage from "./pages/Finisher";
+import LittleLegendPage from "./pages/LittleLegend";
+import TraitPage from "./pages/Trait";
+import Home from "./pages/Home";
 
 const CURRENT_VERSION = "v1.4";
 

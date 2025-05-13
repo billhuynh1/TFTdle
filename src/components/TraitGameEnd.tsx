@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { Trait } from "../type.ts";
-import { useTraitContext } from "../context/TraitContext.tsx";
-import TraitBonus from "./TraitBonus.tsx";
-import Modes from "./Modes.tsx";
+import { Trait } from "../type";
+import { useTraitContext } from "../context/TraitContext";
+import TraitBonus from "./TraitBonus";
+import Modes from "./Modes";
 
 interface TraitGameEndProps {
   trait: Trait | undefined;

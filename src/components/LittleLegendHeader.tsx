@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
-import getDayOfYear from "../utils/getDayOfYear.ts";
+import { useLittleLegendContext } from "../context/LittleLegendContext";
+import getDayOfYear from "../utils/getDayOfYear";
 
 type LittleLegendHeaderProps = {
   isGameOver: boolean;

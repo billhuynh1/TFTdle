@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { LittleLegend } from "../type.ts";
-import LittleLegendBonus from "./LittleLegendBonus.tsx";
-import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
-import Modes from "./Modes.tsx";
+import { LittleLegend } from "../type";
+import LittleLegendBonus from "./LittleLegendBonus";
+import { useLittleLegendContext } from "../context/LittleLegendContext";
+import Modes from "./Modes";
 
 interface LittleLegendGameEndProps {
   littleLegend: LittleLegend | undefined;

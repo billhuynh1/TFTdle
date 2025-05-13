@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Button from "./Button.tsx";
+import Button from "./Button";
 
 interface SearchBarsProps<T> {
   items: T[];

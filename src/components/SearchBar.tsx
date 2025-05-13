@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Champion } from "../type.ts";
-import Button from "./Button.tsx";
+import { Champion } from "../type";
+import Button from "./Button";
 
 interface SearchBarProps {
   championList: Champion[];

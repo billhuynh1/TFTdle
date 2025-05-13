@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/no-array-index-key */
-import ToolTip from "./ToolTip.tsx";
+import ToolTip from "./ToolTip";
 
 const AttributeHeader = () => {
   const attributes = {

@@ -1,5 +1,5 @@
 import supabase from "./supabaseClient";
-import { Champion } from "../type.ts";
+import { Champion } from "../type";
 
 const fetchChampions = async (): Promise<Champion[]> => {
   const cachedChampions = localStorage.getItem("champions");

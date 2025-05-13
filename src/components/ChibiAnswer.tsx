@@ -1,6 +1,6 @@
 import React from "react";
-import { Chibi } from "../type.ts";
-import ChibiAnswerItem from "./ChibiAnswerItem.tsx";
+import { Chibi } from "../type";
+import ChibiAnswerItem from "./ChibiAnswerItem";
 
 interface ChibiAnswerProps {
   guessedChibis: Chibi[];

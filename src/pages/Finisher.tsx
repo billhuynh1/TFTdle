@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import confetti from "canvas-confetti";
-import SearchBars from "../components/SearchBars.tsx";
-import ChibiAnswer from "../components/ChibiAnswer.tsx";
-import { useChibiContext } from "../context/ChibiContext.tsx";
-import { Chibi } from "../type.ts";
-import { useGame } from "../context/GameContext.tsx";
-import ChibiGameEnd from "../components/ChibiGameEnd.tsx";
-import Modes from "../components/Modes.tsx";
-import Headers from "../components/Headers.tsx";
-import Share from "../components/Share.tsx";
+import SearchBars from "../components/SearchBars";
+import ChibiAnswer from "../components/ChibiAnswer";
+import { useChibiContext } from "../context/ChibiContext";
+import { Chibi } from "../type";
+import { useGame } from "../context/GameContext";
+import ChibiGameEnd from "../components/ChibiGameEnd";
+import Modes from "../components/Modes";
+import Headers from "../components/Headers";
+import Share from "../components/Share";
 
 const FinisherPage: React.FC = () => {
   const location = useLocation();

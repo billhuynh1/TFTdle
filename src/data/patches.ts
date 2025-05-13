@@ -1,4 +1,4 @@
-import { PatchNote } from "../type.ts";
+import { PatchNote } from "../type";
 
 const patches: PatchNote[] = [
   {

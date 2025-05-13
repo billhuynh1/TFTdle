@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 import confetti from "canvas-confetti";
 import { useLocation } from "react-router-dom";
-import LittleLegendHeader from "../components/LittleLegendHeader.tsx";
-import SearchBars from "../components/SearchBars.tsx";
-import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
-import { LittleLegend } from "../type.ts";
-import AnswersItem from "../components/AnswersItem.tsx";
-import LittleLegendGameEnd from "../components/LittleLegendGameEnd.tsx";
-import Headers from "../components/Headers.tsx";
-import Modes from "../components/Modes.tsx";
-import Share from "../components/Share.tsx";
+import LittleLegendHeader from "../components/LittleLegendHeader";
+import SearchBars from "../components/SearchBars";
+import { useLittleLegendContext } from "../context/LittleLegendContext";
+import { LittleLegend } from "../type";
+import AnswersItem from "../components/AnswersItem";
+import LittleLegendGameEnd from "../components/LittleLegendGameEnd";
+import Headers from "../components/Headers";
+import Modes from "../components/Modes";
+import Share from "../components/Share";
 
 const LittleLegendPage: React.FC = () => {
   const {

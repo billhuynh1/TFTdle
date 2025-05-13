@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { ChampionContextType } from "../type.ts";
+import { ChampionContextType } from "../type";
 
 // Create the ChampionContext
 export const ChampionContext = createContext<ChampionContextType | undefined>(

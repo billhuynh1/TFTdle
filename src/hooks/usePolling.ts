@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import resetDailyData from "../utils/resetDailyData.ts";
+import resetDailyData from "../utils/resetDailyData";
 
 // Might need to change to UTC time
 const usePolling = () => {

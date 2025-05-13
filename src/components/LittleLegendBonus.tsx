@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { LittleLegend } from "../type.ts";
-import { useLittleLegendContext } from "../context/LittleLegendContext.tsx";
-import SelectOptions from "./SelectOptions.tsx";
+import { LittleLegend } from "../type";
+import { useLittleLegendContext } from "../context/LittleLegendContext";
+import SelectOptions from "./SelectOptions";
 
 type LittleLegendBonusProps = {
   littleLegend: LittleLegend | undefined;

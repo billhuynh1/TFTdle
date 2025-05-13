@@ -1,8 +1,8 @@
 import React, { ReactElement } from "react";
-import { useChampionContext } from "../context/ChampionContext.tsx";
-import checkPartialGuess from "../utils/checkPartialGuess.ts";
-import { Champion } from "../type.ts";
-import ShareButton from "./ShareButton.tsx";
+import { useChampionContext } from "../context/ChampionContext";
+import checkPartialGuess from "../utils/checkPartialGuess";
+import { Champion } from "../type";
+import ShareButton from "./ShareButton";
 
 type ShareProps = {
   mode: string;

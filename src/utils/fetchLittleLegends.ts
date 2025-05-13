@@ -1,5 +1,5 @@
 import supabase from "./supabaseClient";
-import { LittleLegend } from "../type.ts";
+import { LittleLegend } from "../type";
 
 const fetchLittleLegends = async (): Promise<LittleLegend[]> => {
   const cachedLittleLegends = localStorage.getItem("littleLegends");

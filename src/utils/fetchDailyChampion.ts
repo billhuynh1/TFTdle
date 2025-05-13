@@ -1,5 +1,5 @@
 import axios from "axios";
-import Champion from "../type.ts";
+import Champion from "../type";
 
 const fetchDailyChampion = async (
   attempt: number = 1,

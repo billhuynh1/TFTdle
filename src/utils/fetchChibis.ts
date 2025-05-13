@@ -1,5 +1,5 @@
 import supabase from "./supabaseClient";
-import { Chibi } from "../type.ts";
+import { Chibi } from "../type";
 
 const fetchChibis = async (): Promise<Chibi[]> => {
   const cachedChibis = localStorage.getItem("chibis");
